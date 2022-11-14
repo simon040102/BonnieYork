@@ -1,0 +1,33 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2474.32" height="2243.06" viewBox="0 0 2474.32 2243.06">
+  <defs>
+    <filter id="luminosity-noclip" x="570.83" y="-10263.91" width="1216.12" height="32766" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask" x="570.83" y="-10263.91" width="1216.12" height="32766" maskUnits="userSpaceOnUse">
+      <g style="filter: url(#luminosity-noclip)"/>
+    </mask>
+    <radialGradient id="radial-gradient" cx="1084.15" cy="-2172.48" r="758.31" gradientTransform="translate(338.24 2267.16) scale(0.78 0.07)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1"/>
+    </radialGradient>
+    <filter id="luminosity-noclip-2" x="570.83" y="2074.92" width="1216.12" height="96.85" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-color="#fff" result="bg"/>
+      <feBlend in="SourceGraphic" in2="bg"/>
+    </filter>
+    <mask id="mask-2" x="570.83" y="2074.92" width="1216.12" height="96.85" maskUnits="userSpaceOnUse">
+      <g style="mask: url(#mask);filter: url(#luminosity-noclip-2)">
+        <path d="M1786.94,2123.34c0,26.75-272.23,48.43-608.06,48.43s-608.05-21.68-608.05-48.43,272.23-48.42,608.05-48.42S1786.94,2096.6,1786.94,2123.34Z" style="mix-blend-mode: multiply;fill: url(#radial-gradient)"/>
+      </g>
+    </mask>
+    <radialGradient id="radial-gradient-2" cx="1084.15" cy="-2172.48" r="758.31" gradientTransform="translate(338.24 2267.16) scale(0.78 0.07)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#808285"/>
+      <stop offset="1" stop-color="#808285"/>
+    </radialGradient>
+  </defs>
+  <g style="mask: url(#mask-2)">
+    <path d="M1786.94,2123.34c0,26.75-272.23,48.43-608.06,48.43s-608.05-21.68-608.05-48.43,272.23-48.42,608.05-48.42S1786.94,2096.6,1786.94,2123.34Z" style="opacity: 0.29;fill: url(#radial-gradient-2)"/>
+  </g>
+  <path d="M1215.51,1475.4a100.67,100.67,0,0,1-88.21-52.2c-85.38-155.47-208.53-282.81-346.77-358.58a100.66,100.66,0,1,1,96.75-176.54c122.51,67.15,231.91,162.2,322.61,279.41,197.45-395.07,482.81-728.44,816.57-950.64A100.66,100.66,0,0,1,2128,384.43c-347.55,231.37-638.65,596.88-819.66,1029.19a100.64,100.64,0,0,1-87.53,61.64C1219.06,1475.36,1217.28,1475.4,1215.51,1475.4Z" style="fill: #33cdaf"/>
+  <path d="M1203.41,1912.23q-8.58,0-17.2-.16c-497-9.24-893.88-421.15-884.64-918.22,9.14-491.32,411.79-884.79,901.15-884.79,5.68,0,11.3,0,17,.15,143.74,2.68,286.12,40,411.75,108A81.17,81.17,0,0,1,1554.22,360c-104.38-56.47-217.93-86.23-337.52-88.45-407.47-7.61-745.23,317.8-752.81,725.33s317.81,745.31,725.34,752.88c197.42,3.61,384.44-69.75,526.62-206.76S1938.36,1221.8,1942,1024.35a737.2,737.2,0,0,0-35.75-241.89,81.18,81.18,0,0,1,154.42-50.12,899.37,899.37,0,0,1,43.65,295c-4.48,240.8-102.45,465.43-275.87,632.53C1659.22,1823,1437.83,1912.23,1203.41,1912.23Z" style="fill: #33cdaf"/>
+</svg>
