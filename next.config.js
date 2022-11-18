@@ -3,15 +3,17 @@ const nextConfig = {
   //   runtime: 'experimental-edge',
   //   appDir: true,
   // },
-  images: {
-    loader: 'imgix',
-    path: 'https://example.com/myaccount/',
-  },
+  
   reactStrictMode: true,
   swcMinify: true,
 };
 module.exports = nextConfig
 
+module.exports = {
+  images: {
+    unoptimized: true,
+  },
+};
 /** @type {import('next').NextConfig} */
 const withTM = require("next-transpile-modules")([
   "@fullcalendar/common",
