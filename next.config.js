@@ -4,8 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    loader: 'akamai',
-    path: '',
+    unoptimized: true,
   },
   reactStrictMode: true,
   swcMinify: true,
