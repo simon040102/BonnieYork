@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build ",
     "start": "next start",
     "lint": "next lint"
   },
@@ -24,6 +24,7 @@
     "eslint-config-next": "13.0.1",
     "fullcalendar": "^5.11.3",
     "next": "13.0.1",
+    "next-optimized-images": "^2.6.2",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
     "react-datepicker": "^4.8.0",
