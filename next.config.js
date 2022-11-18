@@ -1,19 +1,16 @@
-const nextConfig = {
-  // experimental: {
-  //   runtime: 'experimental-edge',
-  //   appDir: true,
-  // },
-  
-  reactStrictMode: true,
-  swcMinify: true,
-};
-module.exports = nextConfig
-
-module.exports = {
+module.exports = nextConfig = {
+  experimental: {
+    runtime: 'experimental-edge',
+    appDir: true,
+  },
   images: {
     unoptimized: true,
   },
+  reactStrictMode: true,
+  swcMinify: true,
 };
+
+
 /** @type {import('next').NextConfig} */
 const withTM = require("next-transpile-modules")([
   "@fullcalendar/common",
