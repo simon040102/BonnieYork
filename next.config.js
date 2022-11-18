@@ -1,4 +1,4 @@
-module.exports = nextConfig = {
+const nextConfig = {
   experimental: {
     runtime: 'experimental-edge',
     appDir: true,
@@ -9,6 +9,7 @@ module.exports = nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 };
+module.exports = nextConfig
 
 
 /** @type {import('next').NextConfig} */
