@@ -1,7 +1,11 @@
 const nextConfig = {
   experimental: {
-    runtime: "experimental-edge",
+    runtime: 'experimental-edge',
     appDir: true,
+  },
+  images: {
+    loader: 'akamai',
+    path: '',
   },
   reactStrictMode: true,
   swcMinify: true,
