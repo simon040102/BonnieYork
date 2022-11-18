@@ -6,11 +6,12 @@ import listPlugin from '@fullcalendar/list'; //F
 import { useRef } from 'react';
 
 const calendarOverview = (props) => {
-        const { setAddOffDay, setAddReserve } = props;
+        const { setAddOffDay, setAddReserve, setEditOder } = props;
 
      const calendarRef = useRef(null);
      const handleClick=(e)=>{
         console.log(e.event.id)
+        setEditOder(true);
      }
   return (
     <div>
@@ -21,7 +22,7 @@ const calendarOverview = (props) => {
             setAddOffDay(true);
           }}
         >
-          新增公休日
+          新增休息日
         </button>
       </div>
       <FullCalendar

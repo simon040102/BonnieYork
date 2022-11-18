@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CalendarOverview from './calendarOverview';
 import StaffCalenderOverview from './staffCalenderOverview';
 const storeCalendar = (props) => {
-    const { setAddOffDay, setAddReserve } = props;
+    const { setAddOffDay, setAddReserve, setEditOder } = props;
     const [page, setPage] = useState('overview');
   return (
     <div>
@@ -28,9 +28,12 @@ const storeCalendar = (props) => {
         <CalendarOverview
           setAddOffDay={setAddOffDay}
           setAddReserve={setAddReserve}
+          setEditOder={setEditOder}
         />
       )}
-      {page == 'staffCalenderOverview' && <StaffCalenderOverview />}
+      {page == 'staffCalenderOverview' && (
+        <StaffCalenderOverview setEditOder={setEditOder} />
+      )}
     </div>
   );
 }

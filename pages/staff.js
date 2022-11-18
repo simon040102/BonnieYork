@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddStaff from '../components/addStaff';
 const staff = () => {
     const [editStaff,setEditStaff]=useState(false)
-    const [addStaff,setAddStaff]=useState(true)
+    const [addStaff, setAddStaff] = useState(false);
   return (
     <div className="pt-10">
       <Head>

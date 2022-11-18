@@ -23,14 +23,17 @@ a {
   bottom: 0px !important;
 }
 .HomeSwiper  .swiper-slide {
-    width: 375px;
+    width: 368px !important;
 }
 .HomeSwiper .swiper-pagination-bullet{
-width: 20px;
-height: 20px;
+width: 10px;
+height: 10px;
 }
 .HomeSwiper .swiper-pagination-bullet-active{
-background-color: rgb(68, 68, 68);
+background-color: #00659F;
+width: 24px;
+border-radius: 10px ;
+transition: all 0.3s;
 }
 
 .storeSwiper .swiper-button-next,
@@ -50,6 +53,9 @@ background-color: rgb(68, 68, 68);
 }
 .menu{
   transition: all 0.3s;
+}
+.tryIt{
+  border-radius: 8px 31px 31px 8px;
 }
 /* *{
   outline: auto;

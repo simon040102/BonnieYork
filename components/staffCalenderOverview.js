@@ -8,18 +8,23 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { useRef } from 'react';
 
 
-const staffCalenderOverview = () => {
+const staffCalenderOverview = (props) => {
+    const { setEditOder, status } = props;
       const calendarRef = useRef(null);
       const handleClick = (e) => {
         console.log(e.event.id);
+        setEditOder(true);
       };
   return (
     <div>
-      <div className="w-11/12 md:w-8/12 lg:w-6/12 mx-auto pt-10">
-        <select name="" id="" className="border w-full text-center mb-8">
-          <option value="可愛粉紅豬">可愛粉紅豬</option>
-        </select>
-      </div>
+      {status == 'store' && (
+        <div className="w-11/12 md:w-8/12 lg:w-6/12 mx-auto pt-10">
+          <select name="" id="" className="border w-full text-center mb-8">
+            <option value="可愛粉紅豬">可愛粉紅豬</option>
+          </select>
+        </div>
+      )}
+
       <div>
         <FullCalendar
           plugins={[
