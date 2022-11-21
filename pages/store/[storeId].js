@@ -34,13 +34,13 @@ const storeId = () => {
           <div className="container mx-auto text-center flex justify-between">
             <div className="flex w-1/3 gap-3">
               <Link className="w-16" href="/">
-                <Image src={Facebook} />
+               <a> <Image src={Facebook} /></a>
               </Link>
               <Link className="w-16" href="/">
-                <Image src={Instagram} />
+                <a><Image src={Instagram} /></a>
               </Link>
               <Link className="w-16" href="/">
-                <Image src={Line} />
+               <a> <Image src={Line} /></a>
               </Link>
             </div>
             <div className="w-1/3">

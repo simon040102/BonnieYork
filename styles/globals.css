@@ -51,6 +51,10 @@ transition: all 0.3s;
 * {
   box-sizing: border-box;
 }
+.banner img,.banner{
+  height: 80vh !important;
+}
+
 .menu{
   transition: all 0.3s;
 }

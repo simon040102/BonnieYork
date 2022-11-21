@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build ",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,11 +19,13 @@
     "@fullcalendar/react": "^5.11.2",
     "@fullcalendar/timegrid": "^5.11.3",
     "@mui/icons-material": "^5.10.9",
+    "@zeit/next-css": "^1.0.1",
     "aos": "^2.3.4",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
     "fullcalendar": "^5.11.3",
-    "next": "13.0.1",
+    "next": "12.3.x",
+    "next-images": "^1.8.4",
     "next-optimized-images": "^2.6.2",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
@@ -37,6 +39,7 @@
     "@cloudflare/next-on-pages": "^0.2.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.18",
+    "sass-loader": "^7.1.0",
     "tailwindcss": "^3.2.1",
     "vercel": "^28.5.5"
   }

@@ -36,15 +36,15 @@ const login = () => {
       </Head>
       <Layout className="relative">
         <div className="container mx-auto  pt-10 ">
-          <div className=" w-full mb-4">
+          <div className=" w-full mb-4 flex justify-center">
             <Image className="mx-auto" width={150} src={Logo} />
           </div>
           <ul className="flex justify-center mb-10">
             <li
               className={` ${
                 status == 'member'
-                  ? 'bg-gray-500 text-white'
-                  : 'bg-gray-200 text-black'
+                  ? 'bg-primary text-white'
+                  : 'bg-primary text-black'
               } w-40 h-10 flex items-center justify-center mx-6`}
             >
               <button
@@ -57,8 +57,8 @@ const login = () => {
             <li
               className={`${
                 status == 'store'
-                  ? 'bg-gray-500 text-white'
-                  : 'bg-gray-200 text-black'
+                  ? 'bg-primary text-white'
+                  : 'bg-primary text-black'
               } w-40 h-10 flex items-center justify-center mx-6`}
             >
               <button
@@ -90,14 +90,14 @@ const login = () => {
           <div className="flex justify-center">
             <button
               name="login"
-              className="bg-gray-200 w-44 h-10 mx-6"
+              className="bg-primary w-44 h-10 mx-6"
               onClick={checkEmail}
             >
               登入
             </button>
             <button
               name="signup"
-              className="bg-gray-600 text-white w-44 h-10 mx-6"
+              className="bg-primary text-white w-44 h-10 mx-6"
               onClick={checkEmail}
             >
               註冊

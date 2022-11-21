@@ -14,13 +14,13 @@ const Menu = (props) => {
   return (
     <div className="">
       <button
-        className="flex ml-8 items-center"
+        className="flex items-center"
         onClick={() => {
           setMenu(!menu);
         }}
       >
-        <Image className="mr-2" height={30} src={Profile} />
-        <p>王小明</p>
+        <Image objectFit="contain" width="30" height="30" src={Profile} />
+        <p className="ml-2">王小明</p>
       </button>
       {menu && (
         <div
@@ -43,10 +43,14 @@ const Menu = (props) => {
             {status == 'staff' && (
               <ul>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/profile">個人資料</Link>
+                  <Link href="/profile">
+                    <a>個人資料</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/calendar">我的預約</Link>
+                  <Link href="/calendar">
+                    <a>我的預約</a>
+                  </Link>
                 </li>
               </ul>
             )}
@@ -54,35 +58,51 @@ const Menu = (props) => {
             {status == 'store' && (
               <ul>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/profile">店鋪資訊修改</Link>
+                  <Link href="/profile">
+                    <a>店鋪資訊修改</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/calendar">行事曆/預約管理</Link>
+                  <Link href="/calendar">
+                    <a>行事曆/預約管理</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/staff">員工管理</Link>
+                  <Link href="/staff">
+                    <a>員工管理</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/">營業額</Link>
+                  <Link href="/">
+                    <a>營業額</a>
+                  </Link>
                 </li>
               </ul>
             )}
             {status == 'member' && (
               <ul>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/profile">個人資料</Link>
+                  <Link href="/profile">
+                    <a>個人資料</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/reserve">我的預約</Link>
+                  <Link href="/reserve">
+                    <a>我的預約</a>
+                  </Link>
                 </li>
                 <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                  <Link href="/favorite">我的最愛</Link>
+                  <Link href="/favorite">
+                    <a>我的最愛</a>
+                  </Link>
                 </li>
               </ul>
             )}
             <ul>
               <li className="bg-footerR text-white px-5 py-3 text-xl mb-3">
-                <Link href="/">登出</Link>
+                <Link href="/">
+                  <a>登出</a>
+                </Link>
               </li>
             </ul>
           </div>

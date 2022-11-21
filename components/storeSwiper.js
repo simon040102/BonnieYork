@@ -23,13 +23,23 @@ const storeSwiper = () => {
         className="storeSwiper swiper-button-black "
       >
         <SwiperSlide>
-          <Image className="w-full object-fill" src={StorePhoto1} />
+          <Image layout="responsive" src={StorePhoto1} objectFit="contain" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image className="w-full object-fill" src={StorePhoto2} />
+          <Image
+            layout="responsive"
+            className="w-full object-fill"
+            src={StorePhoto2}
+            objectFit="contain"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <Image className="w-full object-fill" src={StorePhoto3} />
+          <Image
+            layout="responsive"
+            className="w-full object-fill"
+            src={StorePhoto3}
+            objectFit="contain"
+          />
         </SwiperSlide>
       </Swiper>
     </>

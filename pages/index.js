@@ -41,12 +41,15 @@ const Home = () => {
       </Head>
 
       <Layout>
-        <div className=" relative  h-screen lg:pl-[10%] overflow-hidden z-10">
-          <Image
-            className=" absolute -z-10 h-screen object-cover rounded-tl-block"
-            src={Banner}
-          />
-          <div className="my-auto items-center flex  h-screen px-16">
+        <div className="relative lg:pl-[10%]   z-10">
+          <div className="top-0 h-screen absolute banner -z-10 ">
+            <Image
+              className="rounded-tl-block "
+              objectFit="cover"
+              src={Banner}
+            />
+          </div>
+          <div className="my-auto banner flex items-center  px-16">
             <div>
               <h1 className="text-5xl py-2 text-white font-bold drop-shadow-md">
                 邦尼約克
@@ -198,6 +201,8 @@ const Home = () => {
                   <div className=" relative mx-3">
                     <Image
                       src={Who1}
+                      height="320"
+                      width="600"
                       className="lg:h-60 h-48 md:w-80  lg:w-500 object-cover rounded-large"
                     />
                     <div className=" absolute bg-secondary/80 w-32 leading-9  right-6 bottom-4  text-center text-white rounded-large">
@@ -206,6 +211,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who2}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -215,6 +222,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who3}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -224,6 +233,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who4}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -237,6 +248,8 @@ const Home = () => {
                 <Marquee gradient={false} speed={40} direction={'right'}>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who5}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -246,6 +259,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who6}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -255,6 +270,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who7}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -264,6 +281,8 @@ const Home = () => {
                   </div>
                   <div className=" relative mx-3">
                     <Image
+                     height="320"
+                      width="600"
                       src={Who8}
                       className="lg:h-60 h-48 md:w-80 lg:w-500 object-cover rounded-large"
                     />
@@ -277,7 +296,7 @@ const Home = () => {
           </div>
         </div>
         <div className=" pl-0 lg:pl-[8%] ">
-          <div className=" bg-danger pl-[4%] pr-[4%] pt-24 pb-24 mb-24 rounded-l-block">
+          <div className=" bg-danger pl-[4%] pr-[8%] pt-24 pb-24 mb-24 rounded-l-block">
             <div className="container">
               <div className="w-7/12 lg:w-5/12  relative:">
                 <h2
@@ -298,7 +317,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-       
       </Layout>
     </>
   );

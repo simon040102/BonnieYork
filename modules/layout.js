@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import Logo from '../src/images/logo.png';
+import LogoNav from '../src/images/logo_nav.png';
 import Image from 'next/image';
-import Facebook from '../src/images/facebook.svg';
-import Instagram from '../src/images/instagram.svg';
+import Facebook from '../src/images/facebook_home.png';
+import Instagram from '../src/images/instagram_home.png';
 import React, { useEffect, useState } from 'react';
 import Menu from '../components/Menu';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -17,7 +18,10 @@ const Layout = ({ children, title }) => {
     if (account == 'customer')
       return (
         <Link className="mx-2 text-secondary" href="/login">
-          <PersonOutlineOutlinedIcon/>登入/註冊
+          <a>
+            
+            登入/註冊
+          </a>
         </Link>
       );
     else {
@@ -31,24 +35,24 @@ const Layout = ({ children, title }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="  sticky top-0 -mt-20 flex flex-col min-h-screen justify-between">
-        <header className="py-6   bg-white  Pb-20 z-20  w-full sticky top-0 shadow-md  ">
-          <div className="flex justify-between px-6 container mx-auto">
+        <header className="py-3 bg-white   z-20  w-full sticky top-0 shadow-md  ">
+          <div className="flex justify-between  container mx-auto">
             <Link href="/" className=" flex my-auto items-end">
-              <Image className="my-auto " width={80} src={Logo} />
-
-              <h1 className="text-3xl font-bold text-primary">onnie York</h1>
+              <a>
+                <Image src={LogoNav} objectFit="contain" width="300" />
+              </a>
             </Link>
-            <div className="flex my-auto ">
-              <Link className="mx-2  " href="/search">
-                店家搜尋
+            <div className="flex items-center gap-5 my-auto">
+              <Link href="/search">
+                <a>店家搜尋</a>
               </Link>
               {account == 'customer' && (
                 <>
-                  <Link className="mx-2" href="#feature">
-                    功能特色
+                  <Link href="#feature">
+                    <a>功能特色</a>
                   </Link>
-                  <Link className="mx-2" href="#store">
-                    合作店家
+                  <Link href="#store">
+                    <a>合作店家</a>
                   </Link>
                 </>
               )}
@@ -60,30 +64,37 @@ const Layout = ({ children, title }) => {
         <div className=" pt-20  mb-auto">{children}</div>
 
         <footer className=" mt-16 pt-4   ">
-          {router == '/'  ? (
+          {router === '/' ? (
             <div className=" mx-auto flex justify-between">
               <div className=" bg-footer w-1/3 py-16  pl-[10%]  ">
                 <div className="w-2/4 h-72">
-                  <Image src={Logo} width={83} className="mx-auto mb-2" />
-                  <p className="text-center text-success mb-10">
+                  <Image
+                    src={Logo}
+                    objectFit="contain"
+                    height="75"
+                    className="mx-auto mb-2"
+                  />
+                  <p className="text-center text-success mb-8">
                     info@bonnieyork.com
                   </p>
                   <div className="flex justify-center gap-4 mb-10">
-                    <Link href={'/'}>
-                      <Image src={Facebook} width={40} />
+                    <Link href="/">
+                      <a>
+                        <Image src={Facebook} width="50" height="50" />
+                      </a>
                     </Link>
-                    <Link href={'/'}>
-                      <Image src={Instagram} width={40} />
+                    <Link href="/">
+                      <a>
+                        <Image src={Instagram} width="50" height="50" />
+                      </a>
                     </Link>
                   </div>
-                  <Link
-                    href={'/'}
-                    className=" text-success block mb-4 text-center"
-                  >
-                    使用者協議
+                  <Link href="/" className=" text-success">
+                    <a className="block text-center">使用者協議</a>
                   </Link>
-                  <Link href={'/'} className=" text-success block text-center">
-                    隱私權政策
+
+                  <Link href="/" className=" text-success ">
+                    <a className="block text-center">隱私權政策</a>
                   </Link>
                 </div>
                 <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:h-footer  after:-z-10 after:w-7/12 after:rounded-tr-block after:bg-footerL after:content-['']"></div>
@@ -123,33 +134,50 @@ const Layout = ({ children, title }) => {
                 <div className="container mx-auto py-8 flex justify-between mb-2">
                   <div>
                     <Link href="/" className=" flex my-auto items-end">
-                      <Image className="my-auto " width={80} src={Logo} />
-
-                      <h1 className="text-3xl font-bold text-primary">
-                        onnie York
-                      </h1>
+                      <a>
+                        <Image className="my-auto " objectFit='contain'height={80} src={Logo} />
+                      </a>
                     </Link>
-                    <p className="text-lg mt-2">inf@bonnieyork.com</p>
+                    <a>
+                      <p className="text-lg mt-2">inf@bonnieyork.com</p>
+                    </a>
                   </div>
-                  <div className="flex gap-4">
-                    <Link href={'/'}>
-                      <Image className="my-auto " width={50} src={Facebook} />
-                    </Link>
-                    <Link href={'/'}>
-                      <Image className="my-auto" width={50} src={Instagram} />
+                  <div className="flex gap-4 items-center">
+                    <div>
+                      <Link href="/">
+                        <a>
+                          <Image
+                            className="my-auto "
+                            width={50}
+                            height={50}
+                            src={Facebook}
+                          />
+                        </a>
+                      </Link>
+                    </div>
+                    <Link href="/">
+                      <a>
+                        <Image
+                          className="my-auto"
+                          width={50}
+                          height={50}
+                          src={Instagram}
+                        />
+                      </a>
                     </Link>
                   </div>
                 </div>
               </div>
               <div className="bg-footerR ">
                 <div className="container mx-auto flex justify-center text-white py-3">
+                
                   <div className="  flex gap-7">
                     <Link className="" href="/">
-                      使用者協議
+                      <a>使用者協議</a>
                     </Link>
                     <p>|</p>
                     <Link className="" href="/">
-                      隱私權政策
+                      <a>隱私權政策</a>
                     </Link>
                   </div>
                 </div>

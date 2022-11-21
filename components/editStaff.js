@@ -10,7 +10,7 @@ const editStaff = (props) => {
       <div className="fixed  z-10 h-full  overflow-y-auto top-0 w-full flex justify-center bg-black/50">
         <div
           data-aos="zoom-in"
-          className="relative w-96 h-fit mt-20  bg-white border border-black"
+          className="relative w-96 h-fit mt-20 bg-white border border-black"
         >
           <Image src={Pig} />
           <div className="px-5 py-5">
