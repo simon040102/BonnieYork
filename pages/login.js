@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import Layout from '../modules/layout';
-import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../src/images/logo.png';
-import LoginClick from '../components/loginClick';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import Layout from '../modules/layout';
+
+import Logo from '../src/images/logo.png';
+import LoginClick from '../components/loginClick';
 const login = () => {
   const [status, setStatus] = useState('member');
   const [select, setSelect] = useState('');
   const [email, setEmail] = useState('');
-  const [openView,setOpenView]=useState(false)
+  const [openView, setOpenView] = useState(false);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -20,32 +20,31 @@ const login = () => {
   const checkEmail = (e) => {
     const { name } = e.target;
 
-    email||toast.error('請輸email', {
-      position: 'top-center',
-      autoClose: 1000,
-    });
+    email ||
+      toast.error('請輸email', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
     if (email !== '') {
       setSelect(name);
-      setOpenView(true)
+      setOpenView(true);
     }
   };
+
   return (
     <>
-      <Head>
-        <title>邦尼約克Bonnie York 登入</title>
-      </Head>
-      <Layout className="relative">
+      <Layout title="邦尼約克Bonnie York 登入" className="relative">
         <div className="container mx-auto  pt-10 ">
-          <div className=" w-full mb-4 flex justify-center">
+          <div className="mb-4 flex w-full justify-center">
             <Image className="mx-auto" width={150} src={Logo} />
           </div>
-          <ul className="flex justify-center mb-10">
+          <ul className="mb-10 flex justify-center">
             <li
               className={` ${
                 status == 'member'
                   ? 'bg-primary text-white'
                   : 'bg-primary text-black'
-              } w-40 h-10 flex items-center justify-center mx-6`}
+              } mx-6 flex h-10 w-40 items-center justify-center`}
             >
               <button
                 onClick={() => setStatus('member')}
@@ -59,7 +58,7 @@ const login = () => {
                 status == 'store'
                   ? 'bg-primary text-white'
                   : 'bg-primary text-black'
-              } w-40 h-10 flex items-center justify-center mx-6`}
+              } mx-6 flex h-10 w-40 items-center justify-center`}
             >
               <button
                 onClick={() => setStatus('store')}
@@ -72,7 +71,7 @@ const login = () => {
           <div className="flex justify-center">
             <input
               type="email"
-              className="border-black border h-10 indent-3 w-96"
+              className="h-10 w-96 border border-black indent-3"
               placeholder="email"
               value={email}
               onChange={handleChange}
@@ -81,7 +80,7 @@ const login = () => {
           <div className="flex justify-center">
             <button
               name="forget"
-              className="flex justify-end mb-8"
+              className="mb-8 flex justify-end"
               onClick={checkEmail}
             >
               忘記密碼？
@@ -90,14 +89,14 @@ const login = () => {
           <div className="flex justify-center">
             <button
               name="login"
-              className="bg-primary w-44 h-10 mx-6"
+              className="mx-6 h-10 w-44 bg-primary"
               onClick={checkEmail}
             >
               登入
             </button>
             <button
               name="signup"
-              className="bg-primary text-white w-44 h-10 mx-6"
+              className="mx-6 h-10 w-44 bg-primary text-white"
               onClick={checkEmail}
             >
               註冊

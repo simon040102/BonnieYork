@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
@@ -6,12 +6,12 @@ import Image from 'next/image';
 import ChangePassword from './changePassword';
 
 const staffProfile = (props) => {
-    const { handleChange, inf } = props;
-    const [page, setPage] = useState('info');
+  const { handleChange, inf } = props;
+  const [page, setPage] = useState('info');
   return (
     <div className="">
-      <h2 className="text-center mb-8 text-3xl">個人資訊</h2>
-      <div className="flex justify-center mb-4">
+      <h2 className="mb-8 text-center text-3xl">個人資訊</h2>
+      <div className="mb-4 flex justify-center">
         <button
           className={` ${page == 'info' ? 'text-black' : 'text-gray-500'} mx-8`}
           onClick={() => setPage('info')}
@@ -28,11 +28,11 @@ const staffProfile = (props) => {
         </button>
       </div>
       {page == 'info' && (
-        <div className="w-11/12 md:w-8/12 lg:w-6/12  mx-auto">
-          <div className=" flex   justify-between">
-            <div className="w-40 relative  h-40 flex justify-center">
+        <div className="mx-auto w-11/12 md:w-8/12  lg:w-6/12">
+          <div className="flex   justify-between">
+            <div className="relative flex  h-40 w-40 justify-center">
               <Image src={Profile} className="" />
-              <button className="absolute shadow-md border-black bg-gray-100 rounded-full p-1 right-0 bottom-0">
+              <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
                 <Image src={Edit} />
               </button>
             </div>
@@ -46,7 +46,7 @@ const staffProfile = (props) => {
                   onChange={handleChange}
                   name="name"
                   type="text"
-                  className="border-black border w-full mb-4 h-10 indent-3"
+                  className="mb-4 h-10 w-full border border-black indent-3"
                 />
                 <p>手機號碼：</p>
                 <input
@@ -54,7 +54,7 @@ const staffProfile = (props) => {
                   onChange={handleChange}
                   type="text"
                   name="phone"
-                  className="border-black border w-full mb-4 h-10 indent-3"
+                  className="mb-4 h-10 w-full border border-black indent-3"
                 />
                 <p>自我介紹： </p>
                 <textarea
@@ -63,7 +63,7 @@ const staffProfile = (props) => {
                   id=""
                   cols="30"
                   rows="5"
-                  className="border border-black w-full mb-4 resize-none"
+                  className="mb-4 w-full resize-none border border-black"
                 ></textarea>
                 <p>facebook：</p>
                 <input
@@ -71,7 +71,7 @@ const staffProfile = (props) => {
                   onChange={handleChange}
                   type="text"
                   name="facebook"
-                  className="border-black border w-full mb-4 h-10 indent-3"
+                  className="mb-4 h-10 w-full border border-black indent-3"
                 />
                 <p>Instagram：</p>
                 <input
@@ -79,7 +79,7 @@ const staffProfile = (props) => {
                   onChange={handleChange}
                   type="text"
                   name="instagram"
-                  className="border-black border w-full mb-4 h-10 indent-3"
+                  className="mb-4 h-10 w-full border border-black indent-3"
                 />
                 <p>Line官方：</p>
                 <input
@@ -87,16 +87,16 @@ const staffProfile = (props) => {
                   onChange={handleChange}
                   type="text"
                   name="line"
-                  className="border-black border w-full mb-4 h-10 indent-3"
+                  className="mb-4 h-10 w-full border border-black indent-3"
                 />
               </div>
             </div>
           </div>
-          <div className="flex justify-end gap-3 mt-4">
-            <button className=" bg-gray-300 w-32 h-8 text-black">
+          <div className="mt-4 flex justify-end gap-3">
+            <button className="bg-gray-300 h-8 w-32 text-black">
               放棄變更
             </button>
-            <button className=" bg-gray-500 w-32 h-8 text-white">
+            <button className="bg-gray-500 h-8 w-32 text-white">
               確認修改
             </button>
           </div>
@@ -105,8 +105,8 @@ const staffProfile = (props) => {
       {page == 'changePassword' && (
         <div>
           <ChangePassword handleChange={handleChange} inf={inf} />
-          <div className="w-11/12 md:w-8/12 lg:w-6/12  mx-auto flex justify-center mt-4">
-            <button className=" bg-gray-500 w-32 h-8 text-white">
+          <div className="mx-auto mt-4 flex  w-11/12 justify-center md:w-8/12 lg:w-6/12">
+            <button className="bg-gray-500 h-8 w-32 text-white">
               確認修改
             </button>
           </div>
@@ -114,6 +114,6 @@ const staffProfile = (props) => {
       )}
     </div>
   );
-}
+};
 
-export default staffProfile
+export default staffProfile;

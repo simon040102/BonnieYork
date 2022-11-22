@@ -15,48 +15,48 @@ const MemberReserve = (props) => {
   const selectDateHandler = (d) => {
     setDate(d);
   };
-    const today = new Date();
-    
-      useEffect(() => {
-        AOS.init();
-      }, []);
+  const today = new Date();
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
-      <div className="fixed  z-10 h-full  overflow-y-auto top-0 w-full flex justify-center bg-black/50">
+      <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
         <div
           data-aos="zoom-in"
-          className="relative w-96 h-fit mt-20  bg-white border border-black"
+          className="relative mt-20 h-fit w-96  border border-black bg-white"
         >
           <Image src={Item1} />
           <div className="p-5">
-            <h2 className="text-center text-xl mb-2">女士剪髮</h2>
-            <div className="flex justify-center mb-6">
-              <div className="text-sm flex gap-1 mx-2">
+            <h2 className="mb-2 text-center text-xl">女士剪髮</h2>
+            <div className="mb-6 flex justify-center">
+              <div className="mx-2 flex gap-1 text-sm">
                 <AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1小時</p>
               </div>
-              <div className="text-sm flex gap-1 mx-2">
+              <div className="mx-2 flex gap-1 text-sm">
                 <MonetizationOnOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1200</p>
               </div>
             </div>
-            <div className=" flex justify-center mb-2">
+            <div className="mb-2 flex justify-center">
               <p className="w-1/3 text-right">預約姓名：</p>
               <p className="w-2/3 text-center">王小明</p>
             </div>
-            <div className=" flex justify-center  mb-2">
+            <div className="mb-2 flex  justify-center">
               <p className="w-1/3 text-right">手機號碼：</p>
               <p className="w-2/3 text-center">0912345678</p>
             </div>
-            <div className=" flex justify-center mb-2">
+            <div className="mb-2 flex justify-center">
               <p className="w-1/3 text-right">設計師：</p>
-              <select className="w-2/3 text-center border" name="staff" id="">
+              <select className="w-2/3 border text-center" name="staff" id="">
                 <option value="不指定">不指定</option>
               </select>
             </div>
-            <div className=" flex justify-center mb-2">
+            <div className="mb-2 flex justify-center">
               <p className="w-1/3 text-right">日期：</p>
-              <div className="border w-2/3  text-center">
+              <div className="w-2/3 border  text-center">
                 <DatePicker
                   className="w-20"
                   dateFormat="yyyy/MM/dd"
@@ -67,13 +67,13 @@ const MemberReserve = (props) => {
                 />
               </div>
             </div>
-            <div className=" flex justify-center mb-2">
+            <div className="mb-2 flex justify-center">
               <p className="w-1/3 text-right">時間：</p>
-              <select className="w-2/3 text-center border" name="staff" id="">
+              <select className="w-2/3 border text-center" name="staff" id="">
                 <option value="不指定">選擇時間</option>
               </select>
             </div>
-            <div className=" flex justify-center mb-8">
+            <div className="mb-8 flex justify-center">
               <p className="w-1/3 text-right">備註：</p>
               <textarea
                 className="w-2/3 resize-none border"
@@ -82,14 +82,14 @@ const MemberReserve = (props) => {
             </div>
             <div className="flex justify-around">
               <button
-                className=" bg-gray-300 w-32 h-8"
+                className="bg-gray-300 h-8 w-32"
                 onClick={() => {
                   SetReserve(false);
                 }}
               >
                 取消
               </button>
-              <button className=" bg-gray-500 w-32 h-8 text-white">
+              <button className="bg-gray-500 h-8 w-32 text-white">
                 確認預約
               </button>
             </div>

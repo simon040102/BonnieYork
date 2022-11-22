@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import Image from 'next/image';
@@ -44,6 +44,6 @@ const storeSwiper = () => {
       </Swiper>
     </>
   );
-}
+};
 
-export default storeSwiper
+export default storeSwiper;

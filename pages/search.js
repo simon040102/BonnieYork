@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import Layout from '../modules/layout';
 import Image from 'next/image';
-import Search from '../src/images/search.svg'
+
+import Layout from '../modules/layout';
+
+import Search from '../src/images/search.svg';
 import SearchResult from '../components/searchResult';
-import Head from 'next/head';
 const search = () => {
   const [page, setPage] = useState('area');
   return (
     <div>
-      <Head>
-        <title>邦尼約克Bonnie York 店家搜尋</title>
-      </Head>
-      <Layout>
-        <div className="container mx-auto w-11/12 md:w-8/12 lg:w-6/12 pt-10">
-          <h2 className="text-center text-4xl mb-4">店家搜尋</h2>
-          <div className="flex justify-center mb-4">
+      <Layout title="邦尼約克BonnieYork 店家搜尋">
+        <div className="container mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
+          <h2 className="mb-4 text-center text-4xl">店家搜尋</h2>
+          <div className="mb-4 flex justify-center">
             <button
               className={` ${
                 page == 'area' ? 'text-black' : 'text-gray-500'
@@ -33,30 +31,30 @@ const search = () => {
             </button>
           </div>
 
-          <ul className="flex justify-center mx-auto mb-4">
+          <ul className="mx-auto mb-4 flex justify-center">
             {page == 'area' && (
               <>
-                <li className="w-3/12  mx-2">
+                <li className="mx-2  w-3/12">
                   <select
-                    className="border border-black w-full text-center"
+                    className="w-full border border-black text-center"
                     name="country"
                     id=""
                   >
                     <option value="縣市">縣市</option>
                   </select>
                 </li>
-                <li className="w-3/12  mx-2">
+                <li className="mx-2  w-3/12">
                   <select
-                    className="border border-black w-full text-center"
+                    className="w-full border border-black text-center"
                     name="area"
                     id=""
                   >
                     <option value="地區">地區</option>
                   </select>
                 </li>
-                <li className="w-3/12  mx-2">
+                <li className="mx-2  w-3/12">
                   <select
-                    className="border border-black w-full text-center"
+                    className="w-full border border-black text-center"
                     name="area"
                     id=""
                   >
@@ -67,8 +65,8 @@ const search = () => {
             )}
             {page == 'keywords' && (
               <>
-                <li className="w-6/12 mr-2">
-                  <input type="text" className="border border-black w-full" />
+                <li className="mr-2 w-6/12">
+                  <input type="text" className="w-full border border-black" />
                 </li>
               </>
             )}

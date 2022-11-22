@@ -1,22 +1,25 @@
-import React, { useState } from 'react'
-import Layout from '../modules/layout'
-import Head from 'next/head'
-import MemberProfile from '../components/memberProfile'
-import StaffProfile from '../components/staffProfile'
-import StoreProfile from '../components/storeProfile'
-const profile = () => {
-    const [status,setStatus]=useState('store')
-     const [inf, setInf] = useState({});
+import React, { useState } from 'react';
+import Head from 'next/head';
 
-     const handleChange = (e) => {
-       const { name, value } = e.target;
-       setInf((preState) => {
-         return {
-           ...preState,
-           [name]: value,
-         };
-       });
-     };
+import Layout from '../modules/layout';
+
+import MemberProfile from '../components/memberProfile';
+import StaffProfile from '../components/staffProfile';
+import StoreProfile from '../components/storeProfile';
+
+const profile = () => {
+  const [status, setStatus] = useState('store');
+  const [inf, setInf] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInf((preState) => {
+      return {
+        ...preState,
+        [name]: value,
+      };
+    });
+  };
   return (
     <div>
       <Head>
@@ -37,6 +40,6 @@ const profile = () => {
       </Layout>
     </div>
   );
-}
+};
 
-export default profile
+export default profile;

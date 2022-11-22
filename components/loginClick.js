@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 const forgetPassword = (props) => {
-    const { setOpenView, email, select, status } = props;
-      useEffect(() => {
-        AOS.init();
-      }, []);
-    
+  const { setOpenView, email, select, status } = props;
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <div className=" w-screen h-screen absolute z-50 top-20 left-0 flex  justify-center pt-60">
+    <div className="absolute top-20 left-0 z-50 flex h-screen w-screen  justify-center pt-60">
       <div
         data-aos="zoom-in"
-        className=" w-96 h-52 bg-white absolute border-black border p-10"
+        className="absolute h-52 w-96 border border-black bg-white p-10"
       >
         {select == 'forget' && (
           <div>
@@ -31,14 +31,14 @@ const forgetPassword = (props) => {
             <p>請輸入密碼</p>
             <input
               type="password"
-              className="mb-8 w-full h-8 indent-3 border-black border"
+              className="mb-8 h-8 w-full border border-black indent-3"
             />
           </div>
         )}
-        <div className=" flex justify-around">
-          <button className="w-20 h-10 bg-gray-400">確認</button>
+        <div className="flex justify-around">
+          <button className="bg-gray-400 h-10 w-20">確認</button>
           <button
-            className="w-20 h-10 bg-gray-300"
+            className="bg-gray-300 h-10 w-20"
             onClick={() => setOpenView(false)}
           >
             取消
@@ -47,6 +47,6 @@ const forgetPassword = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default forgetPassword;

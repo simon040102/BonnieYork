@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-import Layout from '../modules/layout';
-import Head from 'next/head';
-import SignupInf from '../components/signupInf';
-import Finish from '../src/images/finished.png';
-import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
+import Image from 'next/image';
+
+import Layout from '../modules/layout';
+
+import SignupInf from '../components/signupInf';
+import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
 const signup = () => {
   const [status, setStatus] = useState('member');
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
 
-  const handleChange=(e)=>{
-    const {name,value}=e.target
-    setInf((preState=>{
-        return{
-            ...preState,
-            [name]:value
-        }
-    }))
-  }
-  console.log(inf)
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInf((preState) => {
+      return {
+        ...preState,
+        [name]: value,
+      };
+    });
+  };
+  console.log(inf);
   return (
     <>
-      <Head>
-        <title>邦尼約克Bonnie York 註冊</title>
-      </Head>
-      <Layout>
-        <div className="container mx-auto w-11/12 md:w-8/12 lg:w-6/12 pt-10">
-          <ul className="flex text-center justify-between mb-10">
+      <Layout title="邦尼約克Bonnie York 註冊">
+        <div className="container mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
+          <ul className="mb-10 flex justify-between text-center">
             <li className="w-4/12">
               <p>輸入密碼</p>
               <div className="flex justify-center">
-                <p className=" bg-blue-500 rounded-full flex justify-center   items-center text-white w-8 h-8">
+                <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
                   1
                 </p>
               </div>
@@ -41,7 +39,7 @@ const signup = () => {
             <li className="w-4/12">
               <p>基本資料</p>
               <div className="flex justify-center">
-                <p className=" bg-blue-500 rounded-full flex justify-center   items-center text-white w-8 h-8">
+                <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
                   2
                 </p>
               </div>
@@ -49,7 +47,7 @@ const signup = () => {
             <li className="w-4/12">
               <p>完成</p>
               <div className="flex justify-center">
-                <p className=" bg-blue-500 rounded-full flex justify-center   items-center text-white w-8 h-8">
+                <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
                   3
                 </p>
               </div>
@@ -63,7 +61,7 @@ const signup = () => {
             handleChange={handleChange}
           />
         )}
-        <div className=" mb-4">
+        <div className="mb-4">
           {page == 2 && (
             <SignupInf
               setInf={setInf}
@@ -75,12 +73,12 @@ const signup = () => {
             />
           )}
           {page == 3 && (
-            <div className="container mx-auto w-8/12 lg:w-4/12 xl:2/12">
-              <Image className="w-6/12 mx-auto mb-8" src={Finish} />
+            <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
+              <Image className="mx-auto mb-8 w-6/12" src={Finish} />
               <div className="flex justify-center">
                 {status == 'store' && (
                   <button
-                    className="bg-gray-400 text-white w-60 h-10"
+                    className="bg-gray-400 h-10 w-60 text-white"
                     onClick={() => {
                       Router.push('/');
                     }}
@@ -90,7 +88,7 @@ const signup = () => {
                 )}
                 {status == 'staff' && (
                   <button
-                    className="bg-gray-400 text-white w-60 h-10"
+                    className="bg-gray-400 h-10 w-60 text-white"
                     onClick={() => {
                       Router.push('/');
                     }}
@@ -100,7 +98,7 @@ const signup = () => {
                 )}
                 {status == 'member' && (
                   <button
-                    className="bg-gray-400 text-white w-60 h-10"
+                    className="bg-gray-400 h-10 w-60 text-white"
                     onClick={() => {
                       Router.push('/');
                     }}
@@ -112,10 +110,10 @@ const signup = () => {
             </div>
           )}
           {page !== 3 && (
-            <div className="flex justify-end container mx-auto w-11/12 md:w-8/12 lg:w-6/12  ">
+            <div className="container mx-auto flex w-11/12 justify-end md:w-8/12 lg:w-6/12  ">
               {page !== 1 && (
                 <button
-                  className="bg-gray-300 mx-2 w-32 h-10"
+                  className="bg-gray-300 mx-2 h-10 w-32"
                   onClick={() => {
                     setPage(page - 1);
                   }}
@@ -125,7 +123,7 @@ const signup = () => {
               )}
 
               <button
-                className="bg-gray-300 mx-2  w-32 h-10"
+                className="bg-gray-300 mx-2  h-10 w-32"
                 onClick={() => {
                   setPage(page + 1);
                 }}

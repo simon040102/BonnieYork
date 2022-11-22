@@ -1,0 +1,7 @@
+{
+  // 存檔時就自動排版
+  "editor.formatOnSave": true,
+
+  // 使用 Prettier作為預設排版
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+}

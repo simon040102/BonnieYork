@@ -1,30 +1,27 @@
-import React, { useState } from 'react'
-import Layout from '../modules/layout'
-import Head from 'next/head'
+import React, { useState } from 'react';
 import Image from 'next/image';
+
+import Layout from '../modules/layout';
+
 import Pig from '../src/images/pig.jpg';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EditStaff from '../components/editStaff';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddStaff from '../components/addStaff';
 const staff = () => {
-    const [editStaff,setEditStaff]=useState(false)
-    const [addStaff, setAddStaff] = useState(false);
+  const [editStaff, setEditStaff] = useState(false);
+  const [addStaff, setAddStaff] = useState(false);
   return (
     <div className="pt-10">
-      <Head>
-        <title>員工管理</title>
-      </Head>
-
-      <Layout>
+      <Layout title="員工管理">
         {editStaff && <EditStaff setEditStaff={setEditStaff} />}
         {addStaff && <AddStaff setAddStaff={setAddStaff} />}
-        <h2 className="text-4xl text-center mb-10">員工資訊</h2>
+        <h2 className="mb-10 text-center text-4xl">員工資訊</h2>
         <div className="container mx-auto flex justify-center ">
-          <ul className="w-full px-2 md:px-0 sm:w-3/4 lg:w-1/2">
-            <li className="w-ful h-52 border border-black flex mb-6">
+          <ul className="w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
+            <li className="w-ful mb-6 flex h-52 border border-black">
               <Image src={Pig} className="w-2/5 object-cover" />
-              <div className="p-4 relative">
+              <div className="relative p-4">
                 <p className="mb-1">暱稱：可愛粉紅豬</p>
                 <p className="mb-1">職稱：設計師</p>
                 <p className="mb-1">
@@ -41,9 +38,9 @@ const staff = () => {
                 </div>
               </div>
             </li>
-            <li className="w-ful h-52 border border-black flex mb-6">
+            <li className="w-ful mb-6 flex h-52 border border-black">
               <Image src={Pig} className="w-2/5 object-cover" />
-              <div className="p-4 relative">
+              <div className="relative p-4">
                 <p className="mb-1">暱稱：可愛粉紅豬</p>
                 <p className="mb-1">職稱：設計師</p>
                 <p className="mb-1">
@@ -66,6 +63,6 @@ const staff = () => {
       </Layout>
     </div>
   );
-}
+};
 
-export default staff
+export default staff;
