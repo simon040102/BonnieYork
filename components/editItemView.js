@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Image from 'next/image';
 import Item1 from '../src/images/item1.png';
 import DatePicker from 'react-datepicker';
