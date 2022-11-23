@@ -9,10 +9,8 @@ import Menu from '../components/Menu';
 import SampleFooter from '../components/SampleFooter';
 import HomeFooter from '../components/homeFooter';
 
-import Logo from '../src/images/logo.png';
 import LogoNav from '../src/images/logo_nav.png';
-import Facebook from '../src/images/facebook_home.png';
-import Instagram from '../src/images/instagram_home.png';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const [account, setAccount] = useState('customer');
@@ -20,9 +18,12 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const status = () => {
     if (account == 'customer')
       return (
-        <Link className="mx-2 text-secondary" href="/login">
-          <a>登入/註冊</a>
-        </Link>
+        <div>
+          <PersonOutlineOutlinedIcon color="primary" />
+          <Link href="/login">
+            <a className="mx-2 text-secondary">登入/註冊</a>
+          </Link>
+        </div>
       );
     else {
       return <Menu status={account} />;

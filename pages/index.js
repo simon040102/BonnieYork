@@ -44,7 +44,7 @@ const Home = () => {
               邦尼約克
             </h1>
             <h2 className="mb-4 py-2 text-5xl font-bold text-white drop-shadow-md">
-              預約交給Bonner York
+              預約交給Bonnie York
             </h2>
             <div>
               <p className="mb-6 inline-block bg-secondary px-3 py-2 text-white drop-shadow-md">
