@@ -15,9 +15,7 @@ const editOder = (props) => {
       >
         <button
           className="absolute right-4 top-4"
-          onClick={() => {
-            setEditOder(false);
-          }}
+          onClick={() => setEditOder(false)}
         >
           <CloseIcon />
         </button>

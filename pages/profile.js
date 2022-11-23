@@ -21,7 +21,7 @@ const profile = () => {
     });
   };
   return (
-    <div>
+    <>
       <Head>
         {status == 'member' && <title>會員資訊</title>}
         {status == 'staff' && <title>個人資訊</title>}
@@ -38,7 +38,7 @@ const profile = () => {
           {status == 'store' && <StoreProfile />}
         </div>
       </Layout>
-    </div>
+    </>
   );
 };
 

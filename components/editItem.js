@@ -5,21 +5,21 @@ import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 const editItem = (props) => {
-  const { setEdit, setAddItem  } = props;
+  const { setEdit, setAddItem } = props;
 
   return (
-    <div className="w-full px-2 md:px-0 sm:w-3/4 lg:w-1/2">
+    <div className="w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
       <ul>
-        <li className="w-ful h-52 border border-black flex mb-6">
+        <li className="w-ful mb-6 flex h-52 border border-black">
           <Image src={Item1} className="w-2/5 object-cover" />
-          <div className="p-4 relative">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="relative p-4">
+            <div className="mb-4 flex items-center gap-3">
               <h2 className="font-bold ">女士剪髮</h2>
-              <div className="text-sm flex gap-1 ">
+              <div className="flex gap-1 text-sm ">
                 <AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1小時</p>
               </div>
-              <div className="text-sm flex gap-1">
+              <div className="flex gap-1 text-sm">
                 <MonetizationOnOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1200</p>
               </div>
@@ -30,25 +30,23 @@ const editItem = (props) => {
               只為了讓屏東的顧客也能擁有「時尚｜年輕｜健康 」的髮型！
             </p>
             <button
-              className="absolute bottom-2 right-4 bg-gray-400 text-white w-32 h-8"
-              onClick={() => {
-                setEdit(true);
-              }}
+              className="bg-gray-400 absolute bottom-2 right-4 h-8 w-32 text-white"
+              onClick={() => setEdit(true)}
             >
               編輯
             </button>
           </div>
         </li>
-        <li className="w-ful h-52 border border-black flex mb-6">
+        <li className="w-ful mb-6 flex h-52 border border-black">
           <Image src={Item1} className="w-2/5 object-cover" />
-          <div className="p-4 relative">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="relative p-4">
+            <div className="mb-4 flex items-center gap-3">
               <h2 className="font-bold ">女士剪髮</h2>
-              <div className="text-sm flex gap-1 ">
+              <div className="flex gap-1 text-sm ">
                 <AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1小時</p>
               </div>
-              <div className="text-sm flex gap-1">
+              <div className="flex gap-1 text-sm">
                 <MonetizationOnOutlinedIcon sx={{ fontSize: 20 }} />
                 <p>1200</p>
               </div>
@@ -58,15 +56,15 @@ const editItem = (props) => {
               在這不斷變化的時代裡HAPPYHAIR不斷的前進
               只為了讓屏東的顧客也能擁有「時尚｜年輕｜健康 」的髮型！
             </p>
-            <button className="absolute bottom-2 right-4 bg-gray-400 text-white w-32 h-8">
+            <button className="bg-gray-400 absolute bottom-2 right-4 h-8 w-32 text-white">
               編輯
             </button>
           </div>
         </li>
       </ul>
-      <div className='flex justify-center'>
-        <button onClick={()=>setAddItem(true)}>
-          <AddCircleOutlineIcon sx={{fontSize:40}}/>
+      <div className="flex justify-center">
+        <button onClick={() => setAddItem(true)}>
+          <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
         </button>
       </div>
     </div>

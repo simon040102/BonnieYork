@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -6,17 +6,16 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const addOffDay = (props) => {
-    const {setAddOffDay}=props
-     const [startDate, setStartDate] = useState(new Date());
+  const { setAddOffDay } = props;
+  const [startDate, setStartDate] = useState(new Date());
   return (
-    <div className="fixed  z-10 h-full  overflow-y-auto top-0 w-full flex justify-center bg-black/50">
+    <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
         data-aos="zoom-in"
-        className="relative w-96 h-fit mt-20  bg-white border border-black py-8 items-center"
+        className="relative mt-20 h-fit w-96  items-center border border-black bg-white py-8"
       >
-        
-        <h2 className="text-center mb-4">請選擇日期</h2>
-        <div className="flex justify-center gap-3 mb-4">
+        <h2 className="mb-4 text-center">請選擇日期</h2>
+        <div className="mb-4 flex justify-center gap-3">
           <div>
             <DatePicker
               selected={startDate}
@@ -31,14 +30,14 @@ const addOffDay = (props) => {
             <AddCircleOutlineIcon />
           </button>
         </div>
-        <ul className="w-full m-auto mb-5">
-          <li className="flex justify-center gap-3 items-center mb-2">
+        <ul className="m-auto mb-5 w-full">
+          <li className="mb-2 flex items-center justify-center gap-3">
             <p>2022/11/18</p>
             <button>
               <DeleteOutlineIcon sx={{ fontSize: 20 }} />
             </button>
           </li>
-          <li className="flex justify-center gap-3 items-center mb-2">
+          <li className="mb-2 flex items-center justify-center gap-3">
             <p>2022/11/27</p>
             <button>
               <DeleteOutlineIcon sx={{ fontSize: 20 }} />
@@ -47,10 +46,8 @@ const addOffDay = (props) => {
         </ul>
         <div className="flex justify-center gap-3 ">
           <button
-            className="bg-gray-400  w-20 h-10"
-            onClick={() => {
-              setAddOffDay(false);
-            }}
+            className="bg-gray-400  h-10 w-20"
+            onClick={() => setAddOffDay(false)}
           >
             設定完成
           </button>
@@ -58,6 +55,6 @@ const addOffDay = (props) => {
       </div>
     </div>
   );
-}
+};
 
-export default addOffDay
+export default addOffDay;

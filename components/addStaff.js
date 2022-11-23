@@ -1,29 +1,29 @@
-import React from 'react'
+import React from 'react';
 
 const addStaff = (props) => {
-    const {setAddStaff}=props
+  const { setAddStaff } = props;
   return (
     <>
-      <div className="fixed  z-10 h-full  overflow-y-auto top-0 w-full flex justify-center bg-black/50">
+      <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
         <div
           data-aos="zoom-in"
-          className="relative w-96 h-fit mt-20  bg-white border border-black"
+          className="relative mt-20 h-fit w-96  border border-black bg-white"
         >
           <div className="px-5 py-5">
-            <h2 className="text-2xl text-center mb-8">新增員工</h2>
-            <div className="flex mb-4">
+            <h2 className="mb-8 text-center text-2xl">新增員工</h2>
+            <div className="mb-4 flex">
               <p className="w-3/12 text-end">Email：</p>
-              <input type="mail" className="border w-9/12" />
+              <input type="mail" className="w-9/12 border" />
             </div>
-            <div className="flex  mb-4">
+            <div className="mb-4  flex">
               <p className="w-3/12 text-end">職稱：</p>
-              <input type="mail" className="border w-9/12" />
+              <input type="mail" className="w-9/12 border" />
             </div>
-            <div className="flex gap-2 mb-16 ">
+            <div className="mb-16 flex gap-2 ">
               <div className="w-4/12">
                 <p>工作項目：</p>
               </div>
-              <div className="flex flex-wrap gap-2 w-8/12">
+              <div className="flex w-8/12 flex-wrap gap-2">
                 <div className="flex ">
                   <input
                     type="checkbox"
@@ -68,14 +68,12 @@ const addStaff = (props) => {
             </div>
             <div className="flex justify-center gap-3 ">
               <button
-                className="bg-gray-200 w-32 h-10"
-                onClick={() => {
-                  setAddStaff(false);
-                }}
+                className="bg-gray-200 h-10 w-32"
+                onClick={() => setAddStaff(false)}
               >
                 取消
               </button>
-              <button className="bg-gray-400 text-white w-32 h-10">
+              <button className="bg-gray-400 h-10 w-32 text-white">
                 發送邀請信件
               </button>
             </div>
@@ -84,6 +82,6 @@ const addStaff = (props) => {
       </div>
     </>
   );
-}
+};
 
-export default addStaff
+export default addStaff;

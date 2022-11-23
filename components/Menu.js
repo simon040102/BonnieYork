@@ -13,12 +13,7 @@ const Menu = (props) => {
   }, []);
   return (
     <div className="">
-      <button
-        className="flex items-center"
-        onClick={() => {
-          setMenu(!menu);
-        }}
-      >
+      <button className="flex items-center" onClick={() => setMenu(!menu)}>
         <Image objectFit="contain" width="30" height="30" src={Profile} />
         <p className="ml-2">王小明</p>
       </button>

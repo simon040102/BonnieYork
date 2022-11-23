@@ -83,9 +83,7 @@ const MemberReserve = (props) => {
             <div className="flex justify-around">
               <button
                 className="bg-gray-300 h-8 w-32"
-                onClick={() => {
-                  SetReserve(false);
-                }}
+                onClick={() => SetReserve(false)}
               >
                 取消
               </button>

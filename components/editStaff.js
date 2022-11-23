@@ -82,9 +82,7 @@ const editStaff = (props) => {
             <div className="flex justify-center gap-3 ">
               <button
                 className="bg-gray-200 h-10 w-32"
-                onClick={() => {
-                  setEditStaff(false);
-                }}
+                onClick={() => setEditStaff(false)}
               >
                 放棄變更
               </button>

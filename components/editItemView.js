@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Item1 from '../src/images/item1.png';
 import DatePicker from 'react-datepicker';
@@ -7,17 +7,20 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect, useState } from 'react';
 
-const editItemView = (props) => {
-  const { setEdit } = props;
-  const [startDate, setDate] = React.useState(new Date());
+const editItemView = ({ setEdit }) => {
+  const [startDate, setDate] = useState(new Date());
+
   const selectDateHandler = (d) => {
     setDate(d);
   };
+
   const today = new Date();
 
   useEffect(() => {
     AOS.init();
+    return () => {};
   }, []);
+
   return (
     <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
@@ -76,9 +79,7 @@ const editItemView = (props) => {
           <div className="flex justify-around">
             <button
               className="bg-gray-300 h-8 w-32"
-              onClick={() => {
-                setEdit(false);
-              }}
+              onClick={() => setEdit(false)}
             >
               取消
             </button>

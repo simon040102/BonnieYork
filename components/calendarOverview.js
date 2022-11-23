@@ -1,26 +1,24 @@
-import React from 'react'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from "@fullcalendar/interaction"; // needed
+import React from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction'; // needed
 import listPlugin from '@fullcalendar/list'; //F
 import { useRef } from 'react';
 
 const calendarOverview = (props) => {
-        const { setAddOffDay, setAddReserve, setEditOder } = props;
+  const { setAddOffDay, setAddReserve, setEditOder } = props;
 
-     const calendarRef = useRef(null);
-     const handleClick=(e)=>{
-        console.log(e.event.id)
-        setEditOder(true);
-     }
+  const calendarRef = useRef(null);
+  const handleClick = (e) => {
+    console.log(e.event.id);
+    setEditOder(true);
+  };
   return (
     <div>
-      <div className="flex justify-end mb-4">
+      <div className="mb-4 flex justify-end">
         <button
-          className="bg-gray-400 text-white h-10 w-40"
-          onClick={() => {
-            setAddOffDay(true);
-          }}
+          className="bg-gray-400 h-10 w-40 text-white"
+          onClick={() => setAddOffDay(true)}
         >
           新增休息日
         </button>
@@ -80,9 +78,9 @@ const calendarOverview = (props) => {
           },
         ]}
       />
-      <div className="flex justify-end mt-4">
+      <div className="mt-4 flex justify-end">
         <button
-          className="bg-gray-400 text-white h-10 w-40"
+          className="bg-gray-400 h-10 w-40 text-white"
           onClick={() => setAddReserve(true)}
         >
           手動新增行事曆
@@ -90,6 +88,6 @@ const calendarOverview = (props) => {
       </div>
     </div>
   );
-}
+};
 
-export default calendarOverview
+export default calendarOverview;
