@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Link from 'next/link';
 
-const staffInf = (props) => {
-    const { page, inf, handleChange } = props;
-
+const staffInf = ({ page, inf, handleChange }) => {
   return (
     <>
       {page == 2 && (
@@ -16,7 +14,7 @@ const staffInf = (props) => {
               name="name"
               value={inf.name}
               type="text"
-              className="border-black border w-full mb-4 h-10 indent-3"
+              className="mb-4 h-10 w-full border border-black indent-3"
               onChange={handleChange}
             />
 
@@ -25,11 +23,11 @@ const staffInf = (props) => {
               type="text"
               name="phone"
               value={inf.phone}
-              className="border-black border w-full mb-4 h-10 indent-3"
+              className="mb-4 h-10 w-full border border-black indent-3"
               onChange={handleChange}
             />
           </div>
-          <div className="text-left mb-4">
+          <div className="mb-4 text-left">
             <p>性別：</p>
             <input
               type="radio"
@@ -52,9 +50,8 @@ const staffInf = (props) => {
           </div>
         </div>
       )}
-     
     </>
   );
-}
+};
 
-export default staffInf
+export default staffInf;

@@ -66,6 +66,7 @@ const Home = () => {
             <button
               data-aos="fade-right"
               className="tryIt absolute right-44 top-32 z-10 flex w-48 justify-center gap-8 rounded-tl-sm rounded-tr-full  bg-secondary py-3 text-lg text-white"
+              onClick={() => Router.push('/login')}
             >
               <p>立即試用</p>
               <ArrowCircleRightOutlinedIcon sx={{ fontSize: '28px' }} />

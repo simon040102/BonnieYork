@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
+
+import { useThem } from '../modules/context';
+
 import CalendarOverview from './calendarOverview';
 import StaffCalenderOverview from './staffCalenderOverview';
-import { useState } from 'react';
-const staffCalendar = (props) => {
- const { setAddOffDay, setAddReserve, setEditOder, status } = props;
-    const [page, setPage] = useState('staffCalenderOverview');
+const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
+  const [page, setPage] = useState('staffCalenderOverview');
   return (
     <div>
-      <div className="flex justify-center mb-4">
+      <div className="mb-4 flex justify-center">
         <button
           className={` ${
             page == 'staffCalenderOverview' ? 'text-black' : 'text-gray-500'
@@ -33,10 +35,10 @@ const staffCalendar = (props) => {
         />
       )}
       {page == 'staffCalenderOverview' && (
-        <StaffCalenderOverview setEditOder={setEditOder} status={status} />
+        <StaffCalenderOverview setEditOder={setEditOder} />
       )}
     </div>
   );
-}
+};
 
-export default staffCalendar
+export default staffCalendar;

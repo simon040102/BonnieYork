@@ -7,15 +7,18 @@ import { useRouter } from 'next/router';
 import Menu from '../components/Menu';
 import SampleFooter from '../components/SampleFooter';
 import HomeFooter from '../components/homeFooter';
+import { useThem } from '../modules/context';
 
 import LogoNav from '../src/images/logo_nav.png';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
-  const [account, setAccount] = useState('customer');
+  const { data, setData } = useThem();
+  const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
+  console.log(data.status);
   const status = () => {
-    if (account == 'customer')
+    if (data.status == 'customer')
       return (
         <div className="flex">
           <Link href="/login">
@@ -29,7 +32,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         </div>
       );
     else {
-      return <Menu status={account} />;
+      return <Menu />;
     }
   };
   return (
@@ -52,7 +55,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
               <Link href="/search">
                 <a>店家搜尋</a>
               </Link>
-              {account == 'customer' && (
+              {data.status == 'customer' && (
                 <>
                   <Link href="#feature">
                     <a className="hidden md:block">功能特色</a>

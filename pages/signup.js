@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { withRouter } from 'next/router';
 
 import Layout from '../modules/layout';
+import { useThem } from '../modules/context';
 
 import SignupInf from '../components/signupInf';
 import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
 const signup = ({ router }) => {
+  const { data, setData } = useThem();
   const token = router.query.token;
-  const [status, setStatus] = useState('member');
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
 
@@ -63,7 +64,6 @@ const signup = ({ router }) => {
         {page == 2 && (
           <SignupInf
             setInf={setInf}
-            status={status}
             page={page}
             setPage={setPage}
             inf={inf}
@@ -74,7 +74,7 @@ const signup = ({ router }) => {
           <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
             <Image className="mx-auto mb-8 w-6/12" src={Finish} />
             <div className="flex justify-center">
-              {status == 'store' && (
+              {data.status == 'store' && (
                 <button
                   className="bg-gray-400 h-10 w-60 text-white"
                   onClick={() => {
@@ -84,7 +84,7 @@ const signup = ({ router }) => {
                   開始建立我的店鋪
                 </button>
               )}
-              {status == 'staff' && (
+              {data.status == 'staff' && (
                 <button
                   className="bg-gray-400 h-10 w-60 text-white"
                   onClick={() => {
@@ -94,7 +94,7 @@ const signup = ({ router }) => {
                   開始編輯個人行程
                 </button>
               )}
-              {status == 'member' && (
+              {data.status == 'member' && (
                 <button
                   className="bg-gray-400 h-10 w-60 text-white"
                   onClick={() => {

@@ -1,7 +1,6 @@
 import React from 'react';
 
-const addStaff = (props) => {
-  const { setAddStaff } = props;
+const addStaff = ({ setAddStaff }) => {
   return (
     <>
       <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">

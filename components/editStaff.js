@@ -3,8 +3,7 @@ import Image from 'next/image';
 import Pig from '../src/images/pig.jpg';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const editStaff = (props) => {
-  const { setEditStaff } = props;
+const editStaff = ({ setEditStaff }) => {
   return (
     <>
       <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">

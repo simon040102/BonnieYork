@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Item1 from '../src/images/item1.png';
 
-const addItem = (props) => {
-  const { setAddItem } = props;
+const addItem = ({ setAddItem }) => {
   useEffect(() => {
     AOS.init();
   }, []);

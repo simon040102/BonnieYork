@@ -1,25 +1,25 @@
-import React from 'react'
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from "@fullcalendar/interaction"; // needed
+import React from 'react';
+import { useRef } from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction'; // needed
 import listPlugin from '@fullcalendar/list'; //For List View
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { useRef } from 'react';
+import { useThem } from '../modules/context';
 
-
-const staffCalenderOverview = (props) => {
-    const { setEditOder, status } = props;
-      const calendarRef = useRef(null);
-      const handleClick = (e) => {
-        console.log(e.event.id);
-        setEditOder(true);
-      };
+const staffCalenderOverview = ({ setEditOder }) => {
+  const { data, setData } = useThem();
+  const calendarRef = useRef(null);
+  const handleClick = (e) => {
+    console.log(e.event.id);
+    setEditOder(true);
+  };
   return (
     <div>
-      {status == 'store' && (
-        <div className="w-11/12 md:w-8/12 lg:w-6/12 mx-auto pt-10">
-          <select name="" id="" className="border w-full text-center mb-8">
+      {data.status == 'store' && (
+        <div className="mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
+          <select name="" id="" className="mb-8 w-full border text-center">
             <option value="可愛粉紅豬">可愛粉紅豬</option>
           </select>
         </div>
@@ -114,6 +114,6 @@ const staffCalenderOverview = (props) => {
       </div>
     </div>
   );
-}
+};
 
-export default staffCalenderOverview
+export default staffCalenderOverview;

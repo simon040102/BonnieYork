@@ -3,8 +3,7 @@ import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import Image from 'next/image';
 import ChangePassword from './changePassword';
-const memberProfile = (props) => {
-  const { handleChange, inf } = props;
+const memberProfile = ({ handleChange, inf }) => {
   const [page, setPage] = useState('info');
   const changeDate = (e) => {
     console.log(e.target.value);

@@ -9,9 +9,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 
-const MemberReserve = (props) => {
+const MemberReserve = ({ SetReserve }) => {
   const [startDate, setDate] = React.useState(new Date());
-  const { SetReserve } = props;
+
   const selectDateHandler = (d) => {
     setDate(d);
   };

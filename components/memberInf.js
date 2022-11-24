@@ -3,8 +3,7 @@ import Image from 'next/image';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 
-const memberInf = (props) => {
-  const { setInf, page, inf, handleChange } = props;
+const memberInf = ({ setInf, page, inf, handleChange }) => {
   return (
     <>
       {page == 2 && (
@@ -15,7 +14,7 @@ const memberInf = (props) => {
               name="name"
               value={inf.name}
               type="text"
-              className="border-black border w-full mb-4 h-10 indent-3"
+              className="mb-4 h-10 w-full border border-black indent-3"
               onChange={handleChange}
             />
             <p>*手機號碼：</p>
@@ -23,7 +22,7 @@ const memberInf = (props) => {
               type="text"
               name="phone"
               value={inf.phone}
-              className="border-black border w-full mb-4 h-10 indent-3"
+              className="mb-4 h-10 w-full border border-black indent-3"
               onChange={handleChange}
             />
             <p>生日</p>
@@ -31,10 +30,10 @@ const memberInf = (props) => {
               type="date"
               name="birthday"
               value={inf.birthday}
-              className="border-black border w-full mb-4 h-10 indent-1"
+              className="mb-4 h-10 w-full border border-black indent-1"
               onChange={handleChange}
             />
-            <div className="text-left mb-4">
+            <div className="mb-4 text-left">
               <p>性別：</p>
               <input
                 type="radio"
@@ -58,7 +57,6 @@ const memberInf = (props) => {
           </div>
         </div>
       )}
-     
     </>
   );
 };

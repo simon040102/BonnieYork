@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from '../modules/layout';
 
-import Logo from '../src/images/logo.png';
+import Logo from '../src/images/logo.svg';
 import LoginClick from '../components/loginClick';
 const login = () => {
   const [status, setStatus] = useState('member');
@@ -19,13 +20,22 @@ const login = () => {
 
   const checkEmail = (e) => {
     const { name } = e.target;
+    const emailTest =
+      /^\w+((-\w+)|(.\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z]+$/;
+
+    !emailTest.test(email) &&
+      email !== '' &&
+      toast.error('email格式錯誤', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
 
     email ||
       toast.error('請輸email', {
         position: 'top-center',
         autoClose: 1000,
       });
-    if (email !== '') {
+    if (email !== '' && emailTest.test(email)) {
       setSelect(name);
       setOpenView(true);
     }
@@ -34,8 +44,8 @@ const login = () => {
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
       <div className="container mx-auto  pt-10 ">
-        <div className="mb-4 flex w-full justify-center">
-          <Image className="mx-auto" width={150} src={Logo} />
+        <div className="mb-4 flex h-20 w-full justify-center">
+          <Image className="mx-auto" src={Logo} />
         </div>
         <ul className="mb-10 flex justify-center">
           <li

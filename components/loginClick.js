@@ -2,8 +2,7 @@ import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
-const forgetPassword = (props) => {
-  const { setOpenView, email, select, status } = props;
+const forgetPassword = ({ setOpenView, email, select }) => {
   useEffect(() => {
     AOS.init();
   }, []);

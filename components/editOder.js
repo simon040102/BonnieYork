@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-const editOder = (props) => {
-  const { setEditOder } = props;
+const editOder = ({ setEditOder }) => {
   const [edit, setEdit] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
 

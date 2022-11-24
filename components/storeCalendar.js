@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import CalendarOverview from './calendarOverview';
 import StaffCalenderOverview from './staffCalenderOverview';
-const storeCalendar = (props) => {
-    const { setAddOffDay, setAddReserve, setEditOder } = props;
-    const [page, setPage] = useState('overview');
+const storeCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
+  const [page, setPage] = useState('overview');
   return (
     <div>
-      <div className="flex justify-center mb-4">
+      <div className="mb-4 flex justify-center">
         <button
           className={` ${
             page == 'overview' ? 'text-black' : 'text-gray-500'
@@ -36,6 +35,6 @@ const storeCalendar = (props) => {
       )}
     </div>
   );
-}
+};
 
-export default storeCalendar
+export default storeCalendar;

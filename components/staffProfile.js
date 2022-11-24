@@ -5,8 +5,7 @@ import Edit from '../src/images/pencil.svg';
 import Image from 'next/image';
 import ChangePassword from './changePassword';
 
-const staffProfile = (props) => {
-  const { handleChange, inf } = props;
+const staffProfile = ({ handleChange, inf }) => {
   const [page, setPage] = useState('info');
   return (
     <div className="">

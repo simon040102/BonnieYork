@@ -4,9 +4,7 @@ import Item1 from '../src/images/item1.png';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-const editItem = (props) => {
-  const { setEdit, setAddItem } = props;
-
+const editItem = ({ setEdit, setAddItem }) => {
   return (
     <div className="w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
       <ul>

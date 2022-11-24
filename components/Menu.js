@@ -1,13 +1,19 @@
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+import { useThem } from '../modules/context';
+
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import Link from 'next/link';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect, useState } from 'react';
-const Menu = (props) => {
-  const { status } = props;
+
+const Menu = () => {
   const [menu, setMenu] = useState(false);
+  const { data, setData } = useThem();
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -30,11 +36,13 @@ const Menu = (props) => {
               <Image src={Edit} />
             </button> */}
             <p className="text-center">王大明</p>
-            {status == 'staff' && <p className="text-center">美味蟹堡餐廳</p>}
+            {data.status == 'staff' && (
+              <p className="text-center">美味蟹堡餐廳</p>
+            )}
           </div>
           <div className="pt-6">
             <h3 className="ml-2 mb-2 text-2xl font-bold">我的預約</h3>
-            {status == 'staff' && (
+            {data.status == 'staff' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">
@@ -49,7 +57,7 @@ const Menu = (props) => {
               </ul>
             )}
 
-            {status == 'store' && (
+            {data.status == 'store' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">
@@ -73,7 +81,7 @@ const Menu = (props) => {
                 </li>
               </ul>
             )}
-            {status == 'member' && (
+            {data.status == 'member' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">

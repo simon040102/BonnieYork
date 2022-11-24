@@ -5,9 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // needed
 import listPlugin from '@fullcalendar/list'; //F
 import { useRef } from 'react';
 
-const calendarOverview = (props) => {
-  const { setAddOffDay, setAddReserve, setEditOder } = props;
-
+const calendarOverview = ({ setAddOffDay, setAddReserve, setEditOder }) => {
   const calendarRef = useRef(null);
   const handleClick = (e) => {
     console.log(e.event.id);

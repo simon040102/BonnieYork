@@ -8,8 +8,7 @@ import StorePhoto1 from '../src/images/search1.jpg';
 import EditItem from './editItem';
 import EditItemView from './editItemView';
 import AddItem from './addItem';
-const storeProfile = (props) => {
-  const { handleChange, inf } = props;
+const storeProfile = ({ handleChange, inf }) => {
   const [page, setPage] = useState('info');
   const [edit, setEdit] = useState(false);
   const [addItem, setAddItem] = useState(false);

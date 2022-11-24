@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const changePassword = (props) => {
-    const { setInf, inf, handleChange } = props;
+const changePassword = ({ setInf, inf, handleChange }) => {
   return (
-    <div className="container mx-auto w-8/12 lg:w-4/12 xl:2/12">
+    <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
       <p>請輸入密碼</p>
       <input
         name="password"
         value={inf?.password}
         onChange={handleChange}
         type="password"
-        className="border-black border w-full mb-4 h-10 indent-3"
+        className="mb-4 h-10 w-full border border-black indent-3"
       />
       <p>再次輸入密碼</p>
       <input
@@ -18,10 +17,10 @@ const changePassword = (props) => {
         value={inf?.checkPassword}
         onChange={handleChange}
         type="password"
-        className="border-black border w-full mb-4 h-10 indent-3"
+        className="mb-4 h-10 w-full border border-black indent-3"
       />
     </div>
   );
-}
+};
 
-export default changePassword
+export default changePassword;
