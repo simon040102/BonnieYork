@@ -5,9 +5,9 @@ import Image from 'next/image';
 import Logo from '../src/images/logo.png';
 import Facebook from '../src/images/facebook_home.png';
 import Instagram from '../src/images/instagram_home.png';
-const SampleFooter = () => {
+const SimpleFooter = () => {
   return (
-    <div className="mt-16 -mb-20 pt-4">
+    <div className="mt-4 -mb-20 pt-4">
       <div className="bg-footerL">
         <div className="container mx-auto  flex justify-between py-2">
           <div>
@@ -68,4 +68,4 @@ const SampleFooter = () => {
   );
 };
 
-export default SampleFooter;
+export default SimpleFooter;

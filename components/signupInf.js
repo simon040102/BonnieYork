@@ -20,7 +20,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           <Image src={Edit} />
         </button>
       </div>
-      {data.status == 'member' && (
+      {data.status === 'member' && (
         <MemberInf
           page={page}
           setInf={setInf}
@@ -28,7 +28,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           handleChange={handleChange}
         />
       )}
-      {data.status == 'store' && (
+      {data.status === 'store' && (
         <StoreInf
           page={page}
           setInf={setInf}
@@ -36,7 +36,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           handleChange={handleChange}
         />
       )}
-      {data.status == 'staff' && (
+      {data.status === 'staff' && (
         <StaffInf
           page={page}
           setInf={setInf}

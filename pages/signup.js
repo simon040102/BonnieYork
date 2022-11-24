@@ -34,7 +34,7 @@ const signup = ({ router }) => {
           <li className="w-4/12">
             <p>輸入密碼</p>
             <div className="flex justify-center">
-              <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
+              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
                 1
               </p>
             </div>
@@ -42,7 +42,7 @@ const signup = ({ router }) => {
           <li className="w-4/12">
             <p>基本資料</p>
             <div className="flex justify-center">
-              <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
+              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
                 2
               </p>
             </div>
@@ -50,7 +50,7 @@ const signup = ({ router }) => {
           <li className="w-4/12">
             <p>完成</p>
             <div className="flex justify-center">
-              <p className="bg-blue-500 flex h-8 w-8   items-center justify-center rounded-full text-white">
+              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
                 3
               </p>
             </div>
@@ -70,13 +70,15 @@ const signup = ({ router }) => {
             handleChange={handleChange}
           />
         )}
-        {page == 3 && (
+        {page === 3 && (
           <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
-            <Image className="mx-auto mb-8 w-6/12" src={Finish} />
+            <div className="mx-auto mb-8 w-6/12">
+              <Image src={Finish} />
+            </div>
             <div className="flex justify-center">
-              {data.status == 'store' && (
+              {data.status === 'store' && (
                 <button
-                  className="bg-gray-400 h-10 w-60 text-white"
+                  className="h-10 w-60 bg-secondary text-white"
                   onClick={() => {
                     Router.push('/');
                   }}
@@ -84,9 +86,9 @@ const signup = ({ router }) => {
                   開始建立我的店鋪
                 </button>
               )}
-              {data.status == 'staff' && (
+              {data.status === 'staff' && (
                 <button
-                  className="bg-gray-400 h-10 w-60 text-white"
+                  className=" h-10 w-60 bg-secondary text-white"
                   onClick={() => {
                     Router.push('/');
                   }}
@@ -94,9 +96,9 @@ const signup = ({ router }) => {
                   開始編輯個人行程
                 </button>
               )}
-              {data.status == 'member' && (
+              {data.status === 'member' && (
                 <button
-                  className="bg-gray-400 h-10 w-60 text-white"
+                  className=" h-10 w-60 bg-secondary text-white"
                   onClick={() => {
                     Router.push('/');
                   }}

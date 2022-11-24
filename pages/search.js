@@ -14,7 +14,7 @@ const search = () => {
         <div className="mb-4 flex justify-center">
           <button
             className={` ${
-              page == 'area' ? 'text-black' : 'text-gray-500'
+              page === 'area' ? 'text-black' : 'text-gray-500'
             } mx-8`}
             onClick={() => setPage('area')}
           >
@@ -22,7 +22,7 @@ const search = () => {
           </button>
           <button
             className={` ${
-              page == 'keywords' ? 'text-black' : 'text-gray-500'
+              page === 'keywords' ? 'text-black' : 'text-gray-500'
             } mx-8`}
             onClick={() => setPage('keywords')}
           >
@@ -31,7 +31,7 @@ const search = () => {
         </div>
 
         <ul className="mx-auto mb-4 flex justify-center">
-          {page == 'area' && (
+          {page === 'area' && (
             <>
               <li className="mx-2  w-3/12">
                 <select
@@ -62,7 +62,7 @@ const search = () => {
               </li>
             </>
           )}
-          {page == 'keywords' && (
+          {page === 'keywords' && (
             <>
               <li className="mr-2 w-6/12">
                 <input type="text" className="w-full border border-black" />

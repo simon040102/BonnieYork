@@ -13,19 +13,19 @@ const forgetPassword = ({ setOpenView, email, select }) => {
         data-aos="zoom-in"
         className="absolute h-52 w-96 border border-black bg-white p-10"
       >
-        {select == 'forget' && (
+        {select === 'forget' && (
           <div>
             <p>是否寄送修改密碼驗證信至</p>
             <p className="mb-8">{email}</p>
           </div>
         )}
-        {select == 'signup' && (
+        {select === 'signup' && (
           <div>
             <p>帳號未註冊過</p>
             <p className="mb-8">是否寄送驗證信至{email}</p>
           </div>
         )}
-        {select == 'login' && (
+        {select === 'login' && (
           <div>
             <p>請輸入密碼</p>
             <input

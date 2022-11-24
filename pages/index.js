@@ -309,10 +309,11 @@ const Home = () => {
               </h2>
             </div>
             <div
+              id="store"
               data-aos="fade-left"
               className="relative mb-16 w-8/12 text-end lg:w-5/12"
             >
-              <p>合作店家</p>
+              <p id="store">合作店家</p>
               <div className=" after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12"></div>
             </div>
             <HomeSwiper />

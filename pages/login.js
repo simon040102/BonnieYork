@@ -50,7 +50,7 @@ const login = () => {
         <ul className="mb-10 flex justify-center">
           <li
             className={` ${
-              status == 'member'
+              status === 'member'
                 ? 'bg-primary text-white'
                 : 'bg-primary text-black'
             } mx-6 flex h-10 w-40 items-center justify-center`}
@@ -64,7 +64,7 @@ const login = () => {
           </li>
           <li
             className={`${
-              status == 'store'
+              status === 'store'
                 ? 'bg-primary text-white'
                 : 'bg-primary text-black'
             } mx-6 flex h-10 w-40 items-center justify-center`}

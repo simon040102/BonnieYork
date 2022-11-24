@@ -39,7 +39,7 @@ const memberInf = ({ setInf, page, inf, handleChange }) => {
                 type="radio"
                 name="sex"
                 value="male"
-                checked={inf.sex == 'male'}
+                checked={inf.sex === 'male'}
                 className="mr-2"
                 onChange={handleChange}
               />
@@ -48,7 +48,7 @@ const memberInf = ({ setInf, page, inf, handleChange }) => {
                 type="radio"
                 name="sex"
                 value="female"
-                checked={inf.sex == 'female'}
+                checked={inf.sex === 'female'}
                 className="mr-2 ml-5"
                 onChange={handleChange}
               />

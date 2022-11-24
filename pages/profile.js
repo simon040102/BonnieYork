@@ -23,19 +23,19 @@ const profile = () => {
   return (
     <>
       <Head>
-        {data.status == 'member' && <title>會員資訊</title>}
-        {data.status == 'staff' && <title>個人資訊</title>}
-        {data.status == 'store' && <title>店鋪資訊</title>}
+        {data.status === 'member' && <title>會員資訊</title>}
+        {data.status === 'staff' && <title>個人資訊</title>}
+        {data.status === 'store' && <title>店鋪資訊</title>}
       </Head>
       <Layout>
         <div className="pt-20">
-          {data.status == 'member' && (
+          {data.status === 'member' && (
             <MemberProfile handleChange={handleChange} inf={inf} />
           )}
-          {data.status == 'staff' && (
+          {data.status === 'staff' && (
             <StaffProfile handleChange={handleChange} inf={inf} />
           )}
-          {data.status == 'store' && <StoreProfile />}
+          {data.status === 'store' && <StoreProfile />}
         </div>
       </Layout>
     </>

@@ -17,7 +17,7 @@ const staffCalenderOverview = ({ setEditOder }) => {
   };
   return (
     <div>
-      {data.status == 'store' && (
+      {data.status === 'store' && (
         <div className="mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
           <select name="" id="" className="mb-8 w-full border text-center">
             <option value="可愛粉紅豬">可愛粉紅豬</option>

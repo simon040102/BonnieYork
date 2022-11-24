@@ -12,7 +12,7 @@ const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
       <div className="mb-4 flex justify-center">
         <button
           className={` ${
-            page == 'staffCalenderOverview' ? 'text-black' : 'text-gray-500'
+            page === 'staffCalenderOverview' ? 'text-black' : 'text-gray-500'
           } mx-8`}
           onClick={() => setPage('staffCalenderOverview')}
         >
@@ -20,21 +20,21 @@ const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
         </button>
         <button
           className={` ${
-            page == 'overview' ? 'text-black' : 'text-gray-500'
+            page === 'overview' ? 'text-black' : 'text-gray-500'
           } mx-8`}
           onClick={() => setPage('overview')}
         >
           店鋪總覽
         </button>
       </div>
-      {page == 'overview' && (
+      {page === 'overview' && (
         <CalendarOverview
           setAddOffDay={setAddOffDay}
           setAddReserve={setAddReserve}
           setEditOder={setEditOder}
         />
       )}
-      {page == 'staffCalenderOverview' && (
+      {page === 'staffCalenderOverview' && (
         <StaffCalenderOverview setEditOder={setEditOder} />
       )}
     </div>

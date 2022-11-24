@@ -12,21 +12,23 @@ const staffProfile = ({ handleChange, inf }) => {
       <h2 className="mb-8 text-center text-3xl">個人資訊</h2>
       <div className="mb-4 flex justify-center">
         <button
-          className={` ${page == 'info' ? 'text-black' : 'text-gray-500'} mx-8`}
+          className={` ${
+            page === 'info' ? 'text-black' : 'text-gray-500'
+          } mx-8`}
           onClick={() => setPage('info')}
         >
           基本資料
         </button>
         <button
           className={` ${
-            page == 'changePassword' ? 'text-black' : 'text-gray-500'
+            page === 'changePassword' ? 'text-black' : 'text-gray-500'
           } mx-8`}
           onClick={() => setPage('changePassword')}
         >
           修改密碼
         </button>
       </div>
-      {page == 'info' && (
+      {page === 'info' && (
         <div className="mx-auto w-11/12 md:w-8/12  lg:w-6/12">
           <div className="flex   justify-between">
             <div className="relative flex  h-40 w-40 justify-center">
@@ -101,7 +103,7 @@ const staffProfile = ({ handleChange, inf }) => {
           </div>
         </div>
       )}
-      {page == 'changePassword' && (
+      {page === 'changePassword' && (
         <div>
           <ChangePassword handleChange={handleChange} inf={inf} />
           <div className="mx-auto mt-4 flex  w-11/12 justify-center md:w-8/12 lg:w-6/12">

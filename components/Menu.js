@@ -36,13 +36,13 @@ const Menu = () => {
               <Image src={Edit} />
             </button> */}
             <p className="text-center">王大明</p>
-            {data.status == 'staff' && (
+            {data.status === 'staff' && (
               <p className="text-center">美味蟹堡餐廳</p>
             )}
           </div>
           <div className="pt-6">
             <h3 className="ml-2 mb-2 text-2xl font-bold">我的預約</h3>
-            {data.status == 'staff' && (
+            {data.status === 'staff' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">
@@ -57,7 +57,7 @@ const Menu = () => {
               </ul>
             )}
 
-            {data.status == 'store' && (
+            {data.status === 'store' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">
@@ -81,7 +81,7 @@ const Menu = () => {
                 </li>
               </ul>
             )}
-            {data.status == 'member' && (
+            {data.status === 'member' && (
               <ul>
                 <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
                   <Link href="/profile">

@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import Menu from '../components/Menu';
-import SampleFooter from '../components/SampleFooter';
+import SimpleFooter from '../components/SimpleFooter';
 import HomeFooter from '../components/homeFooter';
 import { useThem } from '../modules/context';
 
@@ -18,7 +18,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const router = useRouter().pathname;
   console.log(data.status);
   const status = () => {
-    if (data.status == 'customer')
+    if (data.status === 'customer')
       return (
         <div className="flex">
           <Link href="/login">
@@ -55,7 +55,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
               <Link href="/search">
                 <a>店家搜尋</a>
               </Link>
-              {data.status == 'customer' && (
+              {data.status === 'customer' && router === '/' && (
                 <>
                   <Link href="#feature">
                     <a className="hidden md:block">功能特色</a>
@@ -79,11 +79,11 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
                 <HomeFooter />
               </div>
               <div className="block md:hidden">
-                <SampleFooter />
+                <SimpleFooter />
               </div>
             </>
           ) : (
-            <SampleFooter />
+            <SimpleFooter />
           )}
         </footer>
       </div>

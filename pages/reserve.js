@@ -15,7 +15,7 @@ const reserve = () => {
         <div className="mb-4 flex justify-center">
           <button
             className={` ${
-              page == 'reserved' ? 'text-black' : 'text-gray-500'
+              page === 'reserved' ? 'text-black' : 'text-gray-500'
             } mx-8`}
             onClick={() => setPage('reserved')}
           >
@@ -23,15 +23,15 @@ const reserve = () => {
           </button>
           <button
             className={` ${
-              page == 'finished' ? 'text-black' : 'text-gray-500'
+              page === 'finished' ? 'text-black' : 'text-gray-500'
             } mx-8`}
             onClick={() => setPage('finished')}
           >
             已完成
           </button>
         </div>
-        {page == 'reserved' && <Reserved />}
-        {page == 'finished' && <Finished />}
+        {page === 'reserved' && <Reserved />}
+        {page === 'finished' && <Finished />}
       </div>
     </Layout>
   );
