@@ -36,7 +36,7 @@ module.exports = {
         414: '26rem',
         500: '32rem',
         footer: '25.5rem',
-        menu:'6.2rem'
+        menu: '5rem',
       },
     },
   },

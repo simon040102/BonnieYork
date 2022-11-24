@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import Image from 'next/image';
+import { withRouter } from 'next/router';
 
 import Layout from '../modules/layout';
 
 import SignupInf from '../components/signupInf';
 import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
-const signup = () => {
+const signup = ({ router }) => {
+  const token = router.query.token;
   const [status, setStatus] = useState('member');
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
@@ -22,7 +23,9 @@ const signup = () => {
       };
     });
   };
+  console.log(token);
   console.log(inf);
+  useEffect(() => {}, []);
   return (
     <Layout title="邦尼約克Bonnie York 註冊">
       <div className="container mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
@@ -132,4 +135,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default withRouter(signup);

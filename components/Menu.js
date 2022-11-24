@@ -23,13 +23,12 @@ const Menu = (props) => {
           className={`menu absolute top-menu right-0 h-screen w-96 overflow-auto border border-l-black bg-warning pb-20`}
         >
           <div className="relative mx-auto bg-white py-10">
-            <Image
-              className="mx-auto mb-3 h-52 w-52 rounded-full border-black"
-              src={Profile}
-            />
-            <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
+            <div className="mx-auto mb-3 h-52 w-52 rounded-full border-black">
+              <Image src={Profile} objectFit="cover" width="208" height="208" />
+            </div>
+            {/* <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
               <Image src={Edit} />
-            </button>
+            </button> */}
             <p className="text-center">王大明</p>
             {status == 'staff' && <p className="text-center">美味蟹堡餐廳</p>}
           </div>

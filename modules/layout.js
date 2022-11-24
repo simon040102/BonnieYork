@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
-import Router from 'next/router';
 import { useRouter } from 'next/router';
 
 import Menu from '../components/Menu';
@@ -18,10 +17,14 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const status = () => {
     if (account == 'customer')
       return (
-        <div>
-          <PersonOutlineOutlinedIcon color="primary" />
+        <div className="flex">
           <Link href="/login">
-            <a className="mx-2 text-secondary">登入/註冊</a>
+            <a>
+              <PersonOutlineOutlinedIcon color="primary" />
+            </a>
+          </Link>
+          <Link href="/login">
+            <a className="mx-2 hidden text-secondary sm:block">登入/註冊</a>
           </Link>
         </div>
       );
@@ -38,7 +41,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         <meta name="description" content={descriptionContent} />
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
-        <header className="sticky top-0   z-20  w-full bg-white  shadow-md  ">
+        <header className="sticky top-0 z-20  w-full  bg-white px-5 shadow-md  sm:px-0  ">
           <div className="container mx-auto  flex justify-between">
             <Link href="/" className="my-auto flex items-end">
               <a>
@@ -66,14 +69,16 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         </header>
         <div className="mb-auto  pt-20">{children}</div>
 
-        <footer className="mt-16 pt-4   ">
-          <div className="block md:hidden">
-            <SampleFooter />
-          </div>
+        <footer className=" pt-4">
           {router === '/' ? (
-            <div className="hidden md:block">
-              <HomeFooter />
-            </div>
+            <>
+              <div className="hidden md:block">
+                <HomeFooter />
+              </div>
+              <div className="block md:hidden">
+                <SampleFooter />
+              </div>
+            </>
           ) : (
             <SampleFooter />
           )}
