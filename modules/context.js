@@ -7,7 +7,7 @@ export const useThem = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
   const [data, setData] = useState({
-    status: 'member',
+    status: 'customer',
   });
 
   return (
