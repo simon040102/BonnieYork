@@ -13,7 +13,7 @@ const isLoading = () => {
           height={100}
           className="animate-spin-slow"
         />
-        <h1 className=" animate-bounce text-center text-2xl text-white">
+        <h1 className=" animate-bounce text-center text-2xl text-success">
           Loading...
         </h1>
       </div>

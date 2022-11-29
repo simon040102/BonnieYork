@@ -17,7 +17,7 @@ const loginClick = ({ setOpenView, email, select, status }) => {
       const data = { Identity: status, Account: email };
       console.log(data);
       axios
-        .post(`${apiUrl}/user/signupsendlink`)
+        .post(`${apiUrl}/user/signupsendlink`, data)
         .then((res) => {
           console.log(res);
         })
