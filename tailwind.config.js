@@ -41,6 +41,9 @@ module.exports = {
         footer: '25.5rem',
         menu: '5rem',
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
     },
   },
   plugins: [],

@@ -11,7 +11,7 @@ import LoginClick from '../components/loginClick';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 const login = () => {
-  const { apiUrl } = useThem();
+  const { apiUrl, setLoading } = useThem();
   const [status, setStatus] = useState('member');
   const [select, setSelect] = useState('');
   const [email, setEmail] = useState('');
@@ -22,24 +22,26 @@ const login = () => {
   };
 
   const checkEmail = (e) => {
+    setLoading(true);
     const { name } = e.target;
     const emailTest =
       /^\w+((-\w+)|(.\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z]+$/;
 
-    !emailTest.test(email) &&
-      email !== '' &&
+    if (!emailTest.test(email) && email !== '') {
+      setLoading(false);
       toast.error('email格式錯誤', {
         position: 'top-center',
         autoClose: 1000,
       });
-
-    email ||
+      return;
+    } else if (!email) {
+      setLoading(false);
       toast.error('請輸email', {
         position: 'top-center',
         autoClose: 1000,
       });
-
-    if (name == 'signup') {
+      return;
+    } else if (name == 'signup') {
       const data = {
         Identity: status,
         Account: email,
@@ -50,19 +52,23 @@ const login = () => {
           const message = await res.data.message;
           console.log(message);
           if (message === '未註冊過') {
+            setLoading(false);
             setSelect(name);
             setOpenView(true);
           } else if (message === '已註冊過') {
+            setLoading(false);
             toast.error('帳號已註冊過', {
               position: 'top-center',
               autoClose: 1000,
             });
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
       return;
-    }
-    if (email !== '' && emailTest.test(email)) {
+    } else if (email !== '' && emailTest.test(email)) {
       setSelect(name);
       setOpenView(true);
     }

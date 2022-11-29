@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import Layout from '../modules/layout';
-
+import GetCity from '../components/areaData/getCity';
+import GetArea from '../components/areaData/getArea';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 import SearchResult from '../components/searchResult';
 const search = () => {
+  const [select, setSelect] = useState({});
   const [page, setPage] = useState('area');
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSelect((preState) => {
+      return {
+        ...preState,
+        [name]: value,
+      };
+    });
+  };
   return (
     <Layout title="邦尼約克BonnieYork 店家搜尋">
       <div className="-mb-40 w-screen bg-bgColor px-5 pb-40">
@@ -42,10 +53,12 @@ const search = () => {
                 <li className="mx-2  w-3/12">
                   <select
                     className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
-                    name="country"
+                    name="city"
                     id=""
+                    onChange={handleChange}
                   >
                     <option value="縣市">縣市</option>
+                    <GetCity />
                   </select>
                 </li>
                 <li className="mx-2  w-3/12">
@@ -53,17 +66,28 @@ const search = () => {
                     className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
                     name="area"
                     id=""
+                    onChange={handleChange}
                   >
                     <option value="地區">地區</option>
+                    <GetArea city={select?.city} />
                   </select>
                 </li>
                 <li className="mx-2  w-3/12">
                   <select
                     className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
-                    name="area"
+                    name="industry"
                     id=""
+                    onChange={handleChange}
                   >
                     <option value="產業">產業</option>
+                    <option value="美髮沙龍">美髮沙龍</option>
+                    <option value="美睫美甲">美睫美甲</option>
+                    <option value="推拿按摩">推拿按摩</option>
+                    <option value="家教老師">家教老師</option>
+                    <option value="手工製作">手工製作</option>
+                    <option value="美妝美容">美妝美容</option>
+                    <option value="健身瑜伽">健身瑜伽</option>
+                    <option value="個人工作室">個人工作室</option>
                   </select>
                 </li>
               </>

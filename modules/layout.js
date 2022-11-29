@@ -8,12 +8,13 @@ import Menu from '../components/Menu';
 import SimpleFooter from '../components/SimpleFooter';
 import HomeFooter from '../components/homeFooter';
 import { useThem } from '../modules/context';
+import IsLoading from '../components/isLoading';
 
 import LogoNav from '../src/images/logo_nav.png';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
-  const { data, setData } = useThem();
+  const { data, setData, loading } = useThem();
   const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
   const status = () => {
@@ -43,6 +44,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         <meta name="description" content={descriptionContent} />
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
+        <div>{loading && <IsLoading />}</div>
         <header className="sticky top-0 z-20  w-full  bg-white px-5 shadow-md  sm:px-0  ">
           <div className="container mx-auto  flex justify-between">
             <Link href="/" className="my-auto flex items-end">
@@ -69,8 +71,8 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
             </div>
           </div>
         </header>
-        <div className="mb-auto  pt-20">{children}</div>
 
+        <div className="mb-auto  pt-20">{children}</div>
         <footer className=" pt-4 ">
           {router === '/' ? (
             <>
