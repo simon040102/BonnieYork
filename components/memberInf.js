@@ -14,8 +14,8 @@ const memberInf = ({ setInf, page, inf, handleChange }) => {
                 *用戶名稱
               </p>
               <input
-                name="name"
-                value={inf.name}
+                name="CustomerName"
+                value={inf.CustomerName}
                 type="text"
                 className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
@@ -27,8 +27,8 @@ const memberInf = ({ setInf, page, inf, handleChange }) => {
               </p>
               <input
                 type="text"
-                name="phone"
-                value={inf.phone}
+                name="CellphoneNumber"
+                value={inf.CellphoneNumber}
                 className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
               />
@@ -44,27 +44,6 @@ const memberInf = ({ setInf, page, inf, handleChange }) => {
                 className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
               />
-            </div>
-            <div className="mb-4 text-left">
-              <p>性別：</p>
-              <input
-                type="radio"
-                name="sex"
-                value="male"
-                checked={inf.sex === 'male'}
-                className="mr-2"
-                onChange={handleChange}
-              />
-              男性
-              <input
-                type="radio"
-                name="sex"
-                value="female"
-                checked={inf.sex === 'female'}
-                className="mr-2 ml-5"
-                onChange={handleChange}
-              />
-              女性
             </div>
           </div>
         </>

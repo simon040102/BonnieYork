@@ -12,9 +12,10 @@ import IsLoading from '../components/isLoading';
 
 import LogoNav from '../src/images/logo_nav.png';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import axios from 'axios';
 
 const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
-  const { data, setData, loading } = useThem();
+  const { data, setData, loading, apiUrl } = useThem();
   const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
   const status = () => {
@@ -35,6 +36,26 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
       return <Menu />;
     }
   };
+  useEffect(() => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    axios
+      .get(`${apiUrl}/user/VerifyUser`, {
+        headers: { Authorization },
+      })
+      .then((res) => {
+        const result = res.data;
+        console.log(res);
+        setData((preState) => {
+          return {
+            ...preState,
+            status: result.Identity,
+            name: result?.CustomerName || result?.StoreName,
+            Account: result?.Account,
+          };
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <Head>

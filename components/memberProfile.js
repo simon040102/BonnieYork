@@ -1,12 +1,53 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
+import { useThem } from '../modules/context';
+
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
-import Image from 'next/image';
 import ChangePassword from './changePassword';
-const memberProfile = ({ handleChange, inf }) => {
+const memberProfile = ({ handleChange, inf, setInf }) => {
+  const { apiUrl, setLoading, data } = useThem();
   const [page, setPage] = useState('info');
   const changeDate = (e) => {
     console.log(e.target.value);
+  };
+
+  const changePassword = () => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    setLoading(true);
+    let config = {
+      method: 'post',
+      url: `${apiUrl}/user/resetpassword`,
+      headers: {
+        Authorization,
+      },
+      data: inf,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        const message = res.data.message;
+        console.log(message);
+        if (message === '密碼修改完成') {
+          toast.success('密碼修改完成', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        } else if (message === '輸入的舊密碼不符') {
+          toast.error('輸入的舊密碼不符', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        }
+      })
+      .catch((err) => console.log(err));
+    setInf({});
   };
 
   return (
@@ -41,10 +82,10 @@ const memberProfile = ({ handleChange, inf }) => {
             </div>
             <div className="w-8/12">
               <div className="w-full">
-                <p className="mb-4">Email:xxx123@gmail.com</p>
+                <p className="mb-4">Email:{data.Account}</p>
                 <p>用戶名稱：</p>
                 <input
-                  value={inf?.name}
+                  value={data?.name}
                   onChange={handleChange}
                   name="name"
                   type="text"
@@ -104,12 +145,16 @@ const memberProfile = ({ handleChange, inf }) => {
         <div>
           <ChangePassword handleChange={handleChange} inf={inf} />
           <div className="mx-auto flex w-11/12  justify-center md:w-8/12 lg:w-6/12">
-            <button className="bg-gray-500 h-8 w-32 text-white">
+            <button
+              className="h-10 w-32 rounded-lg bg-secondary text-white"
+              onClick={changePassword}
+            >
               確認修改
             </button>
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

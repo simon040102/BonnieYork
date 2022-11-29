@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import Image from 'next/image';
 import { withRouter } from 'next/router';
+import axios from 'axios';
 
 import Layout from '../modules/layout';
 import { useThem } from '../modules/context';
@@ -11,10 +12,12 @@ import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
 import SignupFinished from '../components/signupFinished';
 const signup = ({ router }) => {
-  const { data, setData } = useThem();
-  const token = router.query.token;
+  const { data, setData, apiUrl, setLoading } = useThem();
+
+  // const token = router.query.token;
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
+  const token = router.query.token;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,9 +28,59 @@ const signup = ({ router }) => {
       };
     });
   };
-  console.log(token);
+  const getTokenInf = async () => {
+    const Authorization = 'Bearer ' + token;
+    axios
+      .get(`${apiUrl}/user/getsignuptoken`, {
+        headers: { Authorization },
+      })
+      .then(async (res) => {
+        console.log(res);
+        const data = await res.data.Token;
+        console.log(data);
+        setInf((preState) => {
+          return {
+            ...preState,
+            Identity: data?.Identity,
+            Account: data?.Account,
+          };
+        });
+        setData((preState) => {
+          return {
+            ...preState,
+            status: data?.Identity,
+          };
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const registerAccount = () => {
+    setLoading(true);
+    axios
+      .post(`${apiUrl}//user/signupuserdata`, inf)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        setPage(page + 1);
+        setData((preState) => {
+          return {
+            ...preState,
+            name: inf.CustomerName || inf.StoreName,
+          };
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(true);
+      });
+  };
   console.log(inf);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (token) {
+      getTokenInf();
+    }
+  }, [token]);
   return (
     <Layout title="邦尼約克Bonnie York 註冊">
       <div className="-mb-40 w-screen bg-bgColor px-5  pb-40">
@@ -118,7 +171,11 @@ const signup = ({ router }) => {
                       <button
                         className=" h-10 w-full rounded-lg bg-secondary  text-white "
                         onClick={() => {
-                          setPage(page + 1);
+                          if (page == 1) {
+                            setPage(page + 1);
+                          } else {
+                            registerAccount();
+                          }
                         }}
                       >
                         下一步

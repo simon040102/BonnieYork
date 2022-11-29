@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useThem } from '../modules/context';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,27 +14,32 @@ const login = () => {
   const { apiUrl, setLoading } = useThem();
   const [status, setStatus] = useState('member');
   const [select, setSelect] = useState('');
-  const [email, setEmail] = useState('');
+  const [Account, setAccount] = useState({});
   const [openView, setOpenView] = useState(false);
 
   const handleChange = (e) => {
-    setEmail(e.target.value);
+    const { name, value } = e.target;
+    setAccount((preState) => {
+      return {
+        ...preState,
+        [name]: value,
+      };
+    });
   };
 
   const checkEmail = (e) => {
-    setLoading(true);
     const { name } = e.target;
     const emailTest =
       /^\w+((-\w+)|(.\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z]+$/;
 
-    if (!emailTest.test(email) && email !== '') {
+    if (!emailTest.test(Account.Account) && Account.Account !== '') {
       setLoading(false);
       toast.error('email格式錯誤', {
         position: 'top-center',
         autoClose: 1000,
       });
       return;
-    } else if (!email) {
+    } else if (!Account.Account) {
       setLoading(false);
       toast.error('請輸email', {
         position: 'top-center',
@@ -42,9 +47,10 @@ const login = () => {
       });
       return;
     } else if (name == 'signup') {
+      setLoading(true);
       const data = {
         Identity: status,
-        Account: email,
+        Account: Account.Account,
       };
       axios
         .post(`${apiUrl}/user/SignUpIsValid`, data)
@@ -68,12 +74,13 @@ const login = () => {
           setLoading(false);
         });
       return;
-    } else if (email !== '' && emailTest.test(email)) {
+    } else if (Account.Account !== '' && emailTest.test(Account.Account)) {
       setSelect(name);
       setOpenView(true);
     }
   };
-
+  useEffect(() => {});
+  console.log(Account);
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
       <div className="-mb-40 w-screen bg-bgColor px-5 pt-20 pb-40">
@@ -119,9 +126,10 @@ const login = () => {
           <div className="relative">
             <input
               type="email"
+              name="Account"
               className="h-12 w-full rounded-lg border-2 border-unSelect  indent-10"
               placeholder="請輸入登入 Email"
-              value={email}
+              value={Account.Account}
               onChange={handleChange}
             />
             <EmailOutlinedIcon
@@ -164,8 +172,10 @@ const login = () => {
         <LoginClick
           setOpenView={setOpenView}
           select={select}
-          email={email}
+          Account={Account}
+          setAccount={setAccount}
           status={status}
+          handleChange={handleChange}
         />
       )}
 

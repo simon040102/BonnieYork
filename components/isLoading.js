@@ -4,7 +4,7 @@ import IsLoading from '../src/images/isLoading.png';
 
 const isLoading = () => {
   return (
-    <div className=" absolute z-50  mt-20 h-screen w-screen bg-black/10">
+    <div className=" absolute z-50  mt-20 h-screen w-screen bg-black/30">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
         <Image
           src={IsLoading}
@@ -13,7 +13,7 @@ const isLoading = () => {
           height={100}
           className="animate-spin-slow"
         />
-        <h1 className=" animate-bounce text-center text-2xl text-success">
+        <h1 className=" animate-bounce text-center text-2xl text-white">
           Loading...
         </h1>
       </div>

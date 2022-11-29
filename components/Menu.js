@@ -21,7 +21,7 @@ const Menu = () => {
     <div className="">
       <button className="flex items-center" onClick={() => setMenu(!menu)}>
         <Image objectFit="contain" width="30" height="30" src={Profile} />
-        <p className="ml-2">王小明</p>
+        <p className="ml-2">{data?.name || '王大明'}</p>
       </button>
       {menu && (
         <div
@@ -35,7 +35,7 @@ const Menu = () => {
             {/* <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
               <Image src={Edit} />
             </button> */}
-            <p className="text-center">王大明</p>
+            <p className="text-center">{data?.name || '王大明'}</p>
             {data.status === 'staff' && (
               <p className="text-center">美味蟹堡餐廳</p>
             )}

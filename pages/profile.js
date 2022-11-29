@@ -30,7 +30,11 @@ const profile = () => {
       <Layout>
         <div className="pt-20">
           {data.status === 'member' && (
-            <MemberProfile handleChange={handleChange} inf={inf} />
+            <MemberProfile
+              handleChange={handleChange}
+              inf={inf}
+              setInf={setInf}
+            />
           )}
           {data.status === 'staff' && (
             <StaffProfile handleChange={handleChange} inf={inf} />

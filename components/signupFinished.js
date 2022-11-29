@@ -1,12 +1,14 @@
 import React from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 const signupFinished = ({ text }) => {
+  const router = useRouter();
   return (
     <>
       <button
         className="h-10 w-60 rounded-lg bg-secondary text-white"
-        onClick={() => {
-          Router.push('/');
+        onClick={(e) => {
+          e.preventDefault();
+          router.push('/');
         }}
       >
         {text}

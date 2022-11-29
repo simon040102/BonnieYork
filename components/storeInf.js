@@ -12,8 +12,8 @@ const storeInf = ({ page, inf, handleChange }) => {
             *店鋪名稱
           </p>
           <input
-            name="name"
-            value={inf.name}
+            name="StoreName"
+            value={inf.StoreName}
             type="text"
             className="mb-6 h-12 w-full rounded-lg border border-black indent-3 "
             onChange={handleChange}
@@ -22,8 +22,8 @@ const storeInf = ({ page, inf, handleChange }) => {
           <div className="flex gap-2">
             <div className="w-full">
               <select
-                name="city"
-                value={inf.county}
+                name="City"
+                value={inf.City}
                 className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
               >
@@ -33,20 +33,20 @@ const storeInf = ({ page, inf, handleChange }) => {
             </div>
             <div className="w-full">
               <select
-                name="area"
-                value={inf.area}
+                name="District"
+                value={inf.District}
                 className="mb-6  h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
               >
                 <option value="縣市">地區</option>
-                <GetArea city={inf?.city} />
+                <GetArea city={inf?.City} />
               </select>
             </div>
           </div>
 
           <input
-            name="address"
-            value={inf.address}
+            name="Address"
+            value={inf.Address}
             type="text"
             className="mb-6 h-12 w-full rounded-lg border border-black indent-3"
             placeholder="ex:信義路123號"
@@ -58,8 +58,8 @@ const storeInf = ({ page, inf, handleChange }) => {
             </p>
             <input
               type="text"
-              name="phone"
-              value={inf.phone}
+              name="CellphoneNumber"
+              value={inf.CellphoneNumber}
               className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
               onChange={handleChange}
             />

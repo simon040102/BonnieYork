@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useThem } from '../modules/context';
+import { useRouter } from 'next/router';
 
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,16 +11,64 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
-const loginClick = ({ setOpenView, email, select, status }) => {
-  const { apiUrl } = useThem();
-  const handleSubmit = () => {
+const loginClick = ({
+  setOpenView,
+  Account,
+  setAccount,
+  select,
+  status,
+  handleChange,
+}) => {
+  const { apiUrl, setData } = useThem();
+  const router = useRouter();
+
+  const handleSubmit = async () => {
     if (select === 'signup') {
-      const data = { Identity: status, Account: email };
+      const data = { Identity: status, Account: Account.Account };
+      console.log(data);
       console.log(data);
       axios
         .post(`${apiUrl}/user/signupsendlink`, data)
         .then((res) => {
           console.log(res);
+          setOpenView(false);
+          toast.success('Email已發送', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+        })
+        .catch((err) => console.log(err));
+      return;
+    } else if (select === 'login') {
+      const data = {
+        Identity: status,
+        Account: Account.Account,
+        Password: Account.Password,
+      };
+      console.log(data);
+      await axios
+        .post(`${apiUrl}/user/login`, data)
+        .then((res) => {
+          console.log(res);
+          const result = res.data;
+          toast.success('登入成功', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          const token = 'Bearer ' + result.Token;
+          localStorage.setItem('BonnieYork', token);
+          setData((preState) => {
+            return {
+              ...preState,
+              status: result.Identity,
+              name: result?.CostomerName || result?.StoreName,
+              token: token,
+            };
+          });
+          setTimeout(() => {
+            router.push('/');
+            router.push('/');
+          }, 1500);
         })
         .catch((err) => console.log(err));
     }
@@ -39,13 +88,13 @@ const loginClick = ({ setOpenView, email, select, status }) => {
           <div>
             <h2 className=" mb-4 text-2xl font-bold">忘記密碼</h2>
             <p>是否寄送修改密碼驗證信至</p>
-            <p className="mb-8">{email}</p>
+            <p className="mb-8">{Account.Account}</p>
           </div>
         )}
         {select === 'signup' && (
           <div>
             <h2 className=" mb-4 text-2xl font-bold">註冊帳號</h2>
-            <p className="mb-8">是否寄送驗證信至{email}</p>
+            <p className="mb-8">是否寄送驗證信至{Account.Account}</p>
           </div>
         )}
         {select === 'login' && (
@@ -57,7 +106,9 @@ const loginClick = ({ setOpenView, email, select, status }) => {
               </p>
               <input
                 type="password"
+                name="Password"
                 className="mb-8 h-10 w-full border border-unSelect  indent-3"
+                onChange={handleChange}
               />
             </div>
           </div>
