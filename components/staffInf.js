@@ -5,27 +5,34 @@ const staffInf = ({ page, inf, handleChange }) => {
   return (
     <>
       {page == 2 && (
-        <div className="w-8/12">
+        <div className="w-full">
           <div className="w-full">
             <p className="mb-4 h-10">Email：xxx123@gmail.com</p>
             <p className="mb-4 h-10">所屬店家：第五分局按摩店</p>
-            <p>*名稱(暱稱)：</p>
-            <input
-              name="name"
-              value={inf.name}
-              type="text"
-              className="mb-4 h-10 w-full border border-black indent-3"
-              onChange={handleChange}
-            />
-
-            <p>*手機號碼：</p>
-            <input
-              type="text"
-              name="phone"
-              value={inf.phone}
-              className="mb-4 h-10 w-full border border-black indent-3"
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <p className="absolute -top-2.5 left-4 bg-white px-2 text-black">
+                *名稱(暱稱)
+              </p>
+              <input
+                name="name"
+                value={inf.name}
+                type="text"
+                className="mb-6 h-12 w-full rounded-lg border border-black indent-3"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="relative">
+              <p className="absolute -top-2.5 left-4 bg-white px-2 text-black">
+                *手機號碼
+              </p>
+              <input
+                type="text"
+                name="phone"
+                value={inf.phone}
+                className="mb-6 h-12 w-full rounded-lg border border-black indent-3"
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className="mb-4 text-left">
             <p>性別：</p>

@@ -7,9 +7,9 @@ import Facebook from '../src/images/facebook_home.png';
 import Instagram from '../src/images/instagram_home.png';
 const SimpleFooter = () => {
   return (
-    <div className="mt-4 -mb-20 pt-4">
+    <div className="mt-4 -mb-20 pt-4 ">
       <div className="bg-footerL">
-        <div className="container mx-auto  flex justify-between py-2">
+        <div className="container mx-auto flex justify-between px-4 py-2 sm:px-0">
           <div>
             <Link href="/" className="my-auto flex items-end">
               <a>

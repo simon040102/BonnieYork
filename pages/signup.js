@@ -9,6 +9,7 @@ import { useThem } from '../modules/context';
 import SignupInf from '../components/signupInf';
 import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
+import SignupFinished from '../components/signupFinished';
 const signup = ({ router }) => {
   const { data, setData } = useThem();
   const token = router.query.token;
@@ -29,109 +30,106 @@ const signup = ({ router }) => {
   useEffect(() => {}, []);
   return (
     <Layout title="邦尼約克Bonnie York 註冊">
-      <div className="container mx-auto w-11/12 pt-10 md:w-8/12 lg:w-6/12">
-        <ul className="mb-10 flex justify-between text-center">
-          <li className="w-4/12">
-            <p>輸入密碼</p>
-            <div className="flex justify-center">
-              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
-                1
-              </p>
-            </div>
-          </li>
-          <li className="w-4/12">
-            <p>基本資料</p>
-            <div className="flex justify-center">
-              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
-                2
-              </p>
-            </div>
-          </li>
-          <li className="w-4/12">
-            <p>完成</p>
-            <div className="flex justify-center">
-              <p className="flex h-8 w-8 items-center   justify-center rounded-full bg-secondary text-white">
-                3
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      {page == 1 && (
-        <ChangePassword setInf={setInf} inf={inf} handleChange={handleChange} />
-      )}
-      <div className="mb-4">
-        {page == 2 && (
-          <SignupInf
-            setInf={setInf}
-            page={page}
-            setPage={setPage}
-            inf={inf}
-            handleChange={handleChange}
-          />
-        )}
-        {page === 3 && (
-          <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
-            <div className="mx-auto mb-8 w-6/12">
-              <Image src={Finish} />
-            </div>
-            <div className="flex justify-center">
-              {data.status === 'store' && (
-                <button
-                  className="h-10 w-60 bg-secondary text-white"
-                  onClick={() => {
-                    Router.push('/');
-                  }}
-                >
-                  開始建立我的店鋪
-                </button>
-              )}
-              {data.status === 'staff' && (
-                <button
-                  className=" h-10 w-60 bg-secondary text-white"
-                  onClick={() => {
-                    Router.push('/');
-                  }}
-                >
-                  開始編輯個人行程
-                </button>
-              )}
-              {data.status === 'member' && (
-                <button
-                  className=" h-10 w-60 bg-secondary text-white"
-                  onClick={() => {
-                    Router.push('/');
-                  }}
-                >
-                  開始預約
-                </button>
-              )}
-            </div>
+      <div className="-mb-40 w-screen bg-bgColor px-5  pb-40">
+        <div className="container mx-auto  w-full ">
+          <div className="container mx-auto w-11/12 pt-10">
+            <ul className="mx-auto mb-10 flex justify-between text-center sm:w-8/12 ">
+              <li className="mx-auto  w-4/12">
+                <div className="flex justify-center">
+                  <p className="mb-1 flex h-8 w-8  items-center justify-center rounded-full bg-secondary text-white">
+                    1
+                  </p>
+                </div>
+                <p>輸入密碼</p>
+              </li>
+              <li className="mx-auto w-4/12">
+                <div className="flex justify-center">
+                  <p className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-white">
+                    2
+                  </p>
+                </div>
+                <p>基本資料</p>
+              </li>
+              <li className="mx-auto w-4/12">
+                <div className="flex justify-center">
+                  <p className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-white">
+                    3
+                  </p>
+                </div>
+                <p>完成</p>
+              </li>
+            </ul>
           </div>
-        )}
-        {page !== 3 && (
-          <div className="container mx-auto flex w-11/12 justify-end md:w-8/12 lg:w-6/12  ">
-            {page !== 1 && (
-              <button
-                className="bg-gray-300 mx-2 h-10 w-32"
-                onClick={() => {
-                  setPage(page - 1);
-                }}
-              >
-                上一步
-              </button>
+          <div className="mx-auto rounded-login bg-white  pt-4 pb-10 shadow-lg sm:w-3/4 lg:w-6/12">
+            {page == 1 && (
+              <ChangePassword
+                setInf={setInf}
+                inf={inf}
+                handleChange={handleChange}
+              />
             )}
-
-            <button
-              className="bg-gray-300 mx-2  h-10 w-32"
-              onClick={() => {
-                setPage(page + 1);
-              }}
-            >
-              下一步
-            </button>
+            <div className="mb-4">
+              {page == 2 && (
+                <SignupInf
+                  setInf={setInf}
+                  page={page}
+                  setPage={setPage}
+                  inf={inf}
+                  handleChange={handleChange}
+                />
+              )}
+              {page == 3 && (
+                <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
+                  <h2 className="mb-8 text-center text-3xl font-bold">
+                    註冊成功
+                  </h2>
+                  <div className="mx-auto mb-8 w-6/12">
+                    <Image src={Finish} />
+                  </div>
+                  <div className="flex justify-center">
+                    {data.status === 'store' && (
+                      <SignupFinished text="開始建立我的店鋪" />
+                    )}
+                    {data.status === 'staff' && (
+                      <SignupFinished text="開始編輯個人行程" />
+                    )}
+                    {data.status === 'member' && (
+                      <SignupFinished text="開始預約" />
+                    )}
+                  </div>
+                </div>
+              )}
+              <div className="container mx-auto flex px-8 lg:w-8/12  lg:px-0">
+                {page !== 1 && (
+                  <button
+                    className={`mx-2 h-10 w-4/12 rounded-lg border-2 border-unSelect px-6 py-2 text-unSelect  ${
+                      page == 1 && 'hidden'
+                    } ${page == 3 && 'hidden'}`}
+                    onClick={() => {
+                      setPage(page - 1);
+                    }}
+                  >
+                    上一步
+                  </button>
+                )}
+                {page !== 3 && (
+                  <>
+                    <div className="w-full ">
+                      <button
+                        className=" h-10 w-full rounded-lg bg-secondary  text-white "
+                        onClick={() => {
+                          setPage(page + 1);
+                        }}
+                      >
+                        下一步
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </Layout>
   );

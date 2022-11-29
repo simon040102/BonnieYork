@@ -6,12 +6,11 @@ const nextConfig = {
   // },
   reactStrictMode: true,
   swcMinify: true,
-  images:{
-    domains:['images.unsplash.con']
-  }
+  images: {
+    domains: ['images.unsplash.con'],
+  },
 };
 module.exports = nextConfig;
-
 
 const withTM = require('next-transpile-modules')([
   '@fullcalendar/common',
@@ -68,3 +67,4 @@ module.exports = withTM({
 
 //   // your config for other plugins or the general next.js here...
 // });
+// next.config.js

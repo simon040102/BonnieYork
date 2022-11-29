@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-
+import { useThem } from '../modules/context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
 import Layout from '../modules/layout';
 
-import Logo from '../src/images/logo.svg';
+import LogoNav from '../src/images/logo_nav.png';
 import LoginClick from '../components/loginClick';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+
 const login = () => {
+  const { apiUrl } = useThem();
   const [status, setStatus] = useState('member');
   const [select, setSelect] = useState('');
   const [email, setEmail] = useState('');
@@ -35,6 +38,30 @@ const login = () => {
         position: 'top-center',
         autoClose: 1000,
       });
+
+    if (name == 'signup') {
+      const data = {
+        Identity: status,
+        Account: email,
+      };
+      axios
+        .post(`${apiUrl}/user/SignUpIsValid`, data)
+        .then(async (res) => {
+          const message = await res.data.message;
+          console.log(message);
+          if (message === '未註冊過') {
+            setSelect(name);
+            setOpenView(true);
+          } else if (message === '已註冊過') {
+            toast.error('帳號已註冊過', {
+              position: 'top-center',
+              autoClose: 1000,
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+      return;
+    }
     if (email !== '' && emailTest.test(email)) {
       setSelect(name);
       setOpenView(true);
@@ -43,73 +70,88 @@ const login = () => {
 
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
-      <div className="container mx-auto  pt-10 ">
-        <div className="mb-4 flex h-20 w-full justify-center">
-          <Image className="mx-auto" src={Logo} />
-        </div>
-        <ul className="mb-10 flex justify-center">
-          <li
-            className={` ${
-              status === 'member'
-                ? 'bg-primary text-white'
-                : 'bg-primary text-black'
-            } mx-6 flex h-10 w-40 items-center justify-center`}
-          >
-            <button
-              onClick={() => setStatus('member')}
-              className="h-full w-full"
+      <div className="-mb-40 w-screen bg-bgColor px-5 pt-20 pb-40">
+        <div className="container mx-auto  w-full rounded-login bg-white px-8 pt-4 pb-10 shadow-lg sm:w-1/2 lg:w-4/12">
+          <div className="mb-4 flex h-20 w-full justify-center">
+            <Image
+              className="mx-auto"
+              src={LogoNav}
+              objectFit="contain"
+              width={180}
+            />
+          </div>
+          <ul className="mb-10 flex justify-center gap-6">
+            <li
+              className={` ${
+                status === 'member'
+                  ? 'border-b-2 text-secondary'
+                  : ' text-unSelect'
+              }  flex h-10 w-40 items-center justify-center`}
             >
-              顧客登入
-            </button>
-          </li>
-          <li
-            className={`${
-              status === 'store'
-                ? 'bg-primary text-white'
-                : 'bg-primary text-black'
-            } mx-6 flex h-10 w-40 items-center justify-center`}
-          >
-            <button
-              onClick={() => setStatus('store')}
-              className="h-full w-full"
+              <button
+                onClick={() => setStatus('member')}
+                className="h-full w-full"
+              >
+                顧客登入
+              </button>
+            </li>
+            <li
+              className={`${
+                status === 'store'
+                  ? 'border-b-2 text-secondary'
+                  : ' text-unSelect'
+              }  flex h-10 w-40 items-center justify-center`}
             >
-              店家登入
+              <button
+                onClick={() => setStatus('store')}
+                className="h-full w-full"
+              >
+                店家登入
+              </button>
+            </li>
+          </ul>
+          <div className="relative">
+            <input
+              type="email"
+              className="h-12 w-full rounded-lg border-2 border-unSelect  indent-10"
+              placeholder="請輸入登入 Email"
+              value={email}
+              onChange={handleChange}
+            />
+            <EmailOutlinedIcon
+              className="absolute left-2 top-3"
+              sx={{ color: '#bbbbbb' }}
+            />
+          </div>
+          <div className="mb-4 flex justify-end text-sm">
+            <button
+              name="forget"
+              className=" flex justify-end"
+              onClick={checkEmail}
+            >
+              忘記密碼？
             </button>
-          </li>
-        </ul>
-        <div className="flex justify-center">
-          <input
-            type="email"
-            className="h-10 w-96 border border-black indent-3"
-            placeholder="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex justify-center">
-          <button
-            name="forget"
-            className="mb-8 flex justify-end"
-            onClick={checkEmail}
-          >
-            忘記密碼？
-          </button>
-        </div>
-        <div className="flex justify-center">
-          <button
-            name="login"
-            className="mx-6 h-10 w-44 bg-primary"
-            onClick={checkEmail}
-          >
-            登入
-          </button>
-          <button
-            name="signup"
-            className="mx-6 h-10 w-44 bg-primary text-white"
-            onClick={checkEmail}
-          >
-            註冊
-          </button>
+          </div>
+          <div>
+            <button
+              name="login"
+              className=" mb-9 h-10 w-full rounded-lg bg-secondary text-white "
+              onClick={checkEmail}
+            >
+              登入
+            </button>
+          </div>
+
+          <div className="text-center">
+            <p>還沒有帳號？</p>
+            <button
+              name="signup"
+              className=" h-10 w-full rounded-lg border border-secondary text-secondary"
+              onClick={checkEmail}
+            >
+              註冊
+            </button>
+          </div>
         </div>
       </div>
       {openView && (

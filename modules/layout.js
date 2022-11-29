@@ -16,7 +16,6 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const { data, setData } = useThem();
   const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
-  console.log(data.status);
   const status = () => {
     if (data.status === 'customer')
       return (
@@ -72,7 +71,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         </header>
         <div className="mb-auto  pt-20">{children}</div>
 
-        <footer className=" pt-4">
+        <footer className=" pt-4 ">
           {router === '/' ? (
             <>
               <div className="hidden md:block">

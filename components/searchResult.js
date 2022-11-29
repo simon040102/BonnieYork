@@ -8,8 +8,8 @@ const searchResult = () => {
   return (
     <div className="container mx-auto w-full">
       <ul className="flex justify-between gap-3">
-        <li className="w-4/12  border border-black">
-          <div className="">
+        <li className="w-[32%] rounded-card shadow-md">
+          <div className=" rounded-t-card">
             <StoreSwiper />
           </div>
           <div className="px-5">
@@ -18,25 +18,25 @@ const searchResult = () => {
               <FavoriteBorderOutlinedIcon />
             </div>
             <ul className="mb-2 flex flex-wrap gap-2">
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 洗髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
             </ul>
@@ -58,7 +58,7 @@ const searchResult = () => {
             </p>
             <div className="mb-8 flex justify-center">
               <button
-                className="bg-gray-500 h-10 w-40 text-white"
+                className="h-10 w-full rounded-full bg-secondary text-white"
                 onClick={() => {
                   Router.push({
                     pathname: '/store/1232321',
@@ -70,8 +70,8 @@ const searchResult = () => {
             </div>
           </div>
         </li>
-        <li className="w-4/12  border border-black">
-          <div className="">
+        <li className="w-[32%] rounded-card shadow-md">
+          <div className=" rounded-t-card">
             <StoreSwiper />
           </div>
           <div className="px-5">
@@ -80,25 +80,25 @@ const searchResult = () => {
               <FavoriteBorderOutlinedIcon />
             </div>
             <ul className="mb-2 flex flex-wrap gap-2">
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 洗髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
             </ul>
@@ -119,14 +119,14 @@ const searchResult = () => {
               只為了讓屏東的顧客也能擁有「時尚｜年輕｜健康 」的髮型！{' '}
             </p>
             <div className="mb-8 flex justify-center">
-              <button className="bg-gray-500 h-10 w-40 text-white">
+              <button className="h-10 w-full rounded-full bg-secondary text-white">
                 我要預約
               </button>
             </div>
           </div>
         </li>
-        <li className="w-4/12  border border-black">
-          <div className="">
+        <li className="w-[32%] rounded-card shadow-md">
+          <div className=" rounded-t-card">
             <StoreSwiper />
           </div>
           <div className="px-5">
@@ -135,25 +135,25 @@ const searchResult = () => {
               <FavoriteBorderOutlinedIcon />
             </div>
             <ul className="mb-2 flex flex-wrap gap-2">
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 洗髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 染髮
               </li>
-              <li className="bg-gray-500  w-16 text-center  text-white">
+              <li className="w-16  rounded-full bg-secondary text-center  text-white">
                 燙髮
               </li>
             </ul>
@@ -174,7 +174,7 @@ const searchResult = () => {
               只為了讓屏東的顧客也能擁有「時尚｜年輕｜健康 」的髮型！{' '}
             </p>
             <div className="mb-8 flex justify-center">
-              <button className="bg-gray-500 h-10 w-40 text-white">
+              <button className="h-10 w-full rounded-full bg-secondary text-white">
                 我要預約
               </button>
             </div>

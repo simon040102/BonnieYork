@@ -9,12 +9,12 @@ import StaffInf from '../components/staffInf';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 
-const signupInf = ({ setInf, page, inf, handleChange }) => {
+const signupInf = ({ setInf, page, inf, handleChange, setPage }) => {
   const { data, setData } = useThem();
 
   return (
-    <div className="mx-auto flex w-11/12  justify-between md:w-8/12   lg:w-6/12">
-      <div className="relative flex  h-40 w-40 justify-center">
+    <div className="relative mx-auto w-11/12 px-8 lg:w-8/12 lg:px-0">
+      <div className="relative mx-auto mt-4 mb-8 flex h-40 w-40 justify-center">
         <Image src={Profile} className="" />
         <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
           <Image src={Edit} />

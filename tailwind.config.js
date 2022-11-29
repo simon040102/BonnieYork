@@ -17,6 +17,8 @@ module.exports = {
       warning: '#D6E3EB',
       footerL: '#F2F7FA',
       footerR: '#02446A',
+      bgColor: '#FAFAFA',
+      unSelect: '#CCCCCC',
     },
     borderRadius: {
       none: '0',
@@ -29,6 +31,7 @@ module.exports = {
       large: '50px',
       block: '200px',
       card: '40px',
+      login: '16px',
     },
     extend: {
       spacing: {
