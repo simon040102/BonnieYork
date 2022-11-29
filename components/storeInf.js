@@ -1,6 +1,7 @@
 import React from 'react';
-import Finish from '../src/images/finished.svg';
-import Image from 'next/image';
+
+import GetCity from './areaData/getCity';
+import GetArea from './areaData/getArea';
 
 const storeInf = ({ page, inf, handleChange }) => {
   return (
@@ -21,12 +22,13 @@ const storeInf = ({ page, inf, handleChange }) => {
           <div className="flex gap-2">
             <div className="w-full">
               <select
-                name="county"
+                name="city"
                 value={inf.county}
                 className="mb-6 mr-2 h-12 w-full rounded-lg border border-black indent-3"
                 onChange={handleChange}
               >
                 <option value="縣市">縣市</option>
+                <GetCity />
               </select>
             </div>
             <div className="w-full">
@@ -37,6 +39,7 @@ const storeInf = ({ page, inf, handleChange }) => {
                 onChange={handleChange}
               >
                 <option value="縣市">地區</option>
+                <GetArea city={inf?.city} />
               </select>
             </div>
           </div>
