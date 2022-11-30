@@ -19,7 +19,7 @@ const loginClick = ({
   status,
   handleChange,
 }) => {
-  const { apiUrl, setData } = useThem();
+  const { apiUrl, setData, setLoading } = useThem();
   const router = useRouter();
 
   const handleSubmit = async () => {
@@ -40,6 +40,7 @@ const loginClick = ({
         .catch((err) => console.log(err));
       return;
     } else if (select === 'login') {
+      setLoading(true);
       const data = {
         Identity: status,
         Account: Account.Account,
@@ -51,24 +52,34 @@ const loginClick = ({
         .then((res) => {
           console.log(res);
           const result = res.data;
-          toast.success('登入成功', {
-            position: 'top-center',
-            autoClose: 1000,
-          });
           const token = 'Bearer ' + result.Token;
-          localStorage.setItem('BonnieYork', token);
-          setData((preState) => {
-            return {
-              ...preState,
-              status: result.Identity,
-              name: result?.CostomerName || result?.StoreName,
-              token: token,
-            };
-          });
-          setTimeout(() => {
-            router.push('/');
-            router.push('/');
-          }, 1500);
+          if (result.message == '密碼錯誤') {
+            toast.error('密碼錯誤', {
+              position: 'top-center',
+              autoClose: 1000,
+            });
+            setLoading(false);
+          } else {
+            setLoading(false);
+
+            localStorage.setItem('BonnieYork', token);
+            setData((preState) => {
+              return {
+                ...preState,
+                status: result.Identity,
+                name: result?.CustomerName || result?.StoreName,
+                token: token,
+              };
+            });
+            toast.success('登入成功', {
+              position: 'top-center',
+              autoClose: 1000,
+            });
+            setTimeout(() => {
+              router.push('/');
+              router.push('/');
+            }, 1500);
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -79,7 +90,7 @@ const loginClick = ({
   }, []);
 
   return (
-    <div className="absolute top-20 left-0 z-50 flex h-screen w-screen justify-center bg-black/50 pt-20">
+    <div className="absolute top-20 left-0 z-40 flex h-screen w-screen justify-center bg-black/50 pt-20">
       <div
         data-aos="zoom-in"
         className="relative h-72 w-96 rounded-lg border-2 border-secondary bg-white px-10 pb-4 pt-12"

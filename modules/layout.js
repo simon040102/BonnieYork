@@ -18,6 +18,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   const { data, setData, loading, apiUrl } = useThem();
   const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
+  console.log(data);
   const status = () => {
     if (data.status === 'customer')
       return (
@@ -38,23 +39,30 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
   };
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
-    axios
-      .get(`${apiUrl}/user/VerifyUser`, {
-        headers: { Authorization },
-      })
-      .then((res) => {
-        const result = res.data;
-        console.log(res);
-        setData((preState) => {
-          return {
-            ...preState,
-            status: result.Identity,
-            name: result?.CustomerName || result?.StoreName,
-            Account: result?.Account,
-          };
-        });
-      })
-      .catch((err) => console.log(err));
+    if (data.Account) return;
+    else if (Authorization?.split(' ')[1] !== 'undefined') {
+      axios
+        .get(`${apiUrl}/user/VerifyUser`, {
+          headers: { Authorization },
+        })
+        .then((res) => {
+          console.log(res);
+          const result = res.data;
+          if (result.Message == 'JwtToken為空或是格式錯誤') {
+            return;
+          } else {
+            setData((preState) => {
+              return {
+                ...preState,
+                status: result.Identity,
+                name: result?.CustomerName || result?.StoreName,
+                Account: result?.Account,
+              };
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
   return (
     <>
@@ -65,7 +73,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         <meta name="description" content={descriptionContent} />
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
-        <div>{loading && <IsLoading />}</div>
+        <div className="sticky -top-menu z-50 ">{loading && <IsLoading />}</div>
         <header className="sticky top-0 z-20  w-full  bg-white px-5 shadow-md  sm:px-0  ">
           <div className="container mx-auto  flex justify-between">
             <Link href="/" className="my-auto flex items-end">
@@ -94,7 +102,7 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         </header>
 
         <div className="mb-auto  pt-20">{children}</div>
-        <footer className=" pt-4 ">
+        <footer className="  ">
           {router === '/' ? (
             <>
               <div className="hidden md:block">

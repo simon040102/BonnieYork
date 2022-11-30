@@ -60,6 +60,10 @@ a {
 .tryIt {
   border-radius: 8px 31px 31px 8px;
 }
+.bg-height {
+  height: calc(100vh - 160px);
+  /* height: 100vh; */
+}
 /* *{
   outline: auto;
 } */

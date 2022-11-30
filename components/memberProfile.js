@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import { useThem } from '../modules/context';
 
@@ -12,6 +13,8 @@ import ChangePassword from './changePassword';
 const memberProfile = ({ handleChange, inf, setInf }) => {
   const { apiUrl, setLoading, data } = useThem();
   const [page, setPage] = useState('info');
+  const router = useRouter();
+
   const changeDate = (e) => {
     console.log(e.target.value);
   };
@@ -30,13 +33,16 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
     axios(config)
       .then((res) => {
         console.log(res);
-        const message = res.data.message;
+        const message = res.data.Message;
         console.log(message);
         if (message === '密碼修改完成') {
           toast.success('密碼修改完成', {
             position: 'top-center',
             autoClose: 1000,
           });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
           setLoading(false);
         } else if (message === '輸入的舊密碼不符') {
           toast.error('輸入的舊密碼不符', {

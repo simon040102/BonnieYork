@@ -61,6 +61,8 @@ const signup = ({ router }) => {
       .post(`${apiUrl}//user/signupuserdata`, inf)
       .then((res) => {
         console.log(res);
+        const token = 'Bearer ' + res.data.Token;
+        localStorage.setItem('BonnieYork', token);
         setLoading(false);
         setPage(page + 1);
         setData((preState) => {

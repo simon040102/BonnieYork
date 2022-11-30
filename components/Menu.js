@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -13,6 +14,14 @@ import Link from 'next/link';
 const Menu = () => {
   const [menu, setMenu] = useState(false);
   const { data, setData } = useThem();
+  const router = useRouter();
+
+  const logout = () => {
+    console.log(123);
+    localStorage.removeItem('BonnieYork');
+    router.push('/');
+    router.reload(window.location.pathname);
+  };
 
   useEffect(() => {
     AOS.init();
@@ -21,7 +30,7 @@ const Menu = () => {
     <div className="">
       <button className="flex items-center" onClick={() => setMenu(!menu)}>
         <Image objectFit="contain" width="30" height="30" src={Profile} />
-        <p className="ml-2">{data?.name || '王大明'}</p>
+        <p className="ml-2">{data?.name}</p>
       </button>
       {menu && (
         <div
@@ -102,9 +111,7 @@ const Menu = () => {
             )}
             <ul>
               <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
-                <Link href="/">
-                  <a>登出</a>
-                </Link>
+                <button onClick={logout}>登出</button>
               </li>
             </ul>
           </div>

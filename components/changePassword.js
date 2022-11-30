@@ -26,33 +26,33 @@ const changePassword = ({ setInf, inf, handleChange }) => {
       <h2 className="my-8 text-center text-3xl font-bold">
         {router == '/signup' && '歡迎使用邦尼約克'}
       </h2>
-      <div className="relative">
-        <p className="absolute -top-2.5 left-4 bg-white text-unSelect">
-          請輸入舊密碼
-        </p>
-        <input
-          name="OriginalPassword"
-          value={inf?.OriginalPassword}
-          onChange={handleChange}
-          type="password"
-          className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
-        />
-      </div>
+
       {router == '/profile' && (
         <div className="relative">
           <p className="absolute -top-2.5 left-4 bg-white text-unSelect">
-            請輸新入密碼
+            請輸入舊密碼
           </p>
           <input
-            name="Password"
-            value={inf?.Password}
+            name="OriginalPassword"
+            value={inf?.OriginalPassword}
             onChange={handleChange}
             type="password"
             className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
           />
         </div>
       )}
-
+      <div className="relative">
+        <p className="absolute -top-2.5 left-4 bg-white text-unSelect">
+          請入輸新密碼
+        </p>
+        <input
+          name="Password"
+          value={inf?.Password}
+          onChange={handleChange}
+          type="password"
+          className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
+        />
+      </div>
       <div className="relative">
         <p className="absolute -top-2.5 left-4 bg-white text-unSelect">
           再次輸入密碼

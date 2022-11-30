@@ -4,6 +4,7 @@ import { useThem } from '../modules/context';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+
 import Layout from '../modules/layout';
 
 import LogoNav from '../src/images/logo_nav.png';
@@ -55,7 +56,7 @@ const login = () => {
       axios
         .post(`${apiUrl}/user/SignUpIsValid`, data)
         .then(async (res) => {
-          const message = await res.data.message;
+          const message = await res.data.Message;
           console.log(message);
           if (message === '未註冊過') {
             setLoading(false);
@@ -83,7 +84,7 @@ const login = () => {
   console.log(Account);
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
-      <div className="-mb-40 w-screen bg-bgColor px-5 pt-20 pb-40">
+      <div className="bg-height  w-screen bg-bgColor px-5 pt-20 ">
         <div className="container mx-auto  w-full rounded-login bg-white px-8 pt-4 pb-10 shadow-lg sm:w-1/2 lg:w-4/12">
           <div className="mb-4 flex h-20 w-full justify-center">
             <Image

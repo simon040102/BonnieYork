@@ -1,17 +1,63 @@
 import React from 'react';
 import { useState } from 'react';
+import Image from 'next/image';
+import { useThem } from '../modules/context';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
+
+import EditItemView from './editItemView';
+import EditItem from './editItem';
+import AddItem from './addItem';
+
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
-import Image from 'next/image';
 import ChangePassword from './changePassword';
 import StorePhoto1 from '../src/images/search1.jpg';
-import EditItem from './editItem';
-import EditItemView from './editItemView';
-import AddItem from './addItem';
-const storeProfile = ({ handleChange, inf }) => {
+const storeProfile = ({ handleChange, inf, setInf }) => {
   const [page, setPage] = useState('info');
   const [edit, setEdit] = useState(false);
   const [addItem, setAddItem] = useState(false);
+  const { apiUrl, setLoading, data } = useThem();
+  const router = useRouter();
+
+  const changePassword = () => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    setLoading(true);
+    let config = {
+      method: 'post',
+      url: `${apiUrl}/user/resetpassword`,
+      headers: {
+        Authorization,
+      },
+      data: inf,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        const message = res.data.Message;
+        console.log(message);
+        if (message === '密碼修改完成') {
+          toast.success('密碼修改完成', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
+          setLoading(false);
+        } else if (message === '輸入的舊密碼不符') {
+          toast.error('輸入的舊密碼不符', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log(inf);
   return (
     <div className="">
       <div className="relative">
@@ -362,7 +408,10 @@ const storeProfile = ({ handleChange, inf }) => {
         <div>
           <ChangePassword handleChange={handleChange} inf={inf} />
           <div className="mx-auto flex w-11/12  justify-center md:w-8/12 lg:w-6/12">
-            <button className="bg-gray-500 h-8 w-32 text-white">
+            <button
+              className="h-10 w-32 rounded-lg bg-secondary text-white"
+              onClick={changePassword}
+            >
               確認修改
             </button>
           </div>
@@ -373,6 +422,7 @@ const storeProfile = ({ handleChange, inf }) => {
           <EditItem setEdit={setEdit} setAddItem={setAddItem} />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

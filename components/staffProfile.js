@@ -4,8 +4,42 @@ import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import Image from 'next/image';
 import ChangePassword from './changePassword';
+import axios from 'axios';
 
 const staffProfile = ({ handleChange, inf }) => {
+  const changePassword = () => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    setLoading(true);
+    let config = {
+      method: 'post',
+      url: `${apiUrl}/user/resetpassword`,
+      headers: {
+        Authorization,
+      },
+      data: inf,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        const message = res.data.message;
+        console.log(message);
+        if (message === '密碼修改完成') {
+          toast.success('密碼修改完成', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        } else if (message === '輸入的舊密碼不符') {
+          toast.error('輸入的舊密碼不符', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        }
+      })
+      .catch((err) => console.log(err));
+    setInf({});
+  };
   const [page, setPage] = useState('info');
   return (
     <div className="">
@@ -106,8 +140,11 @@ const staffProfile = ({ handleChange, inf }) => {
       {page === 'changePassword' && (
         <div>
           <ChangePassword handleChange={handleChange} inf={inf} />
-          <div className="mx-auto mt-4 flex  w-11/12 justify-center md:w-8/12 lg:w-6/12">
-            <button className="bg-gray-500 h-8 w-32 text-white">
+          <div className="mx-auto flex w-11/12  justify-center md:w-8/12 lg:w-6/12">
+            <button
+              className="h-10 w-32 rounded-lg bg-secondary text-white"
+              onClick={changePassword}
+            >
               確認修改
             </button>
           </div>

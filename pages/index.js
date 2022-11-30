@@ -320,7 +320,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="px-5">
+      <div className="mb-8 px-5">
         <div className="container mx-auto block w-full rounded-card  bg-[url('../src/images/footer.jpg')] bg-cover  md:hidden md:w-7/12">
           <div className="bg-footer  w-full  rounded-card bg-footerR/50  px-10 py-10 ">
             <div className="flex ">

@@ -37,9 +37,19 @@ const profile = () => {
             />
           )}
           {data.status === 'staff' && (
-            <StaffProfile handleChange={handleChange} inf={inf} />
+            <StaffProfile
+              handleChange={handleChange}
+              inf={inf}
+              setInf={setInf}
+            />
           )}
-          {data.status === 'store' && <StoreProfile />}
+          {data.status === 'store' && (
+            <StoreProfile
+              handleChange={handleChange}
+              inf={inf}
+              setInf={setInf}
+            />
+          )}
         </div>
       </Layout>
     </>
