@@ -20,6 +20,7 @@ module.exports = {
       footerR: '#02446A',
       bgColor: '#FAFAFA',
       unSelect: '#CCCCCC',
+      input: '#535353',
     },
     borderRadius: {
       none: '0',

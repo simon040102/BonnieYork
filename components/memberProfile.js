@@ -57,98 +57,94 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
   };
 
   return (
-    <div className="">
-      <h2 className="mb-8 text-center text-3xl">會員資訊</h2>
-      <div className="mb-4 flex justify-center">
+    <div className="-mt-40 bg-bgColor  pb-4 pt-40">
+      <h2 className="mb-4 text-center text-3xl">會員資訊</h2>
+      <div className="mb-8 flex justify-center">
         <button
           className={` ${
-            page === 'info' ? 'text-black' : 'text-gray-500'
-          } mx-8`}
+            page === 'info' ? 'border-b-2 text-secondary' : ' text-unSelect'
+          } mx-8 w-44`}
           onClick={() => setPage('info')}
         >
           基本資料
         </button>
         <button
           className={` ${
-            page === 'changePassword' ? 'text-black' : 'text-gray-500'
-          } mx-8`}
+            page === 'changePassword'
+              ? 'border-b-2 text-secondary'
+              : ' text-unSelect'
+          } mx-8 w-44`}
           onClick={() => setPage('changePassword')}
         >
           修改密碼
         </button>
       </div>
+
       {page === 'info' && (
-        <div className="mx-auto w-11/12 md:w-8/12  lg:w-6/12">
-          <div className="flex   justify-between">
-            <div className="relative flex  h-40 w-40 justify-center">
-              <Image src={Profile} className="" />
-              <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
-                <Image src={Edit} />
-              </button>
+        <div className="mx-auto w-11/12  rounded-lg bg-white px-6 pb-4 pt-4 shadow-lg md:w-8/12 lg:w-5/12">
+          <div className="mx-auto">
+            <div className="relative mb-4 flex  w-full justify-center">
+              <div className="relative">
+                <Image src={Profile} className="" />
+                <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
+                  <Image src={Edit} />
+                </button>
+              </div>
             </div>
-            <div className="w-8/12">
-              <div className="w-full">
-                <p className="mb-4">Email:{data.Account}</p>
-                <p>用戶名稱：</p>
-                <input
-                  value={data?.name}
-                  onChange={handleChange}
-                  name="name"
-                  type="text"
-                  className="mb-4 h-10 w-full border border-black indent-3"
-                />
-                <p>手機號碼：</p>
-                <input
-                  value={inf?.phone}
-                  onChange={handleChange}
-                  type="text"
-                  name="phone"
-                  className="mb-4 h-10 w-full border border-black indent-3"
-                />
-                <p>生日：</p>
-                <input
-                  type="date"
-                  name="birthday"
-                  disabled
-                  value={inf?.birthday}
-                  className="mb-4 h-10 w-full border border-black indent-1"
-                />
-                <div className="mb-4 text-left">
-                  <p>性別：</p>
+            <div className="w-full">
+              <div className="mb-4 w-full">
+                <p className="mb-8">Email:{data.Account}</p>
+                <div className="relative">
+                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                    用戶名稱
+                  </p>
                   <input
-                    type="radio"
-                    name="sex"
-                    value="male"
-                    className="mr-2"
-                    checked={inf?.sex === 'male'}
+                    value={data?.name}
                     onChange={handleChange}
+                    name="name"
+                    type="text"
+                    className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                   />
-                  男性
+                </div>
+                <div className="relative">
+                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                    手機號碼
+                  </p>
                   <input
-                    type="radio"
-                    name="sex"
-                    value="female"
-                    className="mr-2 ml-5"
-                    checked={inf?.sex === 'female'}
+                    value={inf?.phone}
                     onChange={handleChange}
+                    type="text"
+                    name="phone"
+                    className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                   />
-                  女性
+                </div>
+                <div className="relative">
+                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                    生日
+                  </p>
+                  <input
+                    type="date"
+                    name="birthday"
+                    disabled
+                    value={inf?.birthday}
+                    className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
+                  />
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex justify-end gap-3">
-            <button className="bg-gray-300 h-8 w-32 text-black">
+          <div className=" flex justify-center gap-3">
+            <button className=" h-10 w-[33%] rounded-lg bg-footerL text-secondary">
               放棄變更
             </button>
-            <button className="bg-gray-500 h-8 w-32 text-white">
+            <button className="h-10 w-[65%] rounded-lg bg-secondary text-white">
               確認修改
             </button>
           </div>
         </div>
       )}
       {page === 'changePassword' && (
-        <div>
+        <div className="mx-auto w-11/12 rounded-lg bg-white py-8 shadow-lg md:w-8/12 lg:w-5/12">
           <ChangePassword handleChange={handleChange} inf={inf} />
           <div className="mx-auto flex w-11/12  justify-center md:w-8/12 lg:w-6/12">
             <button
