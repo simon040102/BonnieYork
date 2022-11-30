@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 import { withRouter } from 'next/router';
 import axios from 'axios';
@@ -11,25 +14,24 @@ import SignupInf from '../components/signupInf';
 import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
 import SignupFinished from '../components/signupFinished';
+
 const signup = ({ router }) => {
   const { data, setData, apiUrl, setLoading } = useThem();
 
   // const token = router.query.token;
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
-  const token = router.query.token;
+  const { token } = router.query;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInf((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
+    setInf((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
   };
   const getTokenInf = async () => {
-    const Authorization = 'Bearer ' + token;
+    const Authorization = `Bearer ${token}`;
     axios
       .get(`${apiUrl}/user/getsignuptoken`, {
         headers: { Authorization },
@@ -38,19 +40,15 @@ const signup = ({ router }) => {
         console.log(res);
         const data = await res.data.Token;
         console.log(data);
-        setInf((preState) => {
-          return {
-            ...preState,
-            Identity: data?.Identity,
-            Account: data?.Account,
-          };
-        });
-        setData((preState) => {
-          return {
-            ...preState,
-            status: data?.Identity,
-          };
-        });
+        setInf((preState) => ({
+          ...preState,
+          Identity: data?.Identity,
+          Account: data?.Account,
+        }));
+        setData((preState) => ({
+          ...preState,
+          status: data?.Identity,
+        }));
       })
       .catch((err) => console.log(err));
   };
@@ -61,16 +59,14 @@ const signup = ({ router }) => {
       .post(`${apiUrl}//user/signupuserdata`, inf)
       .then((res) => {
         console.log(res);
-        const token = 'Bearer ' + res.data.Token;
+        const token = `Bearer ${res.data.Token}`;
         localStorage.setItem('BonnieYork', token);
         setLoading(false);
         setPage(page + 1);
-        setData((preState) => {
-          return {
-            ...preState,
-            name: inf.CustomerName || inf.StoreName,
-          };
-        });
+        setData((preState) => ({
+          ...preState,
+          name: inf.CustomerName || inf.StoreName,
+        }));
       })
       .catch((err) => {
         console.log(err);
@@ -116,7 +112,7 @@ const signup = ({ router }) => {
             </ul>
           </div>
           <div className="mx-auto rounded-login bg-white  pt-4 pb-10 shadow-lg sm:w-3/4 lg:w-6/12">
-            {page == 1 && (
+            {page === 1 && (
               <ChangePassword
                 setInf={setInf}
                 inf={inf}
@@ -124,7 +120,7 @@ const signup = ({ router }) => {
               />
             )}
             <div className="mb-4">
-              {page == 2 && (
+              {page === 2 && (
                 <SignupInf
                   setInf={setInf}
                   page={page}
@@ -133,7 +129,7 @@ const signup = ({ router }) => {
                   handleChange={handleChange}
                 />
               )}
-              {page == 3 && (
+              {page === 3 && (
                 <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
                   <h2 className="mb-8 text-center text-3xl font-bold">
                     註冊成功
@@ -158,8 +154,8 @@ const signup = ({ router }) => {
                 {page !== 1 && (
                   <button
                     className={`mx-2 h-10 w-4/12 rounded-lg border-2 border-unSelect px-6 py-2 text-unSelect  ${
-                      page == 1 && 'hidden'
-                    } ${page == 3 && 'hidden'}`}
+                      page === 1 && 'hidden'
+                    } ${page === 3 && 'hidden'}`}
                     onClick={() => {
                       setPage(page - 1);
                     }}
@@ -168,22 +164,20 @@ const signup = ({ router }) => {
                   </button>
                 )}
                 {page !== 3 && (
-                  <>
-                    <div className="w-full ">
-                      <button
-                        className=" h-10 w-full rounded-lg bg-secondary  text-white "
-                        onClick={() => {
-                          if (page == 1) {
-                            setPage(page + 1);
-                          } else {
-                            registerAccount();
-                          }
-                        }}
-                      >
-                        下一步
-                      </button>
-                    </div>
-                  </>
+                  <div className="w-full ">
+                    <button
+                      className=" h-10 w-full rounded-lg bg-secondary  text-white "
+                      onClick={() => {
+                        if (page === 1) {
+                          setPage(page + 1);
+                        } else {
+                          registerAccount();
+                        }
+                      }}
+                    >
+                      下一步
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

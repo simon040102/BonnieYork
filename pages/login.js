@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useThem } from '../modules/context';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { useThem } from '../modules/context';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from '../modules/layout';
 
 import LogoNav from '../src/images/logo_nav.png';
 import LoginClick from '../components/loginClick';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 const login = () => {
   const { apiUrl, setLoading } = useThem();
@@ -20,12 +22,10 @@ const login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAccount((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
+    setAccount((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
   };
 
   const checkEmail = (e) => {
@@ -39,15 +39,13 @@ const login = () => {
         position: 'top-center',
         autoClose: 1000,
       });
-      return;
     } else if (!Account.Account) {
       setLoading(false);
       toast.error('請輸email', {
         position: 'top-center',
         autoClose: 1000,
       });
-      return;
-    } else if (name == 'signup') {
+    } else if (name === 'signup') {
       setLoading(true);
       const data = {
         Identity: status,
@@ -74,7 +72,6 @@ const login = () => {
           console.log(err);
           setLoading(false);
         });
-      return;
     } else if (Account.Account !== '' && emailTest.test(Account.Account)) {
       setSelect(name);
       setOpenView(true);

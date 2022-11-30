@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/function-component-definition */
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Router from 'next/router';
 
+import AOS from 'aos';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import Marquee from 'react-fast-marquee';
 import Layout from '../modules/layout';
 
-import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Marquee from 'react-fast-marquee';
 import HomeSwiper from '../components/homeSwiper';
 
 import Banner from '../src/images/banner.jpg';
@@ -16,15 +19,12 @@ import Img3 from '../src/images/img3.png';
 import Phone from '../src/images/phone.png';
 import Pad from '../src/images/pad.png';
 import Laptop from '../src/images/laptop.png';
-import Who1 from '../src/images/who01.jpg';
 import Who2 from '../src/images/who02.jpg';
 import Who3 from '../src/images/who03.jpg';
 import Who4 from '../src/images/who04.jpg';
-import Who5 from '../src/images/who05.jpg';
 import Who6 from '../src/images/who06.jpg';
 import Who7 from '../src/images/who07.jpg';
 import Who8 from '../src/images/who08.jpg';
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 const Home = () => {
   useEffect(() => {
@@ -142,7 +142,7 @@ const Home = () => {
                 className="relative mx-auto w-8/12 text-end lg:w-5/12"
               >
                 <p>其他功能</p>
-                <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12"></div>
+                <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12" />
               </div>
               <ul className="mx-auto justify-center gap-8 px-8 sm:mb-32 sm:flex">
                 <li
@@ -207,7 +207,7 @@ const Home = () => {
             className="relative mx-auto mb-16 w-8/12 text-end lg:w-5/12"
           >
             <p>誰適合使用</p>
-            <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12"></div>
+            <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12" />
           </div>
           <div className="mb-24">
             <div className="mb-6">
@@ -253,7 +253,7 @@ const Home = () => {
               </Marquee>
             </div>
             <div className="mb-6">
-              <Marquee gradient={false} speed={40} direction={'right'}>
+              <Marquee gradient={false} speed={40} direction="right">
                 <div className="relative mx-3  h-60 w-1/3 rounded-large bg-[url('../src/images/who05.jpg')] bg-cover">
                   <div className="absolute right-6 bottom-4 w-32  rounded-large bg-secondary/80  text-center leading-9 text-white">
                     美妝美容
@@ -314,7 +314,7 @@ const Home = () => {
               className="relative mb-16 w-8/12 text-end lg:w-5/12"
             >
               <p id="store">合作店家</p>
-              <div className=" after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12"></div>
+              <div className=" after:absolute after:left-0 after:bottom-2.5 after:h-0.5 after:w-9/12 after:bg-warning after:content-[''] sm:after:w-10/12" />
             </div>
             <HomeSwiper />
           </div>

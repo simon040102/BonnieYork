@@ -1,5 +1,8 @@
+/* eslint-disable react/button-has-type */
 import Image from 'next/image';
+// eslint-disable-next-line import/order
 import Item1 from '../src/images/item1.png';
+// eslint-disable-next-line no-unused-vars
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import AOS from 'aos';
@@ -7,13 +10,8 @@ import 'aos/dist/aos.css';
 import { useEffect, useState } from 'react';
 
 const editItemView = ({ setEdit }) => {
+  // eslint-disable-next-line no-unused-vars
   const [startDate, setDate] = useState(new Date());
-
-  const selectDateHandler = (d) => {
-    setDate(d);
-  };
-
-  const today = new Date();
 
   useEffect(() => {
     AOS.init();
@@ -65,7 +63,7 @@ const editItemView = ({ setEdit }) => {
               cols="10"
               rows="5"
               className="w-2/3 resize-none border border-black p-2"
-            ></textarea>
+            />
           </div>
           <div className="mb-4 flex justify-between">
             <p className="w-1/3 text-end">備註：</p>

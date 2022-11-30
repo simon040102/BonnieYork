@@ -1,7 +1,8 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
+
 const addReserve = (props) => {
   const { setAddReserve } = props;
   const [startDate, setStartDate] = useState(new Date());

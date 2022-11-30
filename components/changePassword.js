@@ -1,10 +1,8 @@
-import React from 'react';
+/* eslint-disable no-console */
 import { useRouter } from 'next/router';
-import { useThem } from '../modules/context';
 
-const changePassword = ({ setInf, inf, handleChange }) => {
+const changePassword = ({ inf, handleChange }) => {
   const router = useRouter().pathname;
-  const { apiUrl } = useThem();
 
   const checkPassword = () => {
     const passwordTest = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{8,}$/;
@@ -14,20 +12,20 @@ const changePassword = ({ setInf, inf, handleChange }) => {
           密碼必須8位元以上並包含一個大寫字母及一個小寫字母!
         </div>
       );
-    } else if (inf?.Password !== inf?.CheckPassword) {
-      return <div className="mb-6 -mt-4 text-sm text-red">密碼不相符！</div>;
-    } else {
-      return <></>;
     }
+    if (inf?.Password !== inf?.CheckPassword) {
+      return <div className="mb-6 -mt-4 text-sm text-red">密碼不相符！</div>;
+    }
+    return <> </>;
   };
   console.log(inf);
   return (
     <div className="container mx-auto w-full px-8 lg:w-8/12  lg:px-0">
       <h2 className="my-8 text-center text-3xl font-bold">
-        {router == '/signup' && '歡迎使用邦尼約克'}
+        {router === '/signup' && '歡迎使用邦尼約克'}
       </h2>
 
-      {router == '/profile' && (
+      {router === '/profile' && (
         <div className="relative">
           <p className="absolute -top-2.5 left-4 bg-white text-unSelect">
             請輸入舊密碼

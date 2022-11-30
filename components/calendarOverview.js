@@ -1,12 +1,11 @@
-import React from 'react';
+/* eslint-disable no-console */
+/* eslint-disable react/button-has-type */
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction'; // needed
-import listPlugin from '@fullcalendar/list'; //F
-import { useRef } from 'react';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 
 const calendarOverview = ({ setAddOffDay, setAddReserve, setEditOder }) => {
-  const calendarRef = useRef(null);
   const handleClick = (e) => {
     console.log(e.event.id);
     setEditOder(true);
@@ -25,7 +24,7 @@ const calendarOverview = ({ setAddOffDay, setAddReserve, setEditOder }) => {
         plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
         initialView="listWeek"
         selectable
-        locale={'zh-TW'}
+        locale="zh-TW"
         headerToolbar={{
           left: 'title',
         }}

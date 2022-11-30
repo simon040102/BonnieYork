@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
+import { useState } from 'react';
 import Image from 'next/image';
 
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Layout from '../modules/layout';
 
 import Pig from '../src/images/pig.jpg';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import EditStaff from '../components/editStaff';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddStaff from '../components/addStaff';
+
 const staff = () => {
   const [editStaff, setEditStaff] = useState(false);
   const [addStaff, setAddStaff] = useState(false);

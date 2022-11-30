@@ -1,7 +1,9 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+// eslint-disable-next-line import/order
 import { useThem } from '../modules/context';
 import { useRouter } from 'next/router';
 
@@ -11,14 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
-const loginClick = ({
-  setOpenView,
-  Account,
-  setAccount,
-  select,
-  status,
-  handleChange,
-}) => {
+const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
   const { apiUrl, setData, setLoading } = useThem();
   const router = useRouter();
 
@@ -38,7 +33,6 @@ const loginClick = ({
           });
         })
         .catch((err) => console.log(err));
-      return;
     } else if (select === 'login') {
       setLoading(true);
       const data = {
@@ -52,8 +46,8 @@ const loginClick = ({
         .then((res) => {
           console.log(res);
           const result = res.data;
-          const token = 'Bearer ' + result.Token;
-          if (result.message == '密碼錯誤') {
+          const token = `Bearer ${result.Token}`;
+          if (result.message === '密碼錯誤') {
             toast.error('密碼錯誤', {
               position: 'top-center',
               autoClose: 1000,
@@ -63,14 +57,12 @@ const loginClick = ({
             setLoading(false);
 
             localStorage.setItem('BonnieYork', token);
-            setData((preState) => {
-              return {
-                ...preState,
-                status: result.Identity,
-                name: result?.CustomerName || result?.StoreName,
-                token: token,
-              };
-            });
+            setData((preState) => ({
+              ...preState,
+              status: result.Identity,
+              name: result?.CustomerName || result?.StoreName,
+              token,
+            }));
             toast.success('登入成功', {
               position: 'top-center',
               autoClose: 1000,

@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-console */
+/* eslint-disable react/function-component-definition */
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import axios from 'axios';
 import Menu from '../components/Menu';
 import SimpleFooter from '../components/SimpleFooter';
+import { useThem } from './context';
 import HomeFooter from '../components/homeFooter';
-import { useThem } from '../modules/context';
 import IsLoading from '../components/isLoading';
 
 import LogoNav from '../src/images/logo_nav.png';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import axios from 'axios';
 
-const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
+const Layout = ({ children, title, descriptionContent }) => {
   const { data, setData, loading, apiUrl } = useThem();
-  const [account, setAccount] = useState(data.status);
   const router = useRouter().pathname;
   console.log(data);
   const status = () => {
@@ -33,14 +36,15 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
           </Link>
         </div>
       );
-    else {
-      return <Menu />;
-    }
+
+    return <Menu />;
   };
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
-    if (data.Account) return;
-    else if (Authorization?.split(' ')[1] !== 'undefined') {
+    if (data.Account) {
+      return;
+    }
+    if (Authorization?.split(' ')[1] !== 'undefined') {
       axios
         .get(`${apiUrl}/user/VerifyUser`, {
           headers: { Authorization },
@@ -48,18 +52,15 @@ const Layout = ({ children, title, descriptionContent, setStatus, test }) => {
         .then((res) => {
           console.log(res);
           const result = res.data;
-          if (result.Message == 'JwtToken為空或是格式錯誤') {
+          if (result.Message === 'JwtToken為空或是格式錯誤') {
             return;
-          } else {
-            setData((preState) => {
-              return {
-                ...preState,
-                status: result.Identity,
-                name: result?.CustomerName || result?.StoreName,
-                Account: result?.Account,
-              };
-            });
           }
+          setData((preState) => ({
+            ...preState,
+            status: result.Identity,
+            name: result?.CustomerName || result?.StoreName,
+            Account: result?.Account,
+          }));
         })
         .catch((err) => console.log(err));
     }

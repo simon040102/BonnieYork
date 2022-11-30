@@ -1,9 +1,8 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Item1 from '../src/images/item1.png';
 
 const addItem = ({ setAddItem }) => {
   useEffect(() => {
@@ -13,7 +12,7 @@ const addItem = ({ setAddItem }) => {
     <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
         data-aos="zoom-in"
-        className="relative mt-20 h-fit w-96  border border-black bg-white"
+        className="relative mt-20  h-fit w-96  border border-black bg-white"
       >
         <div className="bg-gray-200 flex h-72 w-full items-center justify-center">
           <p className="">點選新增照片</p>
@@ -55,7 +54,7 @@ const addItem = ({ setAddItem }) => {
               cols="10"
               rows="5"
               className="w-2/3 resize-none border border-black p-2"
-            ></textarea>
+            />
           </div>
           <div className="mb-4 flex justify-between">
             <p className="w-1/3 text-end">備註：</p>

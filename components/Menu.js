@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -5,15 +8,15 @@ import { useRouter } from 'next/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import Link from 'next/link';
 import { useThem } from '../modules/context';
 
 import Profile from '../src/images/profile.png';
-import Edit from '../src/images/pencil.svg';
-import Link from 'next/link';
 
+// eslint-disable-next-line react/function-component-definition
 const Menu = () => {
   const [menu, setMenu] = useState(false);
-  const { data, setData } = useThem();
+  const { data } = useThem();
   const router = useRouter();
 
   const logout = () => {
@@ -35,7 +38,7 @@ const Menu = () => {
       {menu && (
         <div
           data-aos="fade-left"
-          className={`menu absolute top-menu right-0 h-screen w-96 overflow-auto border border-l-black bg-warning pb-20`}
+          className="menu absolute top-menu right-0 h-screen w-96 overflow-auto border border-l-black bg-warning pb-20"
         >
           <div className="relative mx-auto bg-white py-10">
             <div className="mx-auto mb-3 h-52 w-52 rounded-full border-black">

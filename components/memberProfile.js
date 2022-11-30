@@ -1,28 +1,27 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { useThem } from '../modules/context';
 
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
+
 const memberProfile = ({ handleChange, inf, setInf }) => {
   const { apiUrl, setLoading, data } = useThem();
   const [page, setPage] = useState('info');
   const router = useRouter();
 
-  const changeDate = (e) => {
-    console.log(e.target.value);
-  };
-
   const changePassword = () => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
-    let config = {
+    const config = {
       method: 'post',
       url: `${apiUrl}/user/resetpassword`,
       headers: {

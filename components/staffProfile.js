@@ -1,16 +1,21 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 import { useState } from 'react';
+import Image from 'next/image';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
-import Image from 'next/image';
 import ChangePassword from './changePassword';
-import axios from 'axios';
+import { useThem } from '../modules/context';
+import 'react-toastify/dist/ReactToastify.css';
 
-const staffProfile = ({ handleChange, inf }) => {
+const staffProfile = ({ handleChange, inf, setInf }) => {
+  const { setLoading, apiUrl } = useThem();
   const changePassword = () => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
-    let config = {
+    const config = {
       method: 'post',
       url: `${apiUrl}/user/resetpassword`,
       headers: {
@@ -21,7 +26,7 @@ const staffProfile = ({ handleChange, inf }) => {
     axios(config)
       .then((res) => {
         console.log(res);
-        const message = res.data.message;
+        const { message } = res.data;
         console.log(message);
         if (message === '密碼修改完成') {
           toast.success('密碼修改完成', {
@@ -99,7 +104,7 @@ const staffProfile = ({ handleChange, inf }) => {
                   cols="30"
                   rows="5"
                   className="mb-4 w-full resize-none border border-black"
-                ></textarea>
+                />
                 <p>facebook：</p>
                 <input
                   value={inf?.facebook}
@@ -150,6 +155,7 @@ const staffProfile = ({ handleChange, inf }) => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

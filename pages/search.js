@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+/* eslint-disable react/button-has-type */
+import { useState } from 'react';
 
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Layout from '../modules/layout';
 import GetCity from '../components/areaData/getCity';
 import GetArea from '../components/areaData/getArea';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 import SearchResult from '../components/searchResult';
+
 const search = () => {
   const [select, setSelect] = useState({});
   const [page, setPage] = useState('area');
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSelect((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
+    setSelect((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
   };
   return (
     <Layout title="邦尼約克BonnieYork 店家搜尋">
@@ -93,14 +92,12 @@ const search = () => {
               </>
             )}
             {page === 'keywords' && (
-              <>
-                <li className="mr-2 w-6/12">
-                  <input
-                    type="text"
-                    className="h-8 w-full rounded-md  border-black shadow-md"
-                  />
-                </li>
-              </>
+              <li className="mr-2 w-6/12">
+                <input
+                  type="text"
+                  className="h-8 w-full rounded-md  border-black shadow-md"
+                />
+              </li>
             )}
             <button className=" flex w-32 justify-center gap-4 rounded-lg bg-secondary py-1  text-white">
               <p>搜尋</p>

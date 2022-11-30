@@ -1,16 +1,17 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
+
 import Image from 'next/image';
 
 import { useThem } from '../modules/context';
 
-import MemberInf from '../components/memberInf';
-import StoreInf from '../components/storeInf';
-import StaffInf from '../components/staffInf';
+import MemberInf from './memberInf';
+import StoreInf from './storeInf';
+import StaffInf from './staffInf';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 
-const signupInf = ({ setInf, page, inf, handleChange, setPage }) => {
-  const { data, setData } = useThem();
+const signupInf = ({ setInf, page, inf, handleChange }) => {
+  const { data } = useThem();
 
   return (
     <div className="relative mx-auto w-11/12 px-8 lg:w-8/12 lg:px-0">

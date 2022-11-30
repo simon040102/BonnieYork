@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
-import Image from 'next/image';
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
+
 import { withRouter } from 'next/router';
 
 import Layout from '../modules/layout';
 
-import SignupInf from '../components/signupInf';
-import Finish from '../src/images/finished.png';
 import ChangePassword from '../components/changePassword';
+
 const changePassword = ({ router }) => {
-  const token = router.query.token;
-  const [status, setStatus] = useState('member');
-  const [page, setPage] = useState(1);
+  const { token } = router.query;
+
   const [inf, setInf] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInf((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
+    setInf((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
   };
   console.log(token);
   console.log(inf);

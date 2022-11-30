@@ -1,16 +1,11 @@
-import React from 'react';
-import { useRef } from 'react';
+/* eslint-disable no-console */
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // needed
-import listPlugin from '@fullcalendar/list'; //For List View
+import listPlugin from '@fullcalendar/list'; // For List View
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { useThem } from '../modules/context';
-
-const staffCalenderOverview = ({ setEditOder }) => {
-  const { data, setData } = useThem();
-  const calendarRef = useRef(null);
+const staffCalenderOverview = ({ setEditOder, data }) => {
   const handleClick = (e) => {
     console.log(e.event.id);
     setEditOder(true);
@@ -35,7 +30,7 @@ const staffCalenderOverview = ({ setEditOder }) => {
           ]}
           initialView="timeGridWeek"
           selectable
-          locale={'zh-TW'}
+          locale="zh-TW"
           headerToolbar={{
             left: 'title',
           }}

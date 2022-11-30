@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
+import { useState } from 'react';
 
 import Layout from '../modules/layout';
 

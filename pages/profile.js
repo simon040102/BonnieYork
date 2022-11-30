@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 
 import Layout from '../modules/layout';
@@ -10,15 +10,13 @@ import StoreProfile from '../components/storeProfile';
 
 const profile = () => {
   const [inf, setInf] = useState({});
-  const { data, setData } = useThem();
+  const { data } = useThem();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInf((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
+    setInf((preState) => ({
+      ...preState,
+      [name]: value,
+    }));
   };
   return (
     <>

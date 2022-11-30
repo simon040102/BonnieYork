@@ -1,11 +1,16 @@
-import React from 'react';
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import Logo from '../src/images/logo.png';
 import Facebook from '../src/images/facebook_home.png';
 import Instagram from '../src/images/instagram_home.png';
+
 const homeFooter = () => {
+  const router = useRouter();
+
   return (
     <div className="mx-auto flex justify-between">
       <div className="bg-footer w-1/3 py-16  pl-[10%]  ">
@@ -37,7 +42,7 @@ const homeFooter = () => {
             <a className="block text-center">隱私權政策</a>
           </Link>
         </div>
-        <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:-z-10  after:h-footer after:w-7/12 after:rounded-tr-block after:bg-footerL after:content-['']"></div>
+        <div className="mx-auto after:absolute after:left-0 after:bottom-2.5 after:-z-10  after:h-footer after:w-7/12 after:rounded-tr-block after:bg-footerL after:content-['']" />
       </div>
       <div className="flex w-2/3 items-end">
         <div className="h-72 w-full items-end rounded-tl-block bg-footerR pl-24 pt-16  pr-[10%]">
@@ -55,7 +60,7 @@ const homeFooter = () => {
                 <button
                   className="h-full w-full rounded-full bg-white text-xl font-bold text-footerR"
                   onClick={() => {
-                    Router.push('/login');
+                    router.push('/login');
                   }}
                 >
                   立即

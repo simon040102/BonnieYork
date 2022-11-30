@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Layout from '../modules/layout';
 import { useThem } from '../modules/context';
@@ -12,7 +12,7 @@ const calendar = () => {
   const [addBOffDay, setAddOffDay] = useState(false);
   const [addReserve, setAddReserve] = useState(false);
   const [editOder, setEditOder] = useState(false);
-  const { data, setData } = useThem();
+  const { data } = useThem();
   return (
     <Layout title="我的行事曆">
       {addBOffDay && <AddOffDay setAddOffDay={setAddOffDay} />}

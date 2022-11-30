@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
 import CloseIcon from '@mui/icons-material/Close';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useState } from 'react';
+
 const editOder = ({ setEditOder }) => {
   const [edit, setEdit] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
@@ -42,7 +44,7 @@ const editOder = ({ setEditOder }) => {
             <input
               type="text"
               className="w-2/3 border border-black text-center"
-              value={'久安娜貝爾'}
+              value="久安娜貝爾"
               disabled
             />
           </div>
@@ -62,7 +64,7 @@ const editOder = ({ setEditOder }) => {
             <input
               type="text"
               className="w-2/3 border border-black text-center"
-              value={'2500'}
+              value="2500"
               disabled={edit}
             />
           </div>
@@ -71,7 +73,7 @@ const editOder = ({ setEditOder }) => {
             <input
               type="phone"
               className="w-2/3 border border-black text-center"
-              value={'0987654321'}
+              value="0987654321"
               disabled
             />
           </div>
@@ -80,7 +82,7 @@ const editOder = ({ setEditOder }) => {
             <input
               type="mail"
               className="w-2/3 border border-black text-center"
-              value={'xxx123@gmail.com'}
+              value="xxx123@gmail.com"
               disabled
             />
           </div>

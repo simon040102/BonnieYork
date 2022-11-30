@@ -1,11 +1,13 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-console */
 import { useState } from 'react';
 import Image from 'next/image';
-import { useThem } from '../modules/context';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import { useThem } from '../modules/context';
 
 import EditItemView from './editItemView';
 import EditItem from './editItem';
@@ -15,17 +17,18 @@ import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
 import StorePhoto1 from '../src/images/search1.jpg';
-const storeProfile = ({ handleChange, inf, setInf }) => {
+
+const storeProfile = ({ handleChange, inf }) => {
   const [page, setPage] = useState('info');
   const [edit, setEdit] = useState(false);
   const [addItem, setAddItem] = useState(false);
-  const { apiUrl, setLoading, data } = useThem();
+  const { apiUrl, setLoading } = useThem();
   const router = useRouter();
 
   const changePassword = () => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
-    let config = {
+    const config = {
       method: 'post',
       url: `${apiUrl}/user/resetpassword`,
       headers: {
@@ -200,7 +203,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
@@ -211,7 +214,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -223,18 +226,18 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32  border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
                     <div className="flex">
-                      <p className=""></p>
+                      <p className="" />
                       <select
                         name="weekStart"
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -246,18 +249,18 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32  border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
                     <div className="flex">
-                      <p className=""></p>
+                      <p className="" />
                       <select
                         name="weekStart"
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -272,7 +275,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
@@ -283,7 +286,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -295,18 +298,18 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32  border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
                     <div className="flex">
-                      <p className=""></p>
+                      <p className="" />
                       <select
                         name="weekStart"
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -318,18 +321,18 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                         className='"border-black mb-4 w-32  border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                     <p>～</p>
                     <div className="flex">
-                      <p className=""></p>
+                      <p className="" />
                       <select
                         name="weekStart"
                         className='"border-black mb-4  w-32 border   text-center'
                         value={inf?.weekStart}
                       >
-                        <option value="請選擇時間"></option>
+                        <option value="請選擇時間" />
                       </select>
                     </div>
                   </div>
@@ -341,7 +344,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                     id=""
                     className='"border-black mb-4  w-32 border   text-center'
                   >
-                    <option value="星期"></option>
+                    <option value="星期" />
                   </select>
                   <p className="ml-1 text-xs">不定時公休請至預約管理設定</p>
                 </div>
@@ -353,7 +356,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                     cols="30"
                     rows="10"
                     className="w-full resize-none border border-black pt-3 indent-3"
-                  ></textarea>
+                  />
                 </div>
                 <div className="mb-4">
                   <p>預約首頁Banner(最多可選五張，橫式佳)：</p>

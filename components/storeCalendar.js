@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
+import { useState } from 'react';
 import CalendarOverview from './calendarOverview';
 import StaffCalenderOverview from './staffCalenderOverview';
+
 const storeCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
   const [page, setPage] = useState('overview');
   return (
