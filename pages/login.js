@@ -57,14 +57,14 @@ const login = () => {
           const message = await res.data.Message;
           console.log(message, name);
           if (name === 'signup') {
-            setLoading(false);
-            setSelect(name);
-            setOpenView(true);
-          } else if (name === 'login') {
-            toast.error(message, {
+            toast.error('已註冊過', {
               position: 'top-center',
               autoClose: 1000,
             });
+            setLoading(false);
+          } else if (name === 'login') {
+            setSelect(name);
+            setOpenView(true);
             setLoading(false);
           }
         })
@@ -77,8 +77,11 @@ const login = () => {
             setOpenView(true);
           }
           if (name === 'login') {
-            setSelect(name);
-            setOpenView(true);
+            toast.error('未註冊過', {
+              position: 'top-center',
+              autoClose: 1000,
+            });
+            setLoading(false);
           }
         });
     }
