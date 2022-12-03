@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-else-if */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 /* eslint-disable no-shadow */
@@ -6,6 +7,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { withRouter } from 'next/router';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from '../modules/layout';
 import { useThem } from '../modules/context';
@@ -50,28 +53,64 @@ const signup = ({ router }) => {
           status: data?.Identity,
         }));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error('網頁過期，請重新註冊', {
+          position: 'top-center',
+          autoClose: 1000,
+        });
+        setTimeout(() => {
+          router.push('/');
+        }, 1500);
+      });
   };
 
   const registerAccount = () => {
     setLoading(true);
-    axios
-      .post(`${apiUrl}//user/signupuserdata`, inf)
-      .then((res) => {
-        console.log(res);
-        const token = `Bearer ${res.data.Token}`;
-        localStorage.setItem('BonnieYork', token);
-        setLoading(false);
-        setPage(page + 1);
-        setData((preState) => ({
-          ...preState,
-          name: inf.CustomerName || inf.StoreName,
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(true);
+    console.log(data);
+    if (!inf.CellphoneNumber) {
+      setLoading(false);
+      toast.error('手機號碼未填寫', {
+        position: 'top-center',
+        autoClose: 1000,
       });
+    } else if (inf.Identity === 'member' && !inf.CustomerName) {
+      setLoading(false);
+      toast.error('名稱未填寫', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    } else if (inf.Identity === 'store' && !inf.StoreName) {
+      setLoading(false);
+      toast.error('名稱未填寫', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    } else if (inf.Identity === 'store' && !inf.StoreName) {
+      setLoading(false);
+      toast.error('名稱未填寫', {
+        position: 'top-center',
+        autoClose: 1000,
+      });
+    } else {
+      axios
+        .post(`${apiUrl}//user/signupuserdata`, inf)
+        .then((res) => {
+          console.log(res);
+          const token = `Bearer ${res.data.Token}`;
+          localStorage.setItem('BonnieYork', token);
+          setLoading(false);
+          setPage(page + 1);
+          setData((preState) => ({
+            ...preState,
+            name: inf.CustomerName || inf.StoreName,
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(true);
+        });
+    }
   };
   console.log(inf);
   useEffect(() => {
@@ -184,6 +223,7 @@ const signup = ({ router }) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </Layout>
   );
 };

@@ -56,7 +56,7 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
   };
 
   return (
-    <div className="-mt-40 bg-bgColor  pb-4 pt-40">
+    <div className="-mt-40 pb-4 pt-40">
       <h2 className="mb-4 text-center text-3xl">會員資訊</h2>
       <div className="mb-8 flex justify-center">
         <button
@@ -94,7 +94,7 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
               <div className="mb-4 w-full">
                 <p className="mb-8">Email:{data.Account}</p>
                 <div className="relative">
-                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                  <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                     用戶名稱
                   </p>
                   <input
@@ -106,7 +106,7 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
                   />
                 </div>
                 <div className="relative">
-                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                  <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                     手機號碼
                   </p>
                   <input
@@ -118,7 +118,7 @@ const memberProfile = ({ handleChange, inf, setInf }) => {
                   />
                 </div>
                 <div className="relative">
-                  <p className="absolute -top-2.5 left-4 bg-white text-input">
+                  <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                     生日
                   </p>
                   <input

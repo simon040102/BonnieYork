@@ -45,7 +45,7 @@ const login = () => {
         position: 'top-center',
         autoClose: 1000,
       });
-    } else if (name === 'signup') {
+    } else if (name) {
       setLoading(true);
       const data = {
         Identity: status,
@@ -55,26 +55,32 @@ const login = () => {
         .post(`${apiUrl}/user/SignUpIsValid`, data)
         .then(async (res) => {
           const message = await res.data.Message;
-          console.log(message);
-          if (message === '未註冊過') {
+          console.log(message, name);
+          if (name === 'signup') {
             setLoading(false);
             setSelect(name);
             setOpenView(true);
-          } else if (message === '已註冊過') {
-            setLoading(false);
-            toast.error('帳號已註冊過', {
+          } else if (name === 'login') {
+            toast.error(message, {
               position: 'top-center',
               autoClose: 1000,
             });
+            setLoading(false);
           }
         })
-        .catch((err) => {
+        .catch(async (err) => {
           console.log(err);
+          // const message = await err.response.data.Message;
           setLoading(false);
+          if (name === 'signup') {
+            setSelect(name);
+            setOpenView(true);
+          }
+          if (name === 'login') {
+            setSelect(name);
+            setOpenView(true);
+          }
         });
-    } else if (Account.Account !== '' && emailTest.test(Account.Account)) {
-      setSelect(name);
-      setOpenView(true);
     }
   };
   useEffect(() => {});

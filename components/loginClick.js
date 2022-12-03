@@ -20,8 +20,7 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
   const handleSubmit = async () => {
     if (select === 'signup') {
       const data = { Identity: status, Account: Account.Account };
-      console.log(data);
-      console.log(data);
+      setLoading(true);
       axios
         .post(`${apiUrl}/user/signupsendlink`, data)
         .then((res) => {
@@ -31,8 +30,12 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
             position: 'top-center',
             autoClose: 1000,
           });
+          setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     } else if (select === 'login') {
       setLoading(true);
       const data = {
@@ -40,40 +43,42 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
         Account: Account.Account,
         Password: Account.Password,
       };
-      console.log(data);
+
       await axios
         .post(`${apiUrl}/user/login`, data)
         .then((res) => {
           console.log(res);
-          const result = res.data;
-          const token = `Bearer ${result.Token}`;
-          if (result.message === '密碼錯誤') {
-            toast.error('密碼錯誤', {
-              position: 'top-center',
-              autoClose: 1000,
-            });
-            setLoading(false);
-          } else {
-            setLoading(false);
+          const message = res.data;
+          const token = `Bearer ${message.Token}`;
 
-            localStorage.setItem('BonnieYork', token);
-            setData((preState) => ({
-              ...preState,
-              status: result.Identity,
-              name: result?.CustomerName || result?.StoreName,
-              token,
-            }));
-            toast.success('登入成功', {
-              position: 'top-center',
-              autoClose: 1000,
-            });
-            setTimeout(() => {
-              router.push('/');
-              router.push('/');
-            }, 1500);
-          }
+          setLoading(false);
+
+          localStorage.setItem('BonnieYork', token);
+          setData((preState) => ({
+            ...preState,
+            status: message.Identity,
+            name: message?.CustomerName || message?.StoreName,
+            token,
+          }));
+          toast.success('登入成功', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            router.push('/');
+            router.push('/');
+          }, 1500);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          const message = err.response.data.Message;
+
+          toast.error(message, {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        });
     }
   };
 

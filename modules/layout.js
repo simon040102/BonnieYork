@@ -20,7 +20,8 @@ import LogoNav from '../src/images/logo_nav.png';
 
 const Layout = ({ children, title, descriptionContent }) => {
   const { data, setData, loading, apiUrl } = useThem();
-  const router = useRouter().pathname;
+  const routerName = useRouter().pathname;
+  const router = useRouter();
   console.log(data);
   const status = () => {
     if (data.status === 'customer')
@@ -52,9 +53,6 @@ const Layout = ({ children, title, descriptionContent }) => {
         .then((res) => {
           console.log(res);
           const result = res.data;
-          if (result.Message === 'JwtToken為空或是格式錯誤') {
-            return;
-          }
           setData((preState) => ({
             ...preState,
             status: result.Identity,
@@ -62,7 +60,19 @@ const Layout = ({ children, title, descriptionContent }) => {
             Account: result?.Account,
           }));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+
+          if (
+            routerName !== '/login' &&
+            routerName !== '/search' &&
+            routerName !== '/signup' &&
+            routerName !== '/store'
+          ) {
+            router.push('/');
+            localStorage.removeItem('BonnieYork');
+          }
+        });
     }
   }, []);
   return (
@@ -70,7 +80,7 @@ const Layout = ({ children, title, descriptionContent }) => {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <title>{title}</title>
+        <title>{title || '邦尼約克Bonnie'}</title>
         <meta name="description" content={descriptionContent} />
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
@@ -86,7 +96,7 @@ const Layout = ({ children, title, descriptionContent }) => {
               <Link href="/search">
                 <a>店家搜尋</a>
               </Link>
-              {data.status === 'customer' && router === '/' && (
+              {data.status === 'customer' && routerName === '/' && (
                 <>
                   <Link href="#feature">
                     <a className="hidden md:block">功能特色</a>
@@ -102,7 +112,7 @@ const Layout = ({ children, title, descriptionContent }) => {
           </div>
         </header>
 
-        <div className="mb-auto  pt-20">{children}</div>
+        <div className="mb-auto bg-bgColor pb-20 pt-20">{children}</div>
         <footer className="  ">
           {router === '/' ? (
             <>
