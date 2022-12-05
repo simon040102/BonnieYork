@@ -29,10 +29,12 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
   const [selectBanner, setSelectBanner] = useState([]);
   const [previewBanner, setPreviewBanner] = useState([]);
   const [bannerPath, setBannerPath] = useState({});
+  const [headShot, setHeadShot] = useState({});
+  const [headShotPreview, setHeadShotPreview] = useState(null);
   const Authorization = localStorage.getItem('BonnieYork');
 
   const router = useRouter();
-  console.log(selectBanner);
+
   const changePassword = () => {
     setLoading(true);
     const config = {
@@ -68,11 +70,33 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
       .catch((err) => console.log(err));
   };
 
-  const ChangeHeadShot = () => {
-    console.log(123);
+  const ChangeHeadShot = async (e) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      setHeadShotPreview(reader.result);
+    });
+    reader.readAsDataURL(e.target.files[0]);
+    const formData = new FormData();
+    formData.append('HeadShot', e.target.files[0]);
+    setHeadShot(formData);
   };
-
+  console.log(headShot);
   const handleSubmit = () => {
+    if (headShot.length !== 0) {
+      const config = {
+        method: 'post',
+        url: `${apiUrl}/store/uploadprofile`,
+        headers: {
+          Authorization,
+        },
+        data: headShot,
+      };
+      axios(config)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log(err));
+    }
     if (selectBanner.length !== 0) {
       selectBanner.forEach((item) => {
         const config = {
@@ -103,6 +127,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
     });
   };
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${apiUrl}/store/getinformation`, {
         headers: {
@@ -117,9 +142,11 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
 
         setInf(information[0]);
         setBannerPath(BannerPath);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, []);
   console.log(inf);
@@ -170,9 +197,28 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
           <div className="mx-auto">
             <div className="relative mb-4 flex  w-full justify-center">
               <div className="relative">
-                <Image src={Profile} className="" />
+                {headShotPreview ? (
+                  <img
+                    src={headShotPreview}
+                    alt=""
+                    className={`h-40 w-40 rounded-full object-cover ${
+                      headShotPreview && 'hidden'
+                    }`}
+                  />
+                ) : (
+                  <div className={` ${inf?.HeadShot && 'hidden'}`}>
+                    <Image src={Profile} />
+                  </div>
+                )}
+                <img
+                  src={inf?.HeadShot}
+                  alt=""
+                  className={`${
+                    headShotPreview && 'hidden'
+                  } h-40 w-40 rounded-full object-cover`}
+                />
                 <label
-                  htmlFor="upload"
+                  htmlFor="headShot"
                   className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
                 >
                   <Image src={Edit} />
@@ -180,7 +226,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
               </div>
               <input
                 type="file"
-                id="upload"
+                id="headShot"
                 accept="image/png, image/jpeg"
                 className="hidden"
                 onChange={ChangeHeadShot}
