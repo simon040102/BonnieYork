@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,16 +21,19 @@ import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
 
-const storeProfile = ({ handleChange, inf }) => {
+const storeProfile = ({ handleChange, inf, setInf }) => {
   const [page, setPage] = useState('info');
   const [edit, setEdit] = useState(false);
   const [addItem, setAddItem] = useState(false);
   const { apiUrl, setLoading } = useThem();
   const [selectBanner, setSelectBanner] = useState([]);
-  const router = useRouter();
+  const [previewBanner, setPreviewBanner] = useState([]);
+  const [bannerPath, setBannerPath] = useState({});
+  const Authorization = localStorage.getItem('BonnieYork');
 
+  const router = useRouter();
+  console.log(selectBanner);
   const changePassword = () => {
-    const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
     const config = {
       method: 'post',
@@ -63,18 +67,80 @@ const storeProfile = ({ handleChange, inf }) => {
       })
       .catch((err) => console.log(err));
   };
+
+  const ChangeHeadShot = () => {
+    console.log(123);
+  };
+
+  const handleSubmit = () => {
+    if (selectBanner.length !== 0) {
+      selectBanner.forEach((item) => {
+        const config = {
+          method: 'post',
+          url: `${apiUrl}/store/uploadprofile`,
+          headers: {
+            Authorization,
+          },
+          data: item,
+        };
+        axios(config)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
+      });
+    }
+    const config = {
+      method: 'post',
+      url: `${apiUrl}/store/editinformation`,
+      headers: {
+        Authorization,
+      },
+      data: inf,
+    };
+    axios(config).then((res) => {
+      console.log(res);
+    });
+  };
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/store/getinformation`, {
+        headers: {
+          Authorization,
+        },
+      })
+      .then(async (res) => {
+        console.log(res);
+        const information = await res.data.StoreInformation;
+        const BannerPath = await res.data.BannerPath;
+        console.log(information);
+
+        setInf(information[0]);
+        setBannerPath(BannerPath);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   console.log(inf);
   return (
     <div className="">
       <div className="relative">
         {edit && <EditItemView setEdit={setEdit} />}
         {addItem && <AddItem setAddItem={setAddItem} />}
+        <input
+          type="file"
+          id="upload"
+          accept="image/png, image/jpeg"
+          className="hidden"
+          onChange={handleChange}
+        />
       </div>
       <h2 className="mb-8 text-center text-3xl">店鋪資訊</h2>
       <div className="mb-4 flex justify-center">
         <button
           className={` ${
-            page === 'info' ? 'text-black' : 'text-gray-500'
+            page === 'info' ? 'border-b-2 text-secondary' : ' text-unSelect'
           } mx-8`}
           onClick={() => setPage('info')}
         >
@@ -82,7 +148,9 @@ const storeProfile = ({ handleChange, inf }) => {
         </button>
         <button
           className={` ${
-            page === 'changePassword' ? 'text-black' : 'text-gray-500'
+            page === 'changePassword'
+              ? 'border-b-2 text-secondary'
+              : ' text-unSelect'
           } mx-8`}
           onClick={() => setPage('changePassword')}
         >
@@ -90,7 +158,7 @@ const storeProfile = ({ handleChange, inf }) => {
         </button>
         <button
           className={` ${
-            page === 'item' ? 'text-black' : 'text-gray-500'
+            page === 'item' ? 'border-b-2 text-secondary' : ' text-unSelect'
           } mx-8`}
           onClick={() => setPage('item')}
         >
@@ -103,78 +171,87 @@ const storeProfile = ({ handleChange, inf }) => {
             <div className="relative mb-4 flex  w-full justify-center">
               <div className="relative">
                 <Image src={Profile} className="" />
-                <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
+                <label
+                  htmlFor="upload"
+                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+                >
                   <Image src={Edit} />
-                </button>
+                </label>
               </div>
+              <input
+                type="file"
+                id="upload"
+                accept="image/png, image/jpeg"
+                className="hidden"
+                onChange={ChangeHeadShot}
+              />
             </div>
-
             <div className="w-full">
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  店鋪名稱
+                  *店鋪名稱
                 </p>
                 <input
-                  value={inf?.name}
+                  value={inf?.StoreName}
                   onChange={handleChange}
-                  name="name"
+                  name="StoreName"
                   type="text"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  產業別
+                  *產業別
                 </p>
                 <select
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
-                  value={inf?.industry}
+                  value={inf?.IndustryId}
                   onChange={handleChange}
-                  name="industry"
+                  name="IndustryId"
                   id=""
                 >
-                  <option value="請選擇產業">請選擇產業</option>
-                  <option value="美髮沙龍">美髮沙龍</option>
-                  <option value="美睫美甲">美睫美甲</option>
-                  <option value="推拿按摩">推拿按摩</option>
-                  <option value="家教老師">家教老師</option>
-                  <option value="手工製作">手工製作</option>
-                  <option value="美妝美容">美妝美容</option>
-                  <option value="健身瑜伽">健身瑜伽</option>
-                  <option value="個人工作室">個人工作室</option>
+                  <option value="0">請選擇產業</option>
+                  <option value="1">美髮沙龍</option>
+                  <option value="2">美睫美甲</option>
+                  <option value="3">推拿按摩</option>
+                  <option value="4">家教老師</option>
+                  <option value="5">手工製作</option>
+                  <option value="6">美妝美容</option>
+                  <option value="7">健身瑜伽</option>
+                  <option value="8">個人工作室</option>
                 </select>
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  地址
+                  *地址
                 </p>
                 <div className="flex justify-between">
                   <select
-                    name="city"
-                    value={inf?.city}
+                    name="City"
+                    value={inf?.City}
                     onChange={handleChange}
                     id=""
                     className="mb-6 h-12 w-[48%] rounded-lg border border-unSelect indent-3 "
                   >
-                    <option value="請選擇縣市">請選擇縣市</option>
+                    <option value="請選擇縣市">*請選擇縣市</option>
                     <GetCity />
                   </select>
                   <select
-                    name="area"
-                    value={inf?.area}
+                    name="District"
+                    value={inf?.District}
                     onChange={handleChange}
                     id=""
                     className="mb-6 h-12 w-[48%] rounded-lg border border-unSelect indent-3 "
                   >
-                    <option value="請選擇地區">請選擇地區</option>
-                    <GetArea city={inf?.city} />
+                    <option value="請選擇地區">*請選擇地區</option>
+                    <GetArea city={inf?.City} />
                   </select>
                 </div>
               </div>
               <input
-                value={inf?.address}
+                value={inf?.Address}
                 onChange={handleChange}
-                name="address"
+                name="Address"
                 type="text"
                 placeholder="ex:台灣大道12號"
                 className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-5 "
@@ -184,10 +261,10 @@ const storeProfile = ({ handleChange, inf }) => {
                   手機號碼
                 </p>
                 <input
-                  value={inf?.cellphoneNumber}
+                  value={inf?.CellphoneNumber}
                   onChange={handleChange}
                   type="text"
-                  name="cellphoneNumber"
+                  name="CellphoneNumber"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
@@ -196,22 +273,22 @@ const storeProfile = ({ handleChange, inf }) => {
                   市話
                 </p>
                 <input
-                  value={inf?.tel}
+                  value={inf?.PhoneNumber}
                   onChange={handleChange}
                   type="tel"
-                  name="tel"
+                  name="PhoneNumber"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  員工稱謂
+                  *員工稱謂
                 </p>
                 <input
-                  value={inf?.staffTitle}
+                  value={inf?.JobTitle}
                   onChange={handleChange}
                   type="text"
-                  name="staffTitle"
+                  name="JobTitle"
                   className=" h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
                 <p className="mb-6 text-xs text-input">
@@ -220,14 +297,14 @@ const storeProfile = ({ handleChange, inf }) => {
               </div>
               <div className="relative mb-6">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  顧客可選時間區間：
+                  *顧客可選時間區間：
                 </p>
 
                 <select
-                  value={inf?.timeSpace}
+                  value={inf?.TimeInterval}
                   onChange={handleChange}
                   type="text"
-                  name="timeSpace"
+                  name="TimeInterval"
                   className=" h-12 w-full rounded-lg border border-unSelect indent-3 "
                 >
                   <option value="請選擇區間">請選擇區間</option>
@@ -244,32 +321,32 @@ const storeProfile = ({ handleChange, inf }) => {
 
               <div>
                 <p>營業時間：</p>
-                <li className="mb-2 list-none	">平日：(休息非必填)</li>
+                <li className="mb-2 list-none	">*平日：(休息非必填)</li>
                 <div className="mb-6 flex justify-between">
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       開始
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="WeekdayStartTime"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.WeekdayStartTime}
+                      onChange={handleChange}
+                    />
                   </div>
                   <p>～</p>
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       結束
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="WeekdayEndTime"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.WeekdayEndTime}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div className="mb-6 flex justify-between">
@@ -277,53 +354,53 @@ const storeProfile = ({ handleChange, inf }) => {
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       中間休息
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="WeekdayBreakStart"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.WeekdayBreakStart}
+                      onChange={handleChange}
+                    />
                   </div>
                   <p>～</p>
                   <div className="relative w-[45%]">
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="WeekdayBreakEnd"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.WeekdayBreakEnd}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
               <div>
-                <li className="mb-2 list-none	">假日：(休息非必填)</li>
+                <li className="mb-2 list-none	">*假日：(休息非必填)</li>
                 <div className="mb-6 flex justify-between">
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       開始
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="HolidayStartTime"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.HolidayStartTime}
+                      onChange={handleChange}
+                    />
                   </div>
                   <p>～</p>
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       結束
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="HolidayEndTime"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.HolidayEndTime}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div className="mb-6 flex justify-between">
@@ -331,23 +408,23 @@ const storeProfile = ({ handleChange, inf }) => {
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
                       中間休息
                     </p>
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="HolidayBreakStart"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.HolidayBreakStart}
+                      onChange={handleChange}
+                    />
                   </div>
                   <p>～</p>
                   <div className="relative w-[45%]">
-                    <select
-                      name="weekStart"
-                      className=" h-12 w-full rounded-lg border border-unSelect "
-                      value={inf?.weekStart}
-                    >
-                      <option value="請選擇時間" />
-                    </select>
+                    <input
+                      name="HolidayBreakEnd"
+                      type="time"
+                      className=" h-12 w-full rounded-lg border border-unSelect indent-4"
+                      value={inf?.HolidayBreakEnd}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
@@ -356,13 +433,13 @@ const storeProfile = ({ handleChange, inf }) => {
                   固定公休日
                 </p>
                 <select
-                  value={inf?.offDay}
+                  value={inf?.PublicHoliday}
                   onChange={handleChange}
-                  name="offDay"
+                  name="PublicHoliday"
                   type="text"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 >
-                  <option value=""> </option>
+                  <option value="無">無</option>
                   <option value="星期一">星期一</option>
                   <option value="星期二">星期二</option>
                   <option value="星期三">星期三</option>
@@ -374,20 +451,61 @@ const storeProfile = ({ handleChange, inf }) => {
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  店鋪描述
+                  *店鋪描述
                 </p>
                 <textarea
-                  name=""
+                  name="Description"
                   id=""
+                  value={inf.Description}
                   cols="30"
                   rows="10"
-                  className="w-full resize-none rounded-lg border border-unSelect pt-3 indent-3"
+                  className="w-full resize-none rounded-lg border border-unSelect p-3 indent-3"
+                  onChange={handleChange}
                 />
               </div>
               <div className="mb-4">
                 <p>預約首頁Banner(最多可選五張，橫式佳)：</p>
-                <div className="grid grid-cols-3 gap-3  pt-2">
-                  <StoreBanner handleChange={handleChange} />
+                <div className="mb-10 grid grid-cols-3 gap-3 pt-2">
+                  <StoreBanner
+                    setSelectBanner={setSelectBanner}
+                    Num="1"
+                    setPreviewBanner={setPreviewBanner}
+                    previewBanner={previewBanner}
+                    selectBanner={selectBanner}
+                    bannerPath={bannerPath.Banner1}
+                  />
+                  <StoreBanner
+                    setSelectBanner={setSelectBanner}
+                    Num="2"
+                    setPreviewBanner={setPreviewBanner}
+                    selectBanner={selectBanner}
+                    previewBanner={previewBanner}
+                    bannerPath={bannerPath.Banner2}
+                  />
+                  <StoreBanner
+                    setSelectBanner={setSelectBanner}
+                    Num="3"
+                    setPreviewBanner={setPreviewBanner}
+                    selectBanner={selectBanner}
+                    previewBanner={previewBanner}
+                    bannerPath={bannerPath.Banner3}
+                  />
+                  <StoreBanner
+                    setSelectBanner={setSelectBanner}
+                    Num="4"
+                    setPreviewBanner={setPreviewBanner}
+                    selectBanner={selectBanner}
+                    previewBanner={previewBanner}
+                    bannerPath={bannerPath.Banner4}
+                  />
+                  <StoreBanner
+                    setSelectBanner={setSelectBanner}
+                    Num="5"
+                    setPreviewBanner={setPreviewBanner}
+                    selectBanner={selectBanner}
+                    previewBanner={previewBanner}
+                    bannerPath={bannerPath.Banner5}
+                  />
                 </div>
               </div>
               <div className="relative">
@@ -395,10 +513,10 @@ const storeProfile = ({ handleChange, inf }) => {
                   facebook
                 </p>
                 <input
-                  value={inf?.facebook}
+                  value={inf?.FacebookLink}
                   onChange={handleChange}
                   type="text"
-                  name="facebook"
+                  name="FacebookLink"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
@@ -407,10 +525,10 @@ const storeProfile = ({ handleChange, inf }) => {
                   Instagram
                 </p>
                 <input
-                  value={inf?.instagram}
+                  value={inf?.InstagramLink}
                   onChange={handleChange}
                   type="text"
-                  name="instagram"
+                  name="InstagramLink"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
@@ -419,10 +537,10 @@ const storeProfile = ({ handleChange, inf }) => {
                   Line官方
                 </p>
                 <input
-                  value={inf?.line}
+                  value={inf?.LineLink}
                   onChange={handleChange}
                   type="text"
-                  name="line"
+                  name="LineLink"
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
               </div>
@@ -432,7 +550,10 @@ const storeProfile = ({ handleChange, inf }) => {
             <button className=" h-12 w-[32%] rounded-lg bg-footerL text-black">
               放棄變更
             </button>
-            <button className="h-12 w-[65%] rounded-lg bg-secondary text-white">
+            <button
+              className="h-12 w-[65%] rounded-lg bg-secondary text-white"
+              onClick={handleSubmit}
+            >
               確認修改
             </button>
           </div>
@@ -453,11 +574,7 @@ const storeProfile = ({ handleChange, inf }) => {
       )}
       {page === 'item' && (
         <div className="container mx-auto flex justify-center">
-          <EditItem
-            setEdit={setEdit}
-            setAddItem={setAddItem}
-            setSelectBanner={setSelectBanner}
-          />
+          <EditItem setEdit={setEdit} setAddItem={setAddItem} />
         </div>
       )}
       <ToastContainer />

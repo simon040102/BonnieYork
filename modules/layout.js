@@ -62,7 +62,7 @@ const Layout = ({ children, title, descriptionContent }) => {
         })
         .catch((err) => {
           console.log(err);
-
+          localStorage.removeItem('BonnieYork');
           if (
             routerName !== '/login' &&
             routerName !== '/search' &&
@@ -70,7 +70,6 @@ const Layout = ({ children, title, descriptionContent }) => {
             routerName !== '/store'
           ) {
             router.push('/');
-            localStorage.removeItem('BonnieYork');
           }
         });
     }
