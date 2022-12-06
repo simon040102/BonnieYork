@@ -22,7 +22,7 @@ import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
 
 const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
-  const [page, setPage] = useState('item');
+  const [page, setPage] = useState('info');
   const [edit, setEdit] = useState(false);
   const [editItem, setEditItem] = useState({});
   const [addItem, setAddItem] = useState(false);

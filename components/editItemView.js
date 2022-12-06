@@ -37,14 +37,14 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
 
   const handleDelete = () => {
     setLoading(true);
-    const confing = {
+    const config = {
       method: 'delete',
       url: `${apiUrl}/store/DeleteItems?itemId=${editItem.ItemId}`,
       headers: {
         Authorization,
       },
     };
-    axios(confing)
+    axios(config)
       .then((res) => {
         console.log(res);
         setLoading(false);
@@ -89,7 +89,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
           console.log(res);
           setLoading(false);
           setEdit(false);
-          if (imagePreview !== null) {
+          if (imagePreview == null) {
             toast.success('修改完成', {
               position: 'top-center',
               autoClose: 1000,
