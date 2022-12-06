@@ -29,7 +29,7 @@ const addStaff = ({ setAddStaff, allItem }) => {
     setStaffItem((prevState) => ({ ...prevState, BusinessItemsId: job }));
     const config = {
       method: 'post',
-      url: `${apiUrl}/user/signupsendlink`,
+      url: `https://localhost:44306/user/SignUpSendLink`,
       headers: {
         Authorization,
       },
