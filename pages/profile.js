@@ -10,8 +10,10 @@ import StoreProfile from '../components/storeProfile';
 
 const profile = () => {
   const [inf, setInf] = useState({});
+  const [dataChange, setDataChange] = useState(false);
   const { data } = useThem();
   const handleChange = (e) => {
+    setDataChange(true);
     const { name, value } = e.target;
     setInf((preState) => ({
       ...preState,
@@ -32,6 +34,7 @@ const profile = () => {
               handleChange={handleChange}
               inf={inf}
               setInf={setInf}
+              dataChange={dataChange}
             />
           )}
           {data.status === 'staff' && (
@@ -39,6 +42,7 @@ const profile = () => {
               handleChange={handleChange}
               inf={inf}
               setInf={setInf}
+              dataChange={dataChange}
             />
           )}
           {data.status === 'store' && (
@@ -46,6 +50,7 @@ const profile = () => {
               handleChange={handleChange}
               inf={inf}
               setInf={setInf}
+              dataChange={dataChange}
             />
           )}
         </div>

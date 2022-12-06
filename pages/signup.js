@@ -25,6 +25,20 @@ const signup = ({ router }) => {
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
   const { token } = router.query;
+  const [headShot, setHeadShot] = useState({});
+  const [headShotPreview, setHeadShotPreview] = useState(null);
+  const Authorization = `Bearer ${token}`;
+
+  const ChangeHeadShot = async (e) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      setHeadShotPreview(reader.result);
+    });
+    reader.readAsDataURL(e.target.files[0]);
+    const formData = new FormData();
+    formData.append('HeadShot', e.target.files[0]);
+    setHeadShot(formData);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,8 +47,8 @@ const signup = ({ router }) => {
       [name]: value,
     }));
   };
+
   const getTokenInf = async () => {
-    const Authorization = `Bearer ${token}`;
     axios
       .get(`${apiUrl}/user/getsignuptoken`, {
         headers: { Authorization },
@@ -94,21 +108,42 @@ const signup = ({ router }) => {
       });
     } else {
       axios
-        .post(`${apiUrl}//user/signupuserdata`, inf)
+        .post(`${apiUrl}/user/signupuserdata`, inf)
         .then((res) => {
           console.log(res);
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
-          setLoading(false);
           setPage(page + 1);
           setData((preState) => ({
             ...preState,
             name: inf.CustomerName || inf.StoreName,
           }));
         })
+        .then(() => {
+          const token = localStorage.getItem('BonnieYork');
+          if (headShot.length !== 0) {
+            const config = {
+              method: 'post',
+              url: `${apiUrl}/${data.status}/uploadprofile`,
+              headers: {
+                Authorization: token,
+              },
+              data: headShot,
+            };
+            axios(config)
+              .then((res) => {
+                console.log(res);
+                setLoading(false);
+              })
+              .catch((err) => console.log(err));
+            setLoading(false);
+          } else {
+            setLoading(false);
+          }
+        })
         .catch((err) => {
           console.log(err);
-          setLoading(true);
+          setLoading(false);
         });
     }
   };
@@ -156,6 +191,9 @@ const signup = ({ router }) => {
                 setInf={setInf}
                 inf={inf}
                 handleChange={handleChange}
+                setHeadShot={setHeadShot}
+                headShotPreview={headShotPreview}
+                headShot={headShot}
               />
             )}
             <div className="mb-4">
@@ -166,6 +204,8 @@ const signup = ({ router }) => {
                   setPage={setPage}
                   inf={inf}
                   handleChange={handleChange}
+                  ChangeHeadShot={ChangeHeadShot}
+                  headShotPreview={headShotPreview}
                 />
               )}
               {page === 3 && (

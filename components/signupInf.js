@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 
 import Image from 'next/image';
-
 import { useThem } from '../modules/context';
 
 import MemberInf from './memberInf';
@@ -10,16 +10,47 @@ import StaffInf from './staffInf';
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 
-const signupInf = ({ setInf, page, inf, handleChange }) => {
+const signupInf = ({
+  setInf,
+  page,
+  inf,
+  handleChange,
+  headShotPreview,
+  ChangeHeadShot,
+  headShot,
+}) => {
   const { data } = useThem();
 
   return (
     <div className="relative mx-auto w-11/12 px-8 lg:w-8/12 lg:px-0">
-      <div className="relative mx-auto mt-4 mb-8 flex h-40 w-40 justify-center">
-        <Image src={Profile} className="" />
-        <button className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black p-1 shadow-md">
-          <Image src={Edit} />
-        </button>
+      <div className="relative mb-4 flex  w-full justify-center">
+        <div className="relative">
+          {headShotPreview ? (
+            <img
+              src={headShotPreview}
+              alt=""
+              className={`h-40 w-40 rounded-full object-cover `}
+            />
+          ) : (
+            <div className={`h-40 w-40  ${inf?.HeadShot && 'hidden'}`}>
+              <Image src={Profile} className="rounded-full" />
+            </div>
+          )}
+
+          <label
+            htmlFor="headShot"
+            className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+          >
+            <Image src={Edit} />
+          </label>
+          <input
+            type="file"
+            id="headShot"
+            accept="image/png, image/jpeg"
+            className="hidden"
+            onChange={ChangeHeadShot}
+          />
+        </div>
       </div>
       {data.status === 'member' && (
         <MemberInf
@@ -27,6 +58,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           setInf={setInf}
           inf={inf}
           handleChange={handleChange}
+          headShot={headShot}
         />
       )}
       {data.status === 'store' && (
@@ -35,6 +67,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           setInf={setInf}
           inf={inf}
           handleChange={handleChange}
+          headShot={headShot}
         />
       )}
       {data.status === 'staff' && (
@@ -43,6 +76,7 @@ const signupInf = ({ setInf, page, inf, handleChange }) => {
           setInf={setInf}
           inf={inf}
           handleChange={handleChange}
+          headShot={headShot}
         />
       )}
     </div>

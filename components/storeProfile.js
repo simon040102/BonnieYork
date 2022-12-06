@@ -15,15 +15,16 @@ import EditItem from './editItem';
 import AddItem from './addItem';
 import GetCity from './areaData/getCity';
 import GetArea from './areaData/getArea';
-import StoreBanner from './areaData/storeBanner';
+import StoreBanner from './storeBanner';
 
 import Profile from '../src/images/profile.png';
 import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
 
-const storeProfile = ({ handleChange, inf, setInf }) => {
-  const [page, setPage] = useState('info');
+const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
+  const [page, setPage] = useState('item');
   const [edit, setEdit] = useState(false);
+  const [editItem, setEditItem] = useState({});
   const [addItem, setAddItem] = useState(false);
   const { apiUrl, setLoading } = useThem();
   const [selectBanner, setSelectBanner] = useState([]);
@@ -70,6 +71,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
       .catch((err) => console.log(err));
   };
 
+  console.log(selectBanner);
   const ChangeHeadShot = async (e) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
@@ -81,8 +83,9 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
     setHeadShot(formData);
   };
   console.log(headShot);
-  const handleSubmit = () => {
-    if (headShot.length !== 0) {
+  const handleSubmit = async () => {
+    if (headShotPreview !== null) {
+      setLoading(true);
       const config = {
         method: 'post',
         url: `${apiUrl}/store/uploadprofile`,
@@ -94,11 +97,20 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
       axios(config)
         .then((res) => {
           console.log(res);
+          setLoading(false);
+          toast.success('修改成功', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     }
     if (selectBanner.length !== 0) {
-      selectBanner.forEach((item) => {
+      selectBanner.map(async (item) => {
+        console.log(item);
         const config = {
           method: 'post',
           url: `${apiUrl}/store/uploadprofile`,
@@ -110,8 +122,11 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
         axios(config)
           .then((res) => {
             console.log(res);
+            setLoading(false);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+          });
       });
     }
     const config = {
@@ -122,9 +137,19 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
       },
       data: inf,
     };
-    axios(config).then((res) => {
-      console.log(res);
-    });
+    if (dataChange) {
+      setLoading(true);
+      axios(config)
+        .then((res) => {
+          console.log(res);
+          router.reload(window.location.pathname);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }
   };
   useEffect(() => {
     setLoading(true);
@@ -153,7 +178,13 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
   return (
     <div className="">
       <div className="relative">
-        {edit && <EditItemView setEdit={setEdit} />}
+        {edit && (
+          <EditItemView
+            setEdit={setEdit}
+            editItem={editItem}
+            setEditItem={setEditItem}
+          />
+        )}
         {addItem && <AddItem setAddItem={setAddItem} />}
         <input
           type="file"
@@ -202,21 +233,29 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
                     src={headShotPreview}
                     alt=""
                     className={`h-40 w-40 rounded-full object-cover ${
-                      headShotPreview && 'hidden'
+                      headShotPreview || 'hidden'
                     }`}
                   />
                 ) : (
-                  <div className={` ${inf?.HeadShot && 'hidden'}`}>
-                    <Image src={Profile} />
+                  <div
+                    className={` ${inf?.HeadShot && 'hidden'} ${
+                      inf?.HeadShot !== null || 'hidden'
+                    }h-40 w-40`}
+                  >
+                    <Image src={Profile} Class="rounded-full" />
                   </div>
                 )}
-                <img
-                  src={inf?.HeadShot}
-                  alt=""
-                  className={`${
+                <div
+                  className={`${inf?.HeadShot !== null || 'hidden'} ${
                     headShotPreview && 'hidden'
-                  } h-40 w-40 rounded-full object-cover`}
-                />
+                  }`}
+                >
+                  <img
+                    src={inf?.HeadShot}
+                    alt=""
+                    className={` h-40 w-40 rounded-full object-cover`}
+                  />
+                </div>
                 <label
                   htmlFor="headShot"
                   className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
@@ -511,7 +550,7 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
               </div>
               <div className="mb-4">
                 <p>預約首頁Banner(最多可選五張，橫式佳)：</p>
-                <div className="mb-10 grid grid-cols-3 gap-3 pt-2">
+                <div className="mb-10 flex flex-wrap gap-2 pt-2">
                   <StoreBanner
                     setSelectBanner={setSelectBanner}
                     Num="1"
@@ -620,7 +659,11 @@ const storeProfile = ({ handleChange, inf, setInf }) => {
       )}
       {page === 'item' && (
         <div className="container mx-auto flex justify-center">
-          <EditItem setEdit={setEdit} setAddItem={setAddItem} />
+          <EditItem
+            setEdit={setEdit}
+            setAddItem={setAddItem}
+            setEditItem={setEditItem}
+          />
         </div>
       )}
       <ToastContainer />

@@ -32,7 +32,16 @@ const Menu = () => {
   return (
     <div className="">
       <button className="flex items-center" onClick={() => setMenu(!menu)}>
-        <Image objectFit="contain" width="30" height="30" src={Profile} />
+        {data.HeadShot ? (
+          <img
+            src={data.HeadShot}
+            alt=""
+            className="h-8 w-8  rounded-full object-fill"
+          />
+        ) : (
+          <Image objectFit="contain" width="30" height="30" src={Profile} />
+        )}
+
         <p className="ml-2">{data?.name}</p>
       </button>
       {menu && (
@@ -42,7 +51,19 @@ const Menu = () => {
         >
           <div className="relative mx-auto bg-white py-10">
             <div className="mx-auto mb-3 h-52 w-52 rounded-full border-black">
-              <Image src={Profile} objectFit="cover" width="208" height="208" />
+              {data.HeadShot ? (
+                <img
+                  src={data.HeadShot}
+                  alt=""
+                  className="h-52 w-52  rounded-full object-fill"
+                />
+              ) : (
+                <Image
+                  objectFit="contain"
+                  src={Profile}
+                  className="rounded-full"
+                />
+              )}
             </div>
             {/* <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
               <Image src={Edit} />
