@@ -22,14 +22,13 @@ const addStaff = ({ setAddStaff, allItem }) => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const Authorization = localStorage.getItem('BonnieYork');
 
     setLoading(true);
-    setStaffItem((prevState) => ({ ...prevState, BusinessItemsId: job }));
     const config = {
       method: 'post',
-      url: `https://localhost:44306/user/SignUpSendLink`,
+      url: `${apiUrl}/user/signupsendlink`,
       headers: {
         Authorization,
       },
@@ -60,7 +59,6 @@ const addStaff = ({ setAddStaff, allItem }) => {
           } else {
             setJob(job.filter((num) => num !== value));
           }
-          console.log(job);
         };
         return (
           <li key={index} className="flex ">
@@ -80,7 +78,12 @@ const addStaff = ({ setAddStaff, allItem }) => {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setStaffItem((prevState) => ({
+      ...prevState,
+      BusinessItemsId: job,
+    }));
+  }, [job]);
 
   return (
     <div className="fixed  top-8 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
