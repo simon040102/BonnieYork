@@ -54,9 +54,10 @@ const addStaff = ({ setAddStaff, allItem }) => {
       return allItem.map((item, index) => {
         const handleClick = (e) => {
           const { value, checked } = e.target;
+          console.log(value, checked);
           if (checked) {
-            setJob([...job, Number(value)]);
-          } else {
+            setJob([...job, value]);
+          } else if (!checked) {
             setJob(job.filter((num) => num !== value));
           }
         };
@@ -118,11 +119,11 @@ const addStaff = ({ setAddStaff, allItem }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-16 flex gap-2 ">
-            <div className="w-3/12">
+          <div className="mx-auto mb-16 ">
+            <div className="mb-2 w-full  text-center">
               <p>工作項目：</p>
             </div>
-            <ul className="flex w-8/12 flex-wrap gap-2">{showItem()}</ul>
+            <ul className="flex w-full flex-wrap gap-2">{showItem()}</ul>
           </div>
           <div className="flex justify-center gap-3 ">
             <button

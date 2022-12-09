@@ -7,7 +7,14 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['images.unsplash.con'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bonnieyork.rocket-coding.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 module.exports = nextConfig;

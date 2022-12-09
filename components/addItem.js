@@ -119,7 +119,7 @@ const addItem = ({ setAddItem }) => {
             <img
               src={imagePreview}
               alt=""
-              className="aspect-auto rounded-t-lg object-fill"
+              className="aspect-auto h-64 w-full rounded-t-lg object-cover"
             />
             <p
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform ${

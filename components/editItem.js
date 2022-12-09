@@ -21,7 +21,7 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
       return allItem.map((item, index) => (
         <li
           key={index}
-          className="w-ful mb-6 flex h-52 rounded-lg border-2 border-unSelect bg-white shadow-lg"
+          className="mb-6 flex h-52 w-full rounded-lg border-2 border-unSelect bg-white shadow-lg"
         >
           <img
             src={item?.PicturePath}
@@ -78,7 +78,7 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
       });
   }, []);
   return (
-    <div className="w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
+    <div className="mx-auto w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
       <ul>{showItem()}</ul>
       <div className="flex justify-center">
         <button onClick={() => setAddItem(true)}>

@@ -65,6 +65,7 @@ const signup = ({ router }) => {
         setData((preState) => ({
           ...preState,
           status: data?.Identity,
+          StoreName: data?.StoreName,
         }));
       })
       .catch((err) => {
@@ -106,6 +107,53 @@ const signup = ({ router }) => {
         position: 'top-center',
         autoClose: 1000,
       });
+    } else if (inf.Identity === 'staff') {
+      console.log(Authorization);
+      const config = {
+        method: 'post',
+        url: `${apiUrl}/user/signupuserdata`,
+        headers: {
+          Authorization,
+        },
+        data: inf,
+      };
+      axios(config)
+        .then((res) => {
+          console.log(res);
+          const token = `Bearer ${res.data.Token}`;
+          localStorage.setItem('BonnieYork', token);
+          setPage(page + 1);
+          setData((preState) => ({
+            ...preState,
+            name: inf.CustomerName || inf.StoreName,
+          }));
+        })
+        .then(() => {
+          const token = localStorage.getItem('BonnieYork');
+          if (headShot.length !== 0) {
+            const config = {
+              method: 'post',
+              url: `${apiUrl}/${data.status}/uploadprofile`,
+              headers: {
+                Authorization: token,
+              },
+              data: headShot,
+            };
+            axios(config)
+              .then((res) => {
+                console.log(res);
+                setLoading(false);
+              })
+              .catch((err) => console.log(err));
+            setLoading(false);
+          } else {
+            setLoading(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     } else {
       axios
         .post(`${apiUrl}/user/signupuserdata`, inf)

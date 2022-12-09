@@ -71,7 +71,7 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
         })
         .catch((err) => {
           console.log(err);
-          const message = err.response.data.Message;
+          const message = err.response?.data.Message;
 
           toast.error(message, {
             position: 'top-center',
@@ -115,7 +115,7 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
               <input
                 type="password"
                 name="Password"
-                className="mb-8 h-10 w-full border border-unSelect  indent-3"
+                className="mb-8 h-10 w-full rounded-lg border border-unSelect indent-3"
                 onChange={handleChange}
               />
             </div>

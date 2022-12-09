@@ -56,9 +56,11 @@ const Layout = ({ children, title, descriptionContent }) => {
           setData((preState) => ({
             ...preState,
             status: result.Identity,
-            name: result?.CustomerName || result?.StoreName,
+            name:
+              result?.CustomerName || result?.StaffName || result?.StoreName,
             Account: result?.Account,
             HeadShot: result?.HeadShot,
+            StoreName: result?.StoreName,
           }));
         })
         .catch((err) => {
@@ -85,8 +87,8 @@ const Layout = ({ children, title, descriptionContent }) => {
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
         <div className="sticky -top-menu z-50 ">{loading && <IsLoading />}</div>
-        <div className="sticky -z-10">
-          <div className=" absolute  -top-menu   mt-20 h-screen w-screen bg-bgColor" />
+        <div className="sticky -top-menu -z-10">
+          <div className="absolute top-0  mt-20 h-screen w-screen bg-bgColor" />
         </div>
         <header className="sticky top-0 z-20  w-full  bg-white px-5 shadow-md  sm:px-0  ">
           <div className="container mx-auto  flex justify-between">

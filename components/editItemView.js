@@ -154,7 +154,9 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
               <img
                 src={editItem?.PicturePath}
                 alt=""
-                className={`rounded-t-lg ${imagePreview && 'hidden'}`}
+                className={`rounded-t-lg ${
+                  imagePreview && 'hidden'
+                } h-64 w-full object-cover`}
               />
             ) : (
               <p
@@ -169,7 +171,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
               <img
                 src={imagePreview}
                 alt=""
-                className="aspect-auto rounded-t-lg object-fill"
+                className="aspect-auto h-64 w-full rounded-t-lg object-cover"
               />
             )}
           </label>

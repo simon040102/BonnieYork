@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line import/no-duplicates
@@ -10,8 +11,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 const addOffDay = (props) => {
   const { setAddOffDay } = props;
   const [startDate, setStartDate] = useState(new Date());
+  const [offDay, setOffDay] = useState([]);
+  console.log(startDate);
+  const handleClick = () => {
+    console.log(123);
+  };
+
   return (
-    <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
+    <div className="fixed  top-10 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
         data-aos="zoom-in"
         className="relative mt-20 h-fit w-96  items-center border border-black bg-white py-8"
@@ -28,7 +35,7 @@ const addOffDay = (props) => {
               className="border text-center"
             />
           </div>
-          <button>
+          <button onClick={handleClick}>
             <AddCircleOutlineIcon />
           </button>
         </div>

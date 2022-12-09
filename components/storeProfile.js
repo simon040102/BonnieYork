@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
@@ -28,6 +29,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
   const [addItem, setAddItem] = useState(false);
   const { apiUrl, setLoading } = useThem();
   const [selectBanner, setSelectBanner] = useState([]);
+  const [count, setCount] = useState(0);
   const [previewBanner, setPreviewBanner] = useState([]);
   const [bannerPath, setBannerPath] = useState({});
   const [headShot, setHeadShot] = useState({});
@@ -109,7 +111,8 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         });
     }
     if (selectBanner.length !== 0) {
-      selectBanner.map(async (item) => {
+      setLoading(true);
+      selectBanner.forEach(async (item) => {
         console.log(item);
         const config = {
           method: 'post',
@@ -121,8 +124,18 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         };
         axios(config)
           .then((res) => {
+            setCount((count += 1));
             console.log(res);
-            setLoading(false);
+            if (count === selectBanner.length) {
+              setLoading(false);
+              toast.success('修改成功', {
+                position: 'top-center',
+                autoClose: 1000,
+              });
+              setTimeout(() => {
+                router.reload(window.location.pathname);
+              }, 1200);
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -175,6 +188,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
       });
   }, []);
   console.log(inf);
+  console.log(count);
   return (
     <div className="">
       <div className="relative">
@@ -658,7 +672,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         </div>
       )}
       {page === 'item' && (
-        <div className="container mx-auto flex justify-center">
+        <div className="mx-auto w-11/12 py-8 ">
           <EditItem
             setEdit={setEdit}
             setAddItem={setAddItem}

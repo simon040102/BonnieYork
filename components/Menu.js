@@ -36,10 +36,16 @@ const Menu = () => {
           <img
             src={data.HeadShot}
             alt=""
-            className="h-8 w-8  rounded-full object-fill"
+            className="h-8 w-8  rounded-full object-cover"
           />
         ) : (
-          <Image objectFit="contain" width="30" height="30" src={Profile} />
+          <Image
+            objectFit="contain"
+            width="30"
+            height="30"
+            src={Profile}
+            className="rounded-full"
+          />
         )}
 
         <p className="ml-2">{data?.name}</p>
@@ -55,7 +61,7 @@ const Menu = () => {
                 <img
                   src={data.HeadShot}
                   alt=""
-                  className="h-52 w-52  rounded-full object-fill"
+                  className=" h-52  w-52 rounded-full object-cover"
                 />
               ) : (
                 <Image
@@ -68,9 +74,11 @@ const Menu = () => {
             {/* <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
               <Image src={Edit} />
             </button> */}
-            <p className="text-center">{data?.name || '王大明'}</p>
+            <p className="text-center">{data?.name}</p>
             {data.status === 'staff' && (
-              <p className="text-center">美味蟹堡餐廳</p>
+              <p className="text-center text-2xl text-secondary">
+                {data?.StoreName}
+              </p>
             )}
           </div>
           <div className="pt-6">

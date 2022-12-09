@@ -32,7 +32,6 @@ const storeBanner = ({
       setSelectBanner([...selectBanner, formData]);
     }
   };
-  console.log(selectBanner, previewBanner);
   return (
     <div className="relative flex  w-[32%] rounded-lg bg-footerL text-white">
       <label
