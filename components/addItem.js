@@ -164,7 +164,7 @@ const addItem = ({ setAddItem }) => {
               <option value="">請選擇項目時間</option>
               <option value="30分鐘">30分鐘</option>
               <option value="1小時">1小時</option>
-              <option value="1.5小時">1小時30分鐘</option>
+              <option value="1小時30分鐘">1小時30分鐘</option>
               <option value="2小時">2小時</option>
               <option value="2小時30分鐘">2小時30分鐘</option>
               <option value="3小時">3小時</option>

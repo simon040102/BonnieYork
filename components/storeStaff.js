@@ -6,7 +6,7 @@ import Instagram from '../src/images/instagram1.svg';
 import Line from '../src/images/Line1.svg';
 
 const storeStaff = () => (
-  <ul className="w-full px-2 sm:w-3/4 md:px-0 lg:w-1/2">
+  <ul className="w-full px-2 ">
     <li className="w-ful mb-6 flex h-52 border border-black">
       <Image src={Pig} className="w-2/5 object-cover" />
       <div className="relative p-4">

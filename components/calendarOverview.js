@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { useThem } from '../modules/context';
 
 const calendarOverview = ({
   setAddOffDay,
@@ -12,6 +13,8 @@ const calendarOverview = ({
   allReserve,
   setOrderId,
 }) => {
+  const { data } = useThem();
+
   const handleClick = (e) => {
     setOrderId(e.event.id);
     console.log(e.event.id);
@@ -21,12 +24,14 @@ const calendarOverview = ({
   return (
     <div>
       <div className="mb-4 flex justify-end">
-        <button
-          className="h-10 w-40 rounded-lg bg-secondary text-white"
-          onClick={() => setAddOffDay(true)}
-        >
-          新增休息日
-        </button>
+        {data.status === 'store' && (
+          <button
+            className="h-10 w-40 rounded-lg bg-secondary text-white"
+            onClick={() => setAddOffDay(true)}
+          >
+            新增休息日
+          </button>
+        )}
       </div>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin, listPlugin]}

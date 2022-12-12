@@ -1,11 +1,15 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // needed
 import listPlugin from '@fullcalendar/list'; // For List View
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { useThem } from '../modules/context';
 
-const staffCalenderOverview = ({ setEditOder, data }) => {
+const staffCalenderOverview = ({ setEditOder, setAddOffDay }) => {
+  const { data } = useThem();
+
   const handleClick = (e) => {
     console.log(e.event.id);
     setEditOder(true);
@@ -17,6 +21,16 @@ const staffCalenderOverview = ({ setEditOder, data }) => {
           <select name="" id="" className="mb-8 w-full border text-center">
             <option value="可愛粉紅豬">可愛粉紅豬</option>
           </select>
+        </div>
+      )}
+      {data?.status === 'staff' && (
+        <div className="mb-4 flex justify-end">
+          <button
+            className="h-10 w-40 rounded-lg bg-secondary text-white"
+            onClick={() => setAddOffDay(true)}
+          >
+            新增休息日
+          </button>
         </div>
       )}
 

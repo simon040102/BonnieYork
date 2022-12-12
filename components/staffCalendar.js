@@ -1,17 +1,23 @@
 /* eslint-disable react/button-has-type */
 import { useState } from 'react';
-
 import CalendarOverview from './calendarOverview';
 import StaffCalenderOverview from './staffCalenderOverview';
 
-const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
+const staffCalendar = ({
+  setAddOffDay,
+  setAddReserve,
+  setEditOder,
+  allReserve,
+}) => {
   const [page, setPage] = useState('staffCalenderOverview');
   return (
     <div>
       <div className="mb-4 flex justify-center">
         <button
           className={` ${
-            page === 'staffCalenderOverview' ? 'text-black' : 'text-gray-500'
+            page === 'staffCalenderOverview'
+              ? 'border-b-2 text-secondary'
+              : ' text-unSelect'
           } mx-8`}
           onClick={() => setPage('staffCalenderOverview')}
         >
@@ -19,7 +25,7 @@ const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
         </button>
         <button
           className={` ${
-            page === 'overview' ? 'text-black' : 'text-gray-500'
+            page === 'overview' ? 'border-b-2 text-secondary' : ' text-unSelect'
           } mx-8`}
           onClick={() => setPage('overview')}
         >
@@ -31,10 +37,14 @@ const staffCalendar = ({ setAddOffDay, setAddReserve, setEditOder }) => {
           setAddOffDay={setAddOffDay}
           setAddReserve={setAddReserve}
           setEditOder={setEditOder}
+          allReserve={allReserve}
         />
       )}
       {page === 'staffCalenderOverview' && (
-        <StaffCalenderOverview setEditOder={setEditOder} />
+        <StaffCalenderOverview
+          setEditOder={setEditOder}
+          setAddOffDay={setAddOffDay}
+        />
       )}
     </div>
   );

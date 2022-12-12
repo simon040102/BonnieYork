@@ -19,7 +19,7 @@ import IsLoading from '../components/isLoading';
 import LogoNav from '../src/images/logo_nav.png';
 
 const Layout = ({ children, title, descriptionContent }) => {
-  const { data, setData, loading, apiUrl } = useThem();
+  const { data, setData, loading, apiUrl, setLoading } = useThem();
   const routerName = useRouter().pathname;
   const router = useRouter();
   console.log(data);
@@ -41,6 +41,7 @@ const Layout = ({ children, title, descriptionContent }) => {
     return <Menu />;
   };
   useEffect(() => {
+    setLoading(false);
     const Authorization = localStorage.getItem('BonnieYork');
     if (data.Account) {
       return;
@@ -70,7 +71,7 @@ const Layout = ({ children, title, descriptionContent }) => {
             routerName !== '/login' &&
             routerName !== '/search' &&
             routerName !== '/signup' &&
-            routerName !== '/store'
+            routerName !== '/store/[storeId]'
           ) {
             router.push('/');
           }

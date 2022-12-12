@@ -19,7 +19,7 @@ const addOffDay = ({ setAddOffDay }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [HolidayDate, setHolidayDate] = useState([]);
   const [allHoliday, SetAllHoliday] = useState([]);
-  const { apiUrl, setLoading } = useThem();
+  const { apiUrl, setLoading, data } = useThem();
   const router = useRouter();
 
   console.log(allHoliday);
@@ -59,11 +59,17 @@ const addOffDay = ({ setAddOffDay }) => {
     const date = allHoliday.toString();
     const config = {
       method: 'post',
-      url: `${apiUrl}/store/EditHolidayDate`,
+      url: `${apiUrl}/${
+        data.status === 'store'
+          ? 'store/EditHolidayDate'
+          : 'staff/EditStaffDaysOff'
+      }`,
       headers: {
         Authorization,
       },
-      data: { HolidayDate: date },
+      data: {
+        [data.status === 'store' ? 'HolidayDate' : 'StaffDaysOff']: date,
+      },
     };
     console.log(config);
     axios(config)
@@ -74,9 +80,9 @@ const addOffDay = ({ setAddOffDay }) => {
           position: 'top-center',
           autoClose: 1000,
         });
-        setTimeout(() => {
-          router.reload(window.location.pathname);
-        }, 1500);
+        // setTimeout(() => {
+        //   router.reload(window.location.pathname);
+        // }, 1500);
       })
       .catch((err) => {
         console.log(err);
@@ -92,10 +98,12 @@ const addOffDay = ({ setAddOffDay }) => {
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
-
+    const { status } = data;
     const config = {
       method: 'get',
-      url: `${apiUrl}/store/GetHolidayDate`,
+      url: `${apiUrl}/${
+        status === 'store' ? 'store/GetHolidayDate' : 'staff/GetStaffDaysOff'
+      }`,
       headers: {
         Authorization,
       },
@@ -103,11 +111,19 @@ const addOffDay = ({ setAddOffDay }) => {
     axios(config)
       .then(async (res) => {
         console.log(res);
-        const date = await res.data.ShowHolidayDate.split(',');
-        const allDate = await res.data.PastHolidayDate.split(',');
-        SetAllHoliday(allDate.concat(date));
-        setHolidayDate(date);
-        setLoading(false);
+        if (data.status === 'store') {
+          const date = await res.data.ShowHolidayDate.split(',');
+          const allDate = await res.data.PastHolidayDate.split(',');
+          SetAllHoliday(allDate.concat(date));
+          setHolidayDate(date);
+          setLoading(false);
+        } else {
+          const date = await res.data.ShowStaffDaysOff.split(',');
+          const allDate = await res.data.PastStaffDaysOff.split(',');
+          SetAllHoliday(allDate.concat(date));
+          setHolidayDate(date);
+          setLoading(false);
+        }
       })
       .catch((err) => {
         console.log(err);
