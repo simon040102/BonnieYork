@@ -86,7 +86,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
       });
   };
 
-  const selectDateHandler = (date) => {
+  const selectDateHandle = (date) => {
     setDate(date);
     const choseDay = format(new Date(date), 'yyyy/MM/dd');
     console.log(choseDay);
@@ -231,7 +231,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
               className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
               dateFormat="yyyy/MM/dd"
               selected={startDate}
-              onChange={selectDateHandler}
+              onChange={selectDateHandle}
               minDate={new Date()}
               excludeDates={enableDay}
               maxDate={addDays(new Date(), 30)}

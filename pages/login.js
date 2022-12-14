@@ -28,6 +28,8 @@ const login = () => {
     }));
   };
 
+  console.log(select);
+
   const checkEmail = (e) => {
     const { name } = e.target;
     const emailTest =
@@ -66,6 +68,12 @@ const login = () => {
               autoClose: 1000,
             });
             setLoading(false);
+          } else if (name === 'forget') {
+            toast.error('未註冊過', {
+              position: 'top-center',
+              autoClose: 1000,
+            });
+            setLoading(false);
           }
         })
         .catch(async (err) => {
@@ -77,6 +85,11 @@ const login = () => {
             setOpenView(true);
           }
           if (name === 'login') {
+            setSelect(name);
+            setOpenView(true);
+            setLoading(false);
+          }
+          if (name === 'forget') {
             setSelect(name);
             setOpenView(true);
             setLoading(false);

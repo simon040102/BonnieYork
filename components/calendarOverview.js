@@ -49,7 +49,7 @@ const calendarOverview = ({
       />
       <div className="mt-4 flex justify-end">
         <button
-          className="bg-gray-400 h-10 w-40 text-white"
+          className="h-10 w-40 rounded-lg bg-secondary text-white"
           onClick={() => setAddReserve(true)}
         >
           手動新增行事曆

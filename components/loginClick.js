@@ -16,7 +16,7 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
   const { apiUrl, setData, setLoading } = useThem();
   const router = useRouter();
-
+  console.log(select);
   const handleSubmit = async () => {
     if (select === 'signup') {
       const data = { Identity: status, Account: Account.Account };
@@ -26,6 +26,27 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
         .then((res) => {
           console.log(res);
           setOpenView(false);
+          toast.success('Email已發送', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else if (select === 'forget') {
+      setLoading(true);
+
+      const data = {
+        Account: Account.Account,
+        Identity: status,
+      };
+      axios
+        .post(`${apiUrl}/user/ForgetPasswordLink`, data)
+        .then((res) => {
+          console.log(res);
           toast.success('Email已發送', {
             position: 'top-center',
             autoClose: 1000,

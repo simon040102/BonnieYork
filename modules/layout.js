@@ -71,6 +71,7 @@ const Layout = ({ children, title, descriptionContent }) => {
             routerName !== '/login' &&
             routerName !== '/search' &&
             routerName !== '/signup' &&
+            routerName !== '/changepassword' &&
             routerName !== '/store/[storeId]'
           ) {
             router.push('/');
