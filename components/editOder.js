@@ -15,7 +15,6 @@ const editOder = ({ setEditOder, orderID }) => {
   const [edit, setEdit] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [order, setOrder] = useState({});
-  const [remove, setRemove] = useState(false);
   const { apiUrl, setLoading } = useThem();
   const router = useRouter();
 
@@ -72,10 +71,10 @@ const editOder = ({ setEditOder, orderID }) => {
   }, []);
   console.log(order);
   return (
-    <div className="fixed  top-20 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
+    <div className="fixed  top-20 z-10 flex h-full w-full justify-center overflow-y-auto bg-black/50 pb-20">
       <div
         data-aos="zoom-in"
-        className="relative mt-20 h-fit w-96  items-center rounded-lg bg-white py-12 px-8 "
+        className="relative mt-20 h-fit w-96 items-center rounded-lg bg-white py-12 px-8  "
       >
         <button
           className="absolute right-4 top-4"
@@ -91,25 +90,14 @@ const editOder = ({ setEditOder, orderID }) => {
           )}
           {!edit && (
             <div>
-              {remove ? (
-                <button
-                  className=" mb-4 h-8 w-full rounded-lg bg-red  text-white"
-                  onClick={() => {
-                    setRemove(!remove);
-                  }}
-                >
-                  取消刪除
-                </button>
-              ) : (
-                <button
-                  className=" mb-4 h-8 w-full rounded-lg bg-red  text-white"
-                  onClick={() => {
-                    setRemove(!remove);
-                  }}
-                >
-                  刪除訂單
-                </button>
-              )}
+              <button
+                className=" mb-4 h-8 w-full rounded-lg bg-red  text-white"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                刪除訂單
+              </button>
             </div>
           )}
         </div>
@@ -118,18 +106,16 @@ const editOder = ({ setEditOder, orderID }) => {
             <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
               設計師
             </p>
-            <select
+            <input
               name="StaffName"
               value={order.StaffName}
               id=""
               className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
-              disabled={edit}
-            >
-              <option value="不指定">可愛粉紅豬</option>
-            </select>
+              disabled
+            />
           </div>
           <div className="relative">
-            <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
+            <p className="absolute -top-2.5 left-4  bg-white px-2 text-input">
               顧客
             </p>
             <input
@@ -144,19 +130,16 @@ const editOder = ({ setEditOder, orderID }) => {
             <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
               預約項目
             </p>
-            <select
+            <input
               name="ItemName"
               id=""
               value={order.ItemName}
               className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
-              disabled={edit}
-            >
-              <option value="不指定">染髮 2小時</option>
-              <option value="女士剪髮">女士剪髮</option>
-            </select>
+              disabled
+            />
           </div>
           <div className="relative">
-            <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
+            <p className="absolute -top-2.5 left-4  bg-white px-2 text-input">
               金額
             </p>
             <input
@@ -164,7 +147,7 @@ const editOder = ({ setEditOder, orderID }) => {
               className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
               name="Price"
               value={order.Price}
-              disabled={edit}
+              disabled
             />
           </div>
           <div className="relative">
@@ -205,15 +188,15 @@ const editOder = ({ setEditOder, orderID }) => {
                   useShortMonthInDropdown
                   dateFormat="yyyy/MM/dd"
                   className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
-                  disabled={edit}
+                  disabled
                 />
                 <select
                   name=""
                   id=""
                   className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
-                  disabled={edit}
+                  disabled
                 >
-                  <option value="10:00">10:00</option>
+                  <option value="10:00">{order.ReserveStart}</option>
                 </select>
               </div>
             </div>
@@ -222,33 +205,23 @@ const editOder = ({ setEditOder, orderID }) => {
           {edit && (
             <div className="flex justify-center gap-3">
               <button
-                className="h-8 w-full rounded-lg bg-secondary text-white "
-                onClick={() => setEdit(!edit)}
+                className="h-8 w-full rounded-lg bg-red text-white "
+                onClick={() => {
+                  setEdit(!edit);
+                }}
               >
-                編輯預約
+                刪除訂單
               </button>
             </div>
           )}
           {!edit && (
             <div className="mb-4 flex justify-between gap-3">
               <button
-                className="h-8 w-32 rounded-lg bg-footerL"
+                className="h-8 w-full rounded-lg bg-footerL"
                 onClick={() => setEdit(!edit)}
               >
-                捨棄變更
+                放棄刪除
               </button>
-              {remove ? (
-                <button
-                  className="h-8 w-32 rounded-lg bg-red text-white"
-                  onClick={handleDelete}
-                >
-                  確認刪除
-                </button>
-              ) : (
-                <button className="h-8 w-32 rounded-lg bg-secondary text-white">
-                  確認變更
-                </button>
-              )}
             </div>
           )}
         </div>

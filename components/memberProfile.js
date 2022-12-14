@@ -69,6 +69,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
     setHeadShot(formData);
   };
   const handleSubmit = () => {
+    setLoading(true);
     if (headShot.length !== 0) {
       const config = {
         method: 'post',
@@ -80,6 +81,15 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
       };
       axios(config)
         .then((res) => {
+          setLoading(false);
+          toast.success('修改完成', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
+
           console.log(res);
         })
         .catch((err) => console.log(err));
@@ -93,8 +103,17 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
       data: inf,
     };
     if (dataChange) {
+      setLoading(true);
       axios(config)
         .then((res) => {
+          setLoading(false);
+          toast.success('修改完成', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
           console.log(res);
           router.reload(window.location.pathname);
         })
@@ -163,7 +182,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
                   src={inf?.HeadShot}
                   alt=""
                   className={`${
-                    headShotPreview && 'hidden'
+                    (headShotPreview || !inf?.HeadShot) && 'hidden'
                   } h-40 w-40 rounded-full object-cover`}
                 />
                 <label

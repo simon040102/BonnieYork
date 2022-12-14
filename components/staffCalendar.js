@@ -8,6 +8,7 @@ const staffCalendar = ({
   setAddReserve,
   setEditOder,
   allReserve,
+  setOrderId,
 }) => {
   const [page, setPage] = useState('staffCalenderOverview');
   return (
@@ -44,6 +45,7 @@ const staffCalendar = ({
         <StaffCalenderOverview
           setEditOder={setEditOder}
           setAddOffDay={setAddOffDay}
+          setOrderId={setOrderId}
         />
       )}
     </div>

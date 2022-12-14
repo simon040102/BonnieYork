@@ -43,7 +43,10 @@ const storeCalendar = ({
         />
       )}
       {page === 'staffCalenderOverview' && (
-        <StaffCalenderOverview setEditOder={setEditOder} />
+        <StaffCalenderOverview
+          setEditOder={setEditOder}
+          setOrderId={setOrderId}
+        />
       )}
     </div>
   );

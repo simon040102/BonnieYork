@@ -1,91 +1,277 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
-import Image from 'next/image';
-// eslint-disable-next-line import/order
-import Item1 from '../src/images/item1.png';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-// eslint-disable-next-line react/function-component-definition
-const MemberReserve = ({ SetReserve }) => {
-  const [startDate, setDate] = useState(new Date());
+import axios from 'axios';
+import addDays from 'date-fns/addDays';
+import format from 'date-fns/format';
+import { useThem } from '../modules/context';
 
-  const selectDateHandler = (d) => {
-    setDate(d);
+// eslint-disable-next-line react/function-component-definition
+const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
+  const [startDate, setDate] = useState(new Date());
+  const { apiUrl, setLoading } = useThem();
+  const [reserveData, SetReserveData] = useState({});
+  const [reserveDate, setReserveDate] = useState({});
+  const [enableDay, setEnableDay] = useState([]);
+  const [time, setTime] = useState([]);
+  const router = useRouter();
+
+  console.log(reserveData);
+  const showStaff = () => {
+    if (reserveData.TheStaffName) {
+      return reserveData?.TheStaffName.map((item, index) => (
+        <option
+          key={index}
+          data-name={item.StaffName}
+          value={[item.StaffId, item.StaffName]}
+        >
+          {item.StaffName}
+        </option>
+      ));
+    }
   };
-  const today = new Date();
+
+  const selectStaff = (e) => {
+    setLoading(true);
+    const Authorization = localStorage.getItem('BonnieYork');
+    const { value, id } = e.target;
+    console.log(value, id);
+    setReserveInf((prevState) => ({
+      ...prevState,
+      StaffId: Number(value.split(',')[0]),
+      StaffName: value.split(',')[1],
+    }));
+    const config = {
+      method: 'get',
+      url: `${apiUrl}/customer/SelectReserveTime?storeId=${
+        reserveInf.StoreId
+      }&itemId=${reserveInf.ItemId}&staffId=${value.split(',')[0]}`,
+      headers: {
+        Authorization,
+      },
+    };
+    axios(config)
+      .then(async (res) => {
+        setLoading(false);
+        console.log(res);
+        const { TheEnableDate, TheReserveDate } = await res.data;
+        setDate(new Date(Object.keys(TheReserveDate)[0]));
+        setTime(Object.values(TheReserveDate)[0].split(','));
+        setReserveDate(TheReserveDate);
+        TheEnableDate.forEach((item) => {
+          setEnableDay((prevDay) => [...prevDay, new Date(item)]);
+        });
+        setReserveInf((prevState) => ({
+          ...prevState,
+          ReserveDate: format(
+            new Date(Object.keys(TheReserveDate)[0]),
+            'yyyy/MM/dd'
+          ),
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
+  const selectDateHandler = (date) => {
+    setDate(date);
+    const choseDay = format(new Date(date), 'yyyy/MM/dd');
+    console.log(choseDay);
+    setReserveInf((prevState) => ({
+      ...prevState,
+      ReserveDate: choseDay,
+    }));
+    setTime(reserveDate[choseDay]?.split(','));
+  };
+
+  const showTime = () =>
+    time?.map((item, index) => (
+      <option key={index} value={item}>
+        {item}
+      </option>
+    ));
+
+  const handleSelectTime = (e) => {
+    const { value } = e.target;
+    setReserveInf((prevState) => ({
+      ...prevState,
+      ReserveStart: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    setLoading(true);
+    const Authorization = localStorage.getItem('BonnieYork');
+    console.log(reserveInf);
+    const config = {
+      method: 'post',
+      url: `${apiUrl}/customer/confirmreserve`,
+      headers: {
+        Authorization,
+      },
+      data: reserveInf,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+        toast.success('預約完成', {
+          position: 'top-center',
+          autoClose: 1000,
+        });
+        setTimeout(() => {
+          router.reload(window.location.pathname);
+        }, 1200);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
-    AOS.init();
+    const Authorization = localStorage.getItem('BonnieYork');
+    setLoading(true);
+    const config = {
+      method: 'get',
+      url: `${apiUrl}/customer/reserve?storeId=${reserveInf.StoreId}&itemId=${reserveInf.ItemId}`,
+      headers: {
+        Authorization,
+      },
+    };
+    axios(config)
+      .then((res) => {
+        SetReserveData(res.data[0]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
   return (
-    <div className="fixed  top-0 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
+    <div className="fixed  top-10 z-10 flex h-full w-full justify-center overflow-y-auto bg-black/50 pb-16">
       <div
         data-aos="zoom-in"
-        className="relative mt-20 h-fit w-96  border border-black bg-white"
+        className="relative mt-20 h-fit w-96  rounded-lg  bg-white"
       >
-        <Image src={Item1} />
         <div className="p-5">
-          <h2 className="mb-2 text-center text-xl">女士剪髮</h2>
-          <div className="mb-6 flex justify-center">
-            <div className="mx-2 flex gap-1 text-sm">
-              <AccessTimeOutlinedIcon sx={{ fontSize: 20 }} />
-              <p>1小時</p>
+          <div className="mb-4 flex gap-5">
+            <img
+              src={reserveData?.PicturePath}
+              alt=""
+              className="h-24 w-36 rounded-lg object-cover"
+            />
+            <div>
+              <h2 className="mb-2  text-xl font-bold">
+                {reserveData?.ItemName}
+              </h2>
+              <div className="mb-6 flex justify-center gap-2">
+                <div className="flex gap-1 text-sm">
+                  <AccessTimeOutlinedIcon
+                    sx={{ fontSize: 20, color: '#00659F' }}
+                  />
+                  <p className="text-secondary">{reserveData?.SpendTime}</p>
+                </div>
+                <div className="flex gap-1 text-sm">
+                  <MonetizationOnOutlinedIcon
+                    sx={{ fontSize: 20, color: '#00659F' }}
+                  />
+                  <p className="text-secondary">{reserveData?.Price}</p>
+                </div>
+              </div>
             </div>
-            <div className="mx-2 flex gap-1 text-sm">
-              <MonetizationOnOutlinedIcon sx={{ fontSize: 20 }} />
-              <p>1200</p>
-            </div>
           </div>
-          <div className="mb-2 flex justify-center">
-            <p className="w-1/3 text-right">預約姓名：</p>
-            <p className="w-2/3 text-center">王小明</p>
+          <div className="mb-2">
+            <p className="mb-1">預約姓名：</p>
+            <p className="">{reserveData?.CustomerName}</p>
           </div>
-          <div className="mb-2 flex  justify-center">
-            <p className="w-1/3 text-right">手機號碼：</p>
-            <p className="w-2/3 text-center">0912345678</p>
+          <div className="mb-8 ">
+            <p className="mb-1">手機號碼：</p>
+            <p className="">
+              {reserveData.CustomerCellPhoneNum &&
+                reserveData.CustomerCellPhoneNum[0]}
+            </p>
           </div>
-          <div className="mb-2 flex justify-center">
-            <p className="w-1/3 text-right">設計師：</p>
-            <select className="w-2/3 border text-center" name="staff" id="">
-              <option value="不指定">不指定</option>
+          <div className="relative">
+            <p className="absolute -top-2.5 left-4  bg-white px-2 text-input">
+              {reserveData.StaffTitle && reserveData.StaffTitle[0]}
+            </p>
+            <select
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              name="staff"
+              id=""
+              onChange={selectStaff}
+            >
+              <option value="">
+                請選擇{reserveData.StaffTitle && reserveData.StaffTitle[0]}
+              </option>
+              {showStaff()}
             </select>
           </div>
-          <div className="mb-2 flex justify-center">
-            <p className="w-1/3 text-right">日期：</p>
-            <div className="w-2/3 border  text-center">
-              <DatePicker
-                className="w-20"
-                dateFormat="yyyy/MM/dd"
-                selected={startDate}
-                onChange={selectDateHandler}
-                minDate={today}
-                todayButton="Today"
-              />
-            </div>
+          <div className="relative">
+            <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
+              日期
+            </p>
+
+            <DatePicker
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              dateFormat="yyyy/MM/dd"
+              selected={startDate}
+              onChange={selectDateHandler}
+              minDate={new Date()}
+              excludeDates={enableDay}
+              maxDate={addDays(new Date(), 30)}
+              todayButton="Today"
+            />
           </div>
-          <div className="mb-2 flex justify-center">
-            <p className="w-1/3 text-right">時間：</p>
-            <select className="w-2/3 border text-center" name="staff" id="">
+          <div className="relative">
+            <p className="absolute -top-2.5 left-4  bg-white px-2 text-input">
+              時間
+            </p>
+            <select
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              name="staff"
+              id=""
+              onChange={handleSelectTime}
+            >
               <option value="不指定">選擇時間</option>
+              {showTime()}
             </select>
           </div>
-          <div className="mb-8 flex justify-center">
-            <p className="w-1/3 text-right">備註：</p>
-            <textarea className="w-2/3 resize-none border" rows={3} />
+          <div className="relative">
+            <p className="absolute -top-2.5 left-4  bg-white px-2 text-input">
+              備註：
+            </p>
+            <textarea
+              className="mb-6  w-full resize-none rounded-lg border border-unSelect text-center indent-3 "
+              rows={3}
+            />
           </div>
           <div className="flex justify-around">
             <button
-              className="bg-gray-300 h-8 w-32"
+              className="h-10 w-32 rounded-lg bg-footerL"
               onClick={() => SetReserve(false)}
             >
               取消
             </button>
-            <button className="bg-gray-500 h-8 w-32 text-white">
+            <button
+              className="h-10 w-32 rounded-lg bg-secondary text-white"
+              onClick={handleSubmit}
+            >
               確認預約
             </button>
           </div>

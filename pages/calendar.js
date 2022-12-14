@@ -72,6 +72,7 @@ const calendar = () => {
               setAddReserve={setAddReserve}
               setEditOder={setEditOder}
               allReserve={allReserve}
+              setOrderId={setOrderId}
             />
           )}
         </div>
