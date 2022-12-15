@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-console */
 import FullCalendar from '@fullcalendar/react';
@@ -13,14 +14,19 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
   const { data, apiUrl, setLoading } = useThem();
   const [staff, setStaff] = useState([]);
   const [event, setEvent] = useState([]);
+  const [storeInformation, setStoreInformation] = useState({});
   const handleClick = (e) => {
-    console.log(e.event.id);
+    if (!e.event.id) {
+      return;
+    }
     setEditOder(true);
     setOrderId(e.event.id);
   };
 
   const showStaff = () =>
     staff?.map((item) => <option value={item.Id}>{item.StaffName}</option>);
+
+  console.log(event);
 
   const handleChange = (e) => {
     setLoading(true);
@@ -36,8 +42,12 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
     axios(config)
       .then(async (res) => {
         setLoading(false);
-        const response = res.data;
+        console.log(res);
+        const response = await res.data.calendar;
+        setStoreInformation(res.data.holidayInformation[0]);
+        const { HolidayDate, StaffDaysOff } = res.data.holidayInformation[0];
         console.log(response);
+        console.log(HolidayDate);
         const Reserve = [];
         response.forEach((item) => {
           const task = {
@@ -48,12 +58,29 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
           };
           Reserve.push(task);
         });
+        HolidayDate.split(',').forEach((item) => {
+          const task = {
+            title: `公休日`,
+            date: item.replace(/[\ |\/|\?]/g, '-'),
+            backgroundColor: '#ef4565',
+          };
+          Reserve.push(task);
+        });
+        StaffDaysOff.split(',').forEach((item) => {
+          const task = {
+            title: `休假`,
+            date: item.replace(/[\ |\/|\?]/g, '-'),
+            backgroundColor: '#bdbdbd',
+          };
+          Reserve.push(task);
+        });
         setEvent(Reserve);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  console.log(storeInformation);
 
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
@@ -88,8 +115,12 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
       axios(config)
         .then((res) => {
           setLoading(false);
-          const response = res.data;
+          const response = res.data.calendar;
+          console.log(res);
+          setStoreInformation(res.data.holidayInformation[0]);
+          const { HolidayDate, StaffDaysOff } = res.data.holidayInformation[0];
           console.log(response);
+          console.log(HolidayDate);
           const Reserve = [];
           response.forEach((item) => {
             const task = {
@@ -100,6 +131,22 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
             };
             Reserve.push(task);
           });
+          HolidayDate.split(',').forEach((item) => {
+            const task = {
+              title: `公休日`,
+              date: item.replace(/[\ |\/|\?]/g, '-'),
+              backgroundColor: '#ef4565',
+            };
+            Reserve.push(task);
+          });
+          StaffDaysOff.split(',').forEach((item) => {
+            const task = {
+              title: `休假`,
+              date: item.replace(/[\ |\/|\?]/g, '-'),
+              backgroundColor: '#bdbdbd',
+            };
+            Reserve.push(task);
+          });
           setEvent(Reserve);
         })
         .catch((err) => {
@@ -107,53 +154,104 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
         });
     }
   }, [data]);
+
   return (
     <div>
       {data?.status === 'store' && (
-        <div className="mx-auto w-11/12  md:w-8/12 lg:w-6/12">
-          <select
-            name=""
-            id=""
-            className="mb-8 w-full rounded-lg border border-unSelect text-center"
-            onChange={handleChange}
-          >
-            <option value="">請選擇員工</option>
-            {showStaff()}
-          </select>
-        </div>
+        <>
+          <div className="mx-auto w-11/12  md:w-8/12 lg:w-6/12">
+            <select
+              name=""
+              id=""
+              className="mb-8 w-full rounded-lg border border-unSelect text-center"
+              onChange={handleChange}
+            >
+              <option value="">請選擇員工</option>
+              {showStaff()}
+            </select>
+          </div>
+          {event.length !== 0 ? (
+            <>
+              <div className=" text-xl text-red">
+                固定公休日：{storeInformation.PublicHoliday}
+              </div>
+              <div>
+                <FullCalendar
+                  plugins={[
+                    dayGridPlugin,
+                    interactionPlugin,
+                    listPlugin,
+                    timeGridPlugin,
+                  ]}
+                  initialView="timeGridWeek"
+                  selectable
+                  locale="zh-TW"
+                  expandRows
+                  headerToolbar={{
+                    left: 'title',
+                  }}
+                  slotMinTime={
+                    storeInformation.WeekdayStartTime.replace(':', '') <=
+                    storeInformation.HolidayStartTime.replace(':', '')
+                      ? storeInformation.WeekdayStartTime
+                      : storeInformation.HolidayStartTime
+                  }
+                  slotMaxTime={
+                    storeInformation.WeekdayEndTime.replace(':', '') >=
+                    storeInformation.HolidayEndTime.replace(':', '')
+                      ? storeInformation.WeekdayEndTime
+                      : storeInformation.HolidayEndTime
+                  }
+                  firstDay="1"
+                  eventClick={handleClick}
+                  events={event}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="mt-20 text-center text-3xl text-unSelect">
+              請選擇員工
+            </div>
+          )}
+        </>
       )}
       {data?.status === 'staff' && (
-        <div className="mb-4 flex justify-end">
-          <button
-            className="h-10 w-40 rounded-lg bg-secondary text-white"
-            onClick={() => setAddOffDay(true)}
-          >
-            新增休息日
-          </button>
+        <div>
+          <div className="mb-4 flex justify-end">
+            <button
+              className="h-10 w-40 rounded-lg bg-secondary text-white"
+              onClick={() => setAddOffDay(true)}
+            >
+              新增休息日
+            </button>
+          </div>
+          <div className=" text-xl text-red">
+            固定公休日：{storeInformation.PublicHoliday}
+          </div>
+          <div>
+            <FullCalendar
+              plugins={[
+                dayGridPlugin,
+                interactionPlugin,
+                listPlugin,
+                timeGridPlugin,
+              ]}
+              initialView="timeGridWeek"
+              selectable
+              locale="zh-TW"
+              expandRows
+              headerToolbar={{
+                left: 'title',
+              }}
+              slotMinTime="07:00"
+              slotMaxTime="22:00"
+              firstDay="1"
+              eventClick={handleClick}
+              events={event}
+            />
+          </div>
         </div>
       )}
-
-      <div>
-        <FullCalendar
-          plugins={[
-            dayGridPlugin,
-            interactionPlugin,
-            listPlugin,
-            timeGridPlugin,
-          ]}
-          initialView="timeGridWeek"
-          selectable
-          locale="zh-TW"
-          headerToolbar={{
-            left: 'title',
-          }}
-          slotMinTime="08:00"
-          slotMaxTime="22:00"
-          firstDay="1"
-          eventClick={handleClick}
-          events={event}
-        />
-      </div>
     </div>
   );
 };

@@ -46,6 +46,34 @@ const editOder = ({ setEditOder, orderID }) => {
       });
   };
 
+  const handleFinish = () => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    setLoading(true);
+    const config = {
+      method: 'post',
+      url: `${apiUrl}/store/finishreserve?reserveId=${orderID}`,
+      headers: {
+        Authorization,
+      },
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        toast.success('修改完成', {
+          position: 'top-center',
+          autoClose: 1000,
+        });
+        setTimeout(() => {
+          router.reload(window.location.pathname);
+        }, 1500);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
@@ -84,7 +112,10 @@ const editOder = ({ setEditOder, orderID }) => {
         </button>
         <div className="">
           {edit && (
-            <button className="mt-4 mb-4 h-8  w-full rounded-lg  bg-footerL">
+            <button
+              className="mt-4 mb-4 h-8  w-full rounded-lg  bg-footerL"
+              onClick={handleFinish}
+            >
               完成訂單
             </button>
           )}

@@ -33,12 +33,16 @@ const calendar = () => {
       .then((res) => {
         console.log(res);
         const response = res.data;
+        console.log(res.data);
         const Reserve = [];
         response.forEach((item) => {
           const task = {
             id: item.ReserveId,
-            title: `${item.StaffName}/ ${item.CustomerName}  ${item.ItemName}`,
+            title: `${item.StaffName}/ ${item.CustomerName}  ${item.ItemName} ${
+              item.ReserveState === 'undone' ? '未完成' : ''
+            }`,
             start: new Date(`${item.ReserveDate} ${item.ReserveStart}`),
+
             end: new Date(`${item.ReserveDate} ${item.ReserveEnd}`),
           };
           Reserve.push(task);
