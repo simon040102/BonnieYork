@@ -62,7 +62,10 @@ a {
 }
 .bg-height {
   height: calc(100vh - 160px);
-  /* height: 100vh; */
+}
+.fc .fc-timegrid-axis-frame {
+  display: block !important;
+  align-items: center !important;
 }
 /* *{
   outline: auto;
