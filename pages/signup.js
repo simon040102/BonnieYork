@@ -209,7 +209,12 @@ const signup = ({ router }) => {
             <ul className="mx-auto mb-10 flex justify-between text-center sm:w-8/12 ">
               <li className="mx-auto  w-4/12">
                 <div className="flex justify-center">
-                  <p className="mb-1 flex h-8 w-8  items-center justify-center rounded-full bg-secondary text-white">
+                  <p
+                    className={`mb-1 flex h-8 w-8  items-center justify-center rounded-full  text-white ${
+                      (page === 1 || page === 2 || page === 3) &&
+                      ' bg-secondary'
+                    }`}
+                  >
                     1
                   </p>
                 </div>
@@ -217,7 +222,11 @@ const signup = ({ router }) => {
               </li>
               <li className="mx-auto w-4/12">
                 <div className="flex justify-center">
-                  <p className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-white">
+                  <p
+                    className={`mb-1 flex h-8 w-8  items-center justify-center rounded-full  text-white ${
+                      page === 2 || page === 3 ? ' bg-secondary' : 'bg-unSelect'
+                    }`}
+                  >
                     2
                   </p>
                 </div>
@@ -225,7 +234,11 @@ const signup = ({ router }) => {
               </li>
               <li className="mx-auto w-4/12">
                 <div className="flex justify-center">
-                  <p className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-white">
+                  <p
+                    className={`mb-1 flex h-8 w-8  items-center justify-center rounded-full  text-white ${
+                      page === 3 ? ' bg-secondary' : 'bg-unSelect'
+                    }`}
+                  >
                     3
                   </p>
                 </div>
@@ -257,7 +270,7 @@ const signup = ({ router }) => {
                 />
               )}
               {page === 3 && (
-                <div className="xl:2/12 container mx-auto w-8/12 lg:w-4/12">
+                <div className="xl:2/12 container mx-auto mt-16 w-8/12 lg:w-4/12">
                   <h2 className="mb-8 text-center text-3xl font-bold">
                     註冊成功
                   </h2>

@@ -4,9 +4,14 @@
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useThem } from '../modules/context';
+import 'react-toastify/dist/ReactToastify.css';
 
 const storeItem = ({ SetReserve, item, setReserveInf }) => {
-  console.log(item);
+  const { data } = useThem();
+  const router = useRouter();
 
   const showItem = () =>
     item.map((BusinessItem, index) => (
@@ -42,6 +47,23 @@ const storeItem = ({ SetReserve, item, setReserveInf }) => {
           <button
             className="tryIt absolute bottom-4 right-4   flex w-36 justify-center gap-3 rounded-tl-sm rounded-tr-full  bg-secondary py-2  text-white"
             onClick={() => {
+              if (data.status === 'store' || data.status === 'staff') {
+                toast.error('此帳號不能預約', {
+                  position: 'top-center',
+                  autoClose: 1000,
+                });
+                return;
+              }
+              if (data.status === 'customer') {
+                toast.error('請先登入', {
+                  position: 'top-center',
+                  autoClose: 1000,
+                });
+                setTimeout(() => {
+                  router.push('/login');
+                }, 1200);
+                return;
+              }
               SetReserve(true);
               setReserveInf((prevState) => ({
                 ...prevState,

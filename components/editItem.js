@@ -39,7 +39,7 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
                 <p>{item.Price}</p>
               </div>
             </div>
-            <p className="mb-4">{item.Describe}</p>
+            <p className="textCutoff mb-4">{item.Describe}</p>
             <button
               className="absolute bottom-2 right-4 h-8 w-32 rounded-lg bg-secondary text-white"
               onClick={() => {
@@ -69,7 +69,7 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
     axios(config)
       .then((res) => {
         console.log(res);
-        setAllItem(res.data);
+        setAllItem(res.data.allItems);
         setLoading(false);
       })
       .catch((err) => {

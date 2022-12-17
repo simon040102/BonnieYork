@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-console */
 /* eslint-disable react/function-component-definition */
 import { useEffect } from 'react';
 import Image from 'next/image';
@@ -22,7 +21,7 @@ const Layout = ({ children, title, descriptionContent }) => {
   const { data, setData, loading, apiUrl, setLoading } = useThem();
   const routerName = useRouter().pathname;
   const router = useRouter();
-  console.log(data);
+
   const status = () => {
     if (data.status === 'customer')
       return (
@@ -44,16 +43,15 @@ const Layout = ({ children, title, descriptionContent }) => {
     setLoading(false);
     const Authorization = localStorage.getItem('BonnieYork');
     if (data.Account) {
-      return;
-    }
-    if (Authorization?.split(' ')[1] !== 'undefined') {
+      /* empty */
+    } else if (Authorization?.split(' ')[1] !== 'undefined') {
       axios
         .get(`${apiUrl}/user/VerifyUser`, {
           headers: { Authorization },
         })
         .then((res) => {
-          console.log(res);
           const result = res.data;
+          console.log(result);
           setData((preState) => ({
             ...preState,
             status: result.Identity,
@@ -62,10 +60,10 @@ const Layout = ({ children, title, descriptionContent }) => {
             Account: result?.Account,
             HeadShot: result?.HeadShot,
             StoreName: result?.StoreName,
+            StoreId: result?.StoreId,
           }));
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           localStorage.removeItem('BonnieYork');
           if (
             routerName !== '/login' &&

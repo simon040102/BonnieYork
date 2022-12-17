@@ -67,6 +67,21 @@ a {
   display: block !important;
   align-items: center !important;
 }
+
+.textCutoff {
+  --max-lines: 3;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}
+.textCutoff_search {
+  --max-lines: 2;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}
 /* *{
   outline: auto;
 } */

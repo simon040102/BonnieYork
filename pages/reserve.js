@@ -38,7 +38,7 @@ const reserve = () => {
   }, []);
   return (
     <Layout title="我的預約">
-      <div className="mx-auto w-11/12 pt-10  md:w-8/12 lg:w-4/12">
+      <div className="mx-auto w-11/12 pt-20  md:w-8/12 lg:w-4/12">
         <h2 className="mb-4 text-center text-4xl font-bold">我的預約</h2>
 
         <div className="mb-4 flex justify-center">

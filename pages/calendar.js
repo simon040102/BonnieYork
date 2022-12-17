@@ -39,7 +39,7 @@ const calendar = () => {
           const task = {
             id: item.ReserveId,
             title: `${item.StaffName}/ ${item.CustomerName}  ${item.ItemName} ${
-              item.ReserveState === 'undone' ? '未完成' : ''
+              item.ReserveState === 'Undone' ? '未完成' : ''
             }`,
             start: new Date(`${item.ReserveDate} ${item.ReserveStart}`),
 
@@ -57,8 +57,8 @@ const calendar = () => {
       {addBOffDay && <AddOffDay setAddOffDay={setAddOffDay} />}
       {addReserve && <AddReserve setAddReserve={setAddReserve} />}
       {editOder && <EditOder setEditOder={setEditOder} orderID={orderID} />}
-      <div className="md:w-12/12 mx-auto w-11/12  pt-10 lg:w-10/12">
-        <h2 className="mb-4 text-center text-4xl">行事曆</h2>
+      <div className="md:w-12/12 mx-auto w-11/12  pt-20 lg:w-10/12">
+        <h2 className="mb-4 text-center text-4xl font-bold">行事曆</h2>
 
         <div>
           {data.status === 'store' && (

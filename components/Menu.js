@@ -53,10 +53,10 @@ const Menu = () => {
       {menu && (
         <div
           data-aos="fade-left"
-          className="menu absolute top-menu right-0 h-screen w-96 overflow-auto border border-l-black bg-warning pb-20"
+          className="menu absolute top-menu right-0 h-screen w-72 overflow-auto border border-unSelect bg-white pb-20"
         >
           <div className="relative mx-auto bg-white py-10">
-            <div className="mx-auto mb-3 h-52 w-52 rounded-full border-black">
+            <div className="mx-auto mb-3 h-52 w-52 rounded-full ">
               {data.HeadShot ? (
                 <img
                   src={data.HeadShot}
@@ -71,9 +71,7 @@ const Menu = () => {
                 />
               )}
             </div>
-            {/* <button className="bg-gray-100 absolute right-20 top-60 rounded-full border-black p-1 shadow-md">
-              <Image src={Edit} />
-            </button> */}
+
             <p className="text-center">{data?.name}</p>
             {data.status === 'staff' && (
               <p className="text-center text-2xl text-secondary">
@@ -81,16 +79,18 @@ const Menu = () => {
               </p>
             )}
           </div>
-          <div className="pt-6">
-            <h3 className="ml-2 mb-2 text-2xl font-bold">我的預約</h3>
+          <div>
+            <h3 className="mb-2 bg-footerL py-1 pl-2 text-xl text-secondary">
+              我的預約
+            </h3>
             {data.status === 'staff' && (
               <ul>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/profile">
                     <a>個人資料</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/calendar">
                     <a>我的預約</a>
                   </Link>
@@ -100,52 +100,58 @@ const Menu = () => {
 
             {data.status === 'store' && (
               <ul>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/profile">
                     <a>店鋪資訊修改</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/calendar">
                     <a>行事曆/預約管理</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/staff">
                     <a>員工管理</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/">
                     <a>營業額</a>
+                  </Link>
+                </li>
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
+                  <Link href={`http://localhost:3000/store/${data.StoreId}`}>
+                    <a>我的首頁</a>
                   </Link>
                 </li>
               </ul>
             )}
             {data.status === 'member' && (
               <ul>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/profile">
                     <a>個人資料</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/reserve">
                     <a>我的預約</a>
                   </Link>
                 </li>
-                <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
+                <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
                   <Link href="/favorite">
                     <a>我的最愛</a>
                   </Link>
                 </li>
               </ul>
             )}
-            <ul>
-              <li className="mb-3 bg-footerR px-5 py-3 text-xl text-white">
-                <button onClick={logout}>登出</button>
-              </li>
-            </ul>
+            <button
+              className="mx-auto mt-10 mb-4 flex w-60 justify-center rounded-lg border-2 border-secondary py-2"
+              onClick={logout}
+            >
+              登出
+            </button>
           </div>
         </div>
       )}

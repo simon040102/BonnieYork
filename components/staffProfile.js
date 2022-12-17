@@ -6,8 +6,9 @@ import Image from 'next/image';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import Profile from '../src/images/profile.png';
-import Edit from '../src/images/pencil.svg';
+
 import ChangePassword from './changePassword';
 import { useThem } from '../modules/context';
 import 'react-toastify/dist/ReactToastify.css';
@@ -144,7 +145,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
   }, []);
   return (
     <div className="">
-      <h2 className="mb-8 text-center text-3xl">個人資訊</h2>
+      <h2 className="mb-8 text-center text-4xl font-bold">個人資訊</h2>
       <div className="mb-4 flex justify-center">
         <button
           className={` ${
@@ -167,7 +168,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
       </div>
       {page === 'info' && (
         <div className="mx-auto w-11/12  rounded-lg bg-white px-6 pb-4 pt-4 shadow-lg md:w-8/12 lg:w-5/12">
-          <div className="mx-auto">
+          <div className="mx-auto mt-8">
             <div className="relative mb-4 flex  w-full justify-center">
               <div className="relative">
                 {headShotPreview ? (
@@ -200,9 +201,9 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 </div>
                 <label
                   htmlFor="headShot"
-                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full bg-secondary py-1 px-2 shadow-md"
                 >
-                  <Image src={Edit} />
+                  <FlipCameraIosIcon sx={{ color: '#ffffff' }} />
                 </label>
               </div>
               <input
@@ -213,7 +214,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 onChange={ChangeHeadShot}
               />
             </div>
-            <div className="w-full">
+            <div className="mt-10 w-full">
               <div className="w-full">
                 <div className="relative">
                   <p className="absolute -top-2.5 left-4 bg-white px-2 text-black">
@@ -243,7 +244,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 </div>
                 <div className="relative">
                   <p className="absolute -top-2.5 left-4 bg-white px-2 text-black">
-                    *名稱(暱稱)
+                    名稱(暱稱)<span className="text-red">*</span>
                   </p>
                   <input
                     name="StaffName"
@@ -275,7 +276,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
                     id=""
                     cols="30"
                     rows="5"
-                    className="mb-6  w-full resize-none rounded-lg border border-unSelect px-2 py-4"
+                    className="mb-6  w-full resize-none rounded-lg border border-unSelect px-4 py-4"
                     onChange={handleChange}
                   />
                 </div>

@@ -134,7 +134,7 @@ const addOffDay = ({ setAddOffDay }) => {
     <div className="fixed  top-10 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
         data-aos="zoom-in"
-        className="relative mt-20 h-fit w-96 items-center  rounded-lg border bg-white py-8"
+        className="relative mt-20 h-fit w-72 items-center  rounded-lg border bg-white py-8"
       >
         <div className="my-auto mb-4 flex justify-center gap-3">
           <div className="relative">
@@ -148,7 +148,7 @@ const addOffDay = ({ setAddOffDay }) => {
               useShortMonthInDropdown
               maxDate={addMonths(new Date(), 2)}
               dateFormat="yyyy/MM/dd"
-              className="my-auto  mr-2 h-14 w-full rounded-lg border border-input indent-3 "
+              className="my-auto  mr-2 h-14 w-full rounded-lg border border-input indent-9  "
             />
             <button onClick={handleClick} className="absolute right-2 top-3.5">
               <AddCircleOutlineIcon sx={{ color: '#00659F' }} />

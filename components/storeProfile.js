@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import { useThem } from '../modules/context';
@@ -19,7 +20,6 @@ import GetArea from './areaData/getArea';
 import StoreBanner from './storeBanner';
 
 import Profile from '../src/images/profile.png';
-import Edit from '../src/images/pencil.svg';
 import ChangePassword from './changePassword';
 
 const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
@@ -104,10 +104,17 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
             position: 'top-center',
             autoClose: 1000,
           });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
         })
         .catch((err) => {
           console.log(err);
           setLoading(false);
+          toast.error('欄位未填寫正確', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
         });
     }
     if (selectBanner.length !== 0) {
@@ -155,11 +162,21 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
       axios(config)
         .then((res) => {
           console.log(res);
-          router.reload(window.location.pathname);
           setLoading(false);
+          toast.success('修改成功', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            router.reload(window.location.pathname);
+          }, 1200);
         })
         .catch((err) => {
           console.log(err);
+          toast.error('欄位未填寫正確', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
           setLoading(false);
         });
     }
@@ -208,7 +225,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
           onChange={handleChange}
         />
       </div>
-      <h2 className="mb-8 text-center text-3xl">店鋪資訊</h2>
+      <h2 className="mb-8 text-center text-4xl font-bold">店鋪資訊</h2>
       <div className="mb-4 flex justify-center">
         <button
           className={` ${
@@ -238,7 +255,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         </button>
       </div>
       {page === 'info' && (
-        <div className="mx-auto w-11/12  rounded-lg bg-white px-6 pb-4 pt-4 shadow-lg md:w-8/12 lg:w-5/12">
+        <div className="mx-auto w-11/12   rounded-lg bg-white px-6 pb-4 pt-10 shadow-lg md:w-8/12 lg:w-5/12">
           <div className="mx-auto">
             <div className="relative mb-4 flex  w-full justify-center">
               <div className="relative">
@@ -272,9 +289,9 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 </div>
                 <label
                   htmlFor="headShot"
-                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full bg-secondary py-1 px-2 shadow-md"
                 >
-                  <Image src={Edit} />
+                  <FlipCameraIosIcon sx={{ color: '#ffffff' }} />
                 </label>
               </div>
               <input
@@ -285,10 +302,10 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 onChange={ChangeHeadShot}
               />
             </div>
-            <div className="w-full">
+            <div className="mt-10 w-full">
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *店鋪名稱
+                  店鋪名稱<span className="text-red">*</span>
                 </p>
                 <input
                   value={inf?.StoreName}
@@ -300,7 +317,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *產業別
+                  產業別<span className="text-red">*</span>
                 </p>
                 <select
                   className="mb-6 h-12 w-full rounded-lg border border-unSelect indent-3 "
@@ -322,7 +339,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *地址
+                  地址<span className="text-red">*</span>
                 </p>
                 <div className="flex justify-between">
                   <select
@@ -332,7 +349,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                     id=""
                     className="mb-6 h-12 w-[48%] rounded-lg border border-unSelect indent-3 "
                   >
-                    <option value="請選擇縣市">*請選擇縣市</option>
+                    <option value="請選擇縣市">請選擇縣市</option>
                     <GetCity />
                   </select>
                   <select
@@ -342,7 +359,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                     id=""
                     className="mb-6 h-12 w-[48%] rounded-lg border border-unSelect indent-3 "
                   >
-                    <option value="請選擇地區">*請選擇地區</option>
+                    <option value="請選擇地區">請選擇地區</option>
                     <GetArea city={inf?.City} />
                   </select>
                 </div>
@@ -381,7 +398,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
               </div>
               <div className="relative">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *員工稱謂
+                  員工稱謂<span className="text-red">*</span>
                 </p>
                 <input
                   value={inf?.JobTitle}
@@ -390,13 +407,13 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                   name="JobTitle"
                   className=" h-12 w-full rounded-lg border border-unSelect indent-3 "
                 />
-                <p className="mb-6 text-xs text-input">
+                <p className="mb-6 mt-2 text-xs text-input">
                   ex:老師、教練、設計師、按摩師(會顯示在顧客預約頁面)
                 </p>
               </div>
               <div className="relative mb-6">
                 <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *顧客可選時間區間：
+                  顧客可選時間區間<span className="text-red">*</span>
                 </p>
 
                 <select
@@ -411,16 +428,17 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                   <option value="30">30分鐘</option>
                   <option value="60">1小時</option>
                 </select>
-                <p className="text-xs text-input">
+                <p className="mt-2 text-xs text-input">
                   ex:選擇15分，顧客可選時間顯示10:00 、10:15、10:30、10:45
-                  <br />
                   預約項目會以30分鐘為最短時間
                 </p>
               </div>
 
               <div>
-                <p>營業時間：</p>
-                <li className="mb-2 list-none	">*平日：(休息非必填)</li>
+                <p className="mb-2">營業時間</p>
+                <li className="mb-4 list-none	">
+                  平日<span className="text-red">*</span>(休息非必填)
+                </li>
                 <div className="mb-6 flex justify-between">
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
@@ -474,7 +492,9 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 </div>
               </div>
               <div>
-                <li className="mb-2 list-none	">*假日：(休息非必填)</li>
+                <li className="mb-2 list-none	">
+                  假日<span className="text-red">*</span>(休息非必填)
+                </li>
                 <div className="mb-6 flex justify-between">
                   <div className="relative w-[45%]">
                     <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
@@ -549,8 +569,8 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 </select>
               </div>
               <div className="relative">
-                <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
-                  *店鋪描述
+                <p className="absolute -top-2.5 left-4 bg-white px-2  text-input">
+                  店鋪描述<span className="text-red">*</span>
                 </p>
                 <textarea
                   name="Description"
@@ -558,7 +578,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                   value={inf.Description}
                   cols="30"
                   rows="10"
-                  className="w-full resize-none rounded-lg border border-unSelect p-3 indent-3"
+                  className="w-full resize-none rounded-lg border border-unSelect p-3 pt-8 indent-3"
                   onChange={handleChange}
                 />
               </div>

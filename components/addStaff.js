@@ -90,7 +90,7 @@ const addStaff = ({ setAddStaff, allItem }) => {
     <div className="fixed  top-8 z-10  flex h-full w-full justify-center overflow-y-auto bg-black/50">
       <div
         data-aos="zoom-in"
-        className="relative mt-20  h-fit w-96  rounded-lg  bg-white"
+        className="relative mt-20  h-fit w-96 rounded-lg  bg-white  pb-10"
       >
         <div className="px-5 py-5">
           <h2 className="mb-8 text-center text-2xl">新增員工</h2>

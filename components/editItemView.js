@@ -184,12 +184,6 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
           />
         </div>
         <div className="p-5">
-          <button
-            className="mb-4 h-8 w-full rounded-lg bg-red text-white"
-            onClick={() => setRemove(!remove)}
-          >
-            {remove ? '取消刪除' : '刪除項目'}
-          </button>
           <div className="relative">
             <p className="absolute -top-2.5 left-4 bg-white px-2 text-input">
               *項目名稱
@@ -285,6 +279,14 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
                 確認修改
               </button>
             )}
+          </div>
+          <div className="flex justify-center">
+            <button
+              className="mb-4 mt-4 h-8 w-32 rounded-lg text-red"
+              onClick={() => setRemove(!remove)}
+            >
+              {remove ? '取消刪除' : '刪除項目'}
+            </button>
           </div>
         </div>
       </div>

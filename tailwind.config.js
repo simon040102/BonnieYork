@@ -16,7 +16,7 @@ module.exports = {
       red: '#FF6347',
       danger: '#00659F0D',
       warning: '#D6E3EB',
-      footerL: '#F2F7FA',
+      footerL: '#ebf1f7',
       footerR: '#02446A',
       bgColor: '#FAFAFA',
       unSelect: '#CCCCCC',

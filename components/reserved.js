@@ -25,46 +25,54 @@ const reserved = ({ array }) => {
       return (
         <li className="mb-6 rounded-lg bg-white p-5 shadow-lg">
           <div className="flex justify-between">
-            <h3 className="mb-2 text-2xl font-bold">
-              {item?.StoreInformation[0].StoreName}
-            </h3>
+            <div>
+              <h3 className="text-2xl font-bold text-secondary">
+                {item?.StoreInformation[0].StoreName}
+              </h3>
+              <p className="mb-4">
+                {item?.StoreInformation[0].StaffTitle}：{item.StaffName}
+              </p>
+            </div>
             <Link
               href={googleUrl}
               className="h-8 w-32 rounded-lg bg-secondary text-white"
             >
-              <a className="w-32 rounded-lg bg-secondary py-2 text-center text-white">
+              <a
+                target="_blank"
+                className="h-10 w-32 rounded-lg bg-secondary py-2 text-center text-white"
+              >
                 Google行事曆
               </a>
             </Link>
           </div>
-          <div className="mb-2 flex gap-3">
+          <div className="mb-4 flex gap-3">
             <CalendarMonthIcon />
             <p>
               {item.ReserveDate} {item.ReserveStart}
             </p>
           </div>
-          <div className="mb-2 flex gap-3">
+          <div className="mb-4 flex gap-3">
             <LocationOnIcon />
             <p> {item?.StoreInformation[0].Address}</p>
           </div>
-          <p className="mb-2">
-            {item?.StoreInformation[0].StaffTitle}：{item.StaffName}
-          </p>
+
           <div className="flex justify-between text-xl">
             <div className="flex gap-2">
               <EventNoteIcon sx={{ fontSize: 30, color: '#00659F' }} />
               <p className="text-secondary">{item.ItemName}</p>
             </div>
-            <div className="flex justify-between text-xl">
-              <div className="flex gap-2">
-                <AccessTimeIcon sx={{ fontSize: 30, color: '#00659F' }} />
-                <p className="text-secondary">{item.SpendTime}</p>
+            <div className="flex gap-3">
+              <div className="flex justify-between text-xl">
+                <div className="flex gap-2">
+                  <AccessTimeIcon sx={{ fontSize: 30, color: '#00659F' }} />
+                  <p className="text-secondary">{item.SpendTime}</p>
+                </div>
               </div>
-            </div>
-            <div className="flex justify-between text-xl">
-              <div className="flex gap-2">
-                <PaidOutlinedIcon sx={{ fontSize: 30, color: '#00659F' }} />
-                <p className="text-secondary">{item.Price}</p>
+              <div className="flex justify-between text-xl">
+                <div className="flex gap-2">
+                  <PaidOutlinedIcon sx={{ fontSize: 30, color: '#00659F' }} />
+                  <p className="text-secondary">{item.Price}</p>
+                </div>
               </div>
             </div>
           </div>

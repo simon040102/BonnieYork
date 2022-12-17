@@ -202,7 +202,7 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
           </div>
           <div className="flex justify-center">
             <button
-              className="mb-4 mt-4 h-8 w-64 rounded-lg text-secondary"
+              className="mb-4 mt-4 h-8 w-64 rounded-lg text-red"
               onClick={() => {
                 setRemove(!remove);
               }}

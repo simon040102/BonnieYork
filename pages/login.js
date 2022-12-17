@@ -145,13 +145,13 @@ const login = () => {
             <input
               type="email"
               name="Account"
-              className="h-12 w-full rounded-lg border-2 border-unSelect  indent-10"
+              className="mb-2 h-12 w-full rounded-lg border-2 border-unSelect indent-12"
               placeholder="請輸入登入 Email"
               value={Account.Account}
               onChange={handleChange}
             />
             <EmailOutlinedIcon
-              className="absolute left-2 top-3"
+              className="absolute left-4 top-3"
               sx={{ color: '#bbbbbb' }}
             />
           </div>
@@ -167,7 +167,7 @@ const login = () => {
           <div>
             <button
               name="login"
-              className=" mb-9 h-10 w-full rounded-lg bg-secondary text-white "
+              className=" mb-4 h-10 w-full rounded-lg bg-secondary text-white "
               onClick={checkEmail}
             >
               登入
@@ -175,7 +175,6 @@ const login = () => {
           </div>
 
           <div className="text-center">
-            <p>還沒有帳號？</p>
             <button
               name="signup"
               className=" h-10 w-full rounded-lg border border-secondary text-secondary"
@@ -183,6 +182,7 @@ const login = () => {
             >
               註冊
             </button>
+            <p>還沒有帳號嗎？趕快註冊試試看</p>
           </div>
         </div>
       </div>

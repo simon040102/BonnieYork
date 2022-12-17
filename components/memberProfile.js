@@ -8,10 +8,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import { useThem } from '../modules/context';
 
 import Profile from '../src/images/profile.png';
-import Edit from '../src/images/pencil.svg';
+
 import ChangePassword from './changePassword';
 
 const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
@@ -139,8 +140,8 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
   }, []);
   console.log(inf);
   return (
-    <div className="-mt-40 pb-4 pt-40">
-      <h2 className="mb-4 text-center text-3xl">會員資訊</h2>
+    <div className="">
+      <h2 className="mb-4 text-center text-4xl font-bold">會員資訊</h2>
       <div className="mb-8 flex justify-center">
         <button
           className={` ${
@@ -187,9 +188,9 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 />
                 <label
                   htmlFor="headShot"
-                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+                  className="bg-gray-100 absolute right-0 bottom-0 rounded-full bg-secondary py-1 px-2 shadow-md"
                 >
-                  <Image src={Edit} />
+                  <FlipCameraIosIcon sx={{ color: '#ffffff' }} />
                 </label>
                 <input
                   type="file"

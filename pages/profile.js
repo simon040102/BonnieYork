@@ -20,6 +20,7 @@ const profile = () => {
       [name]: value,
     }));
   };
+  console.log(inf);
   return (
     <>
       <Head>

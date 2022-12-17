@@ -33,7 +33,7 @@ const storeBanner = ({
     }
   };
   return (
-    <div className="relative flex  w-[32%] rounded-lg bg-footerL text-white">
+    <div className="relative flex  h-24 w-32 rounded-lg bg-footerL text-white">
       <label
         htmlFor={`upload${Num}`}
         className=" flex h-24 w-full cursor-pointer rounded-lg "

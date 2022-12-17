@@ -55,6 +55,7 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
             title: `${item.StaffName}/ ${item.CustomerName}  ${item.ItemName}`,
             start: new Date(`${item.ReserveDate} ${item.ReserveStart}`),
             end: new Date(`${item.ReserveDate} ${item.ReserveEnd}`),
+            backgroundColor: `${item.ReserveState === 'Done' && '#bdbdbd'}`,
           };
           Reserve.push(task);
         });
@@ -128,6 +129,7 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
               title: `${item.StaffName}/ ${item.CustomerName}  ${item.ItemName}`,
               start: new Date(`${item.ReserveDate} ${item.ReserveStart}`),
               end: new Date(`${item.ReserveDate} ${item.ReserveEnd}`),
+              backgroundColor: `${item.ReserveState === 'Done' && '#bdbdbd'}`,
             };
             Reserve.push(task);
           });
@@ -163,7 +165,7 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
             <select
               name=""
               id=""
-              className="mb-8 w-full rounded-lg border border-unSelect text-center"
+              className="mb-8 h-10 w-full rounded-lg border border-unSelect text-center"
               onChange={handleChange}
             >
               <option value="">請選擇員工</option>

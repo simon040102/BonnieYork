@@ -111,25 +111,20 @@ const editOder = ({ setEditOder, orderID }) => {
           <CloseIcon />
         </button>
         <div className="">
-          {edit && (
+          {order.ReserveState === 'Undone' ? (
             <button
               className="mt-4 mb-4 h-8  w-full rounded-lg  bg-footerL"
               onClick={handleFinish}
             >
               完成訂單
             </button>
-          )}
-          {!edit && (
-            <div>
-              <button
-                className=" mb-4 h-8 w-full rounded-lg bg-red  text-white"
-                onClick={() => {
-                  handleDelete();
-                }}
-              >
-                刪除訂單
-              </button>
-            </div>
+          ) : (
+            <button
+              className="mt-4 mb-4 h-8  w-full rounded-lg  bg-footerL"
+              disabled
+            >
+              訂單已完成
+            </button>
           )}
         </div>
         <div>
@@ -218,13 +213,13 @@ const editOder = ({ setEditOder, orderID }) => {
                   showMonthDropdown
                   useShortMonthInDropdown
                   dateFormat="yyyy/MM/dd"
-                  className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+                  className="mb-6 h-10 w-full rounded-lg border border-unSelect  text-center indent-3 "
                   disabled
                 />
                 <select
                   name=""
                   id=""
-                  className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+                  className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-bgColor text-center indent-3 "
                   disabled
                 >
                   <option value="10:00">{order.ReserveStart}</option>
@@ -252,6 +247,14 @@ const editOder = ({ setEditOder, orderID }) => {
                 onClick={() => setEdit(!edit)}
               >
                 放棄刪除
+              </button>
+              <button
+                className="h-8 w-full rounded-lg bg-red text-white"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                確認刪除
               </button>
             </div>
           )}
