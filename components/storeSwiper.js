@@ -46,7 +46,7 @@ const storeSwiper = ({ photo }) => {
               (router === '/' ||
                 router === '/search' ||
                 router === '/favorite') &&
-              'rounded-t-card'
+              'h-60 rounded-t-card'
             }  object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'

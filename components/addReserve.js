@@ -30,13 +30,10 @@ const addReserve = ({ setAddReserve }) => {
     ManualCellphoneNumber: '',
     ManualEmail: '',
   });
-  console.log(reserve);
-  console.log(item);
 
   const selectDateHandle = (date) => {
     setStartDate(date);
     const choseDay = format(new Date(date), 'yyyy/MM/dd');
-    console.log(choseDay);
     setReserve((prevState) => ({
       ...prevState,
       ReserveDate: choseDay,
@@ -60,7 +57,6 @@ const addReserve = ({ setAddReserve }) => {
   const selectItem = (e) => {
     setLoading(true);
     const { value } = e.target;
-    console.log(value);
     setReserve((prev) => ({
       ...prev,
       ItemId: value,
@@ -77,11 +73,8 @@ const addReserve = ({ setAddReserve }) => {
       .then((res) => {
         setLoading(false);
         setStaff(res.data);
-        console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   };
 
   const showStaff = () =>

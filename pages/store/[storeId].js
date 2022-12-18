@@ -9,6 +9,9 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CallRoundedIcon from '@mui/icons-material/CallRounded';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import axios from 'axios';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import Layout from '../../modules/layout';
 import StoreSwiper from '../../components/storeSwiper';
 import StoreItem from '../../components/storeItem';
@@ -18,7 +21,6 @@ import Instagram from '../../src/images/instagram-logo.svg';
 import Line from '../../src/images/LINE-logo.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import { useThem } from '../../modules/context';
-
 import MemberReserve from '../../components/memberReserve';
 
 export async function getServerSideProps({ params }) {
@@ -44,17 +46,59 @@ const storeId = ({ inf }) => {
   const [reserve, SetReserve] = useState(false);
   const [reserveInf, setReserveInf] = useState({});
   const router = useRouter();
+  const [describe, setDescribe] = useState('');
   const id = router.query.storeId;
-  const { data } = useThem();
+  const [favorite, setFavorite] = useState(false);
+  const { data, apiUrl } = useThem();
+
+  const checkLike = () => {
+    const Authorization = localStorage.getItem('BonnieYork');
+    const config = {
+      method: 'get',
+      url: `${apiUrl}/customer/ismyfavorite?storeId=${store.StoreId}`,
+      headers: {
+        Authorization,
+      },
+    };
+    axios(config)
+      .then(() => {
+        setFavorite(true);
+      })
+      .catch(() => {
+        setFavorite(false);
+      });
+  };
+
+  const handleLike = () => {
+    const Authorization = localStorage.getItem('BonnieYork') || '';
+    const config = {
+      method: !favorite ? 'post' : 'delete',
+      url: `${apiUrl}/customer/${
+        !favorite ? 'addmyfavorite' : 'cancelmyfavorite'
+      }`,
+      headers: {
+        Authorization,
+      },
+      data: { storeId: store.StoreId },
+    };
+    axios(config)
+      .then(() => {
+        checkLike();
+      })
+      .catch(() => {
+        checkLike();
+      });
+  };
+
   useEffect(() => {
-    if (!store) {
-      router.push('/');
+    if (store.StoreId) {
+      checkLike();
     }
     setReserveInf((prevState) => ({
       ...prevState,
       StoreId: store.StoreId,
     }));
-  }, []);
+  }, [store.StoreId]);
   return (
     <div className="relative ">
       <Layout title={`邦尼約克-${store?.StoreName}`}>
@@ -68,6 +112,7 @@ const storeId = ({ inf }) => {
                 SetReserve={SetReserve}
                 setReserveInf={setReserveInf}
                 reserveInf={reserveInf}
+                describe={describe}
               />
             )}
 
@@ -75,12 +120,14 @@ const storeId = ({ inf }) => {
               <StoreSwiper photo={store?.BannerPath} />
             </div>
             <div className="container mx-auto  block w-full md:flex lg:w-10/12">
-              <div className=" top-96 mx-auto mb-16 flex w-full justify-between md:mb-0 md:block md:w-2/5">
+              <div className=" top-96 mx-auto mb-16 flex w-full justify-around md:mb-0 md:block md:w-2/5">
                 <div>
-                  <h2 className="mb-2 text-center text-4xl font-bold">
-                    {store?.StoreName}
-                  </h2>
-                  <div className="mb-2 flex justify-center gap-1 md:justify-start">
+                  <div className="flex justify-around">
+                    <h2 className="mb-2 text-center text-4xl font-bold">
+                      {store?.StoreName}
+                    </h2>
+                  </div>
+                  <div className="mb-2 flex  gap-1 md:justify-start">
                     <AccessTimeFilledIcon sx={{ color: '#535353' }} />
                     <div>
                       <p className="mb-2">
@@ -95,15 +142,15 @@ const storeId = ({ inf }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="mb-2 flex justify-center gap-1 md:justify-start">
+                  <div className="mb-2 flex  gap-1 md:justify-start">
                     <LocationOnRoundedIcon sx={{ color: '#535353' }} />
                     <p className="mb-2">{store?.Address}</p>
                   </div>
-                  <div className="mb-8 flex justify-center gap-1 md:justify-start">
+                  <div className="mb-8 flex  gap-1 md:justify-start">
                     <CallRoundedIcon sx={{ color: '#535353' }} />
                     <p className="mb-2">電話：{store?.CellphoneNumber}</p>
                   </div>
-                  <div className="mb-10  flex justify-center gap-3 md:justify-start">
+                  <div className="mb-4 flex  gap-3">
                     <Link
                       href={store?.LineLink !== null ? store?.LineLink : '/'}
                     >
@@ -132,7 +179,27 @@ const storeId = ({ inf }) => {
                       </a>
                     </Link>
                   </div>
+                  <div className="mb-10  flex h-10 w-52 justify-center rounded-lg border-2 border-secondary bg-footerL">
+                    <button
+                      onClick={() => {
+                        handleLike();
+                      }}
+                    >
+                      {favorite ? (
+                        <div className="flex gap-2">
+                          <FavoriteIcon sx={{ color: '#FF6347' }} />
+                          <p>已加入我的最愛</p>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2">
+                          <FavoriteBorderOutlinedIcon />
+                          <p>加入我的最愛</p>
+                        </div>
+                      )}
+                    </button>
+                  </div>
                 </div>
+
                 <div className=" h-fit w-2/5 rounded-lg border-2  border-unSelect bg-white p-4 shadow-lg  md:w-10/12">
                   {store?.Description}
                 </div>
@@ -167,6 +234,7 @@ const storeId = ({ inf }) => {
                       SetReserve={SetReserve}
                       item={store?.BusinessItem}
                       setReserveInf={setReserveInf}
+                      setDescribe={setDescribe}
                     />
                   )}
                   {page === 'staff' && (

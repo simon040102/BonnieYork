@@ -12,11 +12,9 @@ const searchResult = ({ Result, handleSearch }) => {
   const { apiUrl } = useThem();
   const showStore = () =>
     Result?.map((item) => {
-      console.log(item);
-
       const showItem = () =>
         item.BusinessItem?.map((items, index) => {
-          if (index === 4) return;
+          if (index === 2) return;
           // eslint-disable-next-line consistent-return
           return (
             <li className="rounded-full  bg-secondary px-2 py-1 text-center  text-white">
@@ -38,13 +36,10 @@ const searchResult = ({ Result, handleSearch }) => {
           data: { storeId: item.Id },
         };
         axios(config)
-          .then((res) => {
-            console.log(res);
+          .then(() => {
             handleSearch();
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(() => {});
       };
       return (
         <li className="mb-4 w-[32%] rounded-card shadow-md">
@@ -62,9 +57,11 @@ const searchResult = ({ Result, handleSearch }) => {
                 )}
               </button>
             </div>
-            <ul className="mb-2 flex flex-wrap gap-2">
-              {showItem()} <li>...</li>
-            </ul>
+            <div className="h-20">
+              <ul className="h-5- mb-2 flex flex-wrap gap-2">
+                {showItem()} <li>...</li>
+              </ul>
+            </div>
             <div className="mb-2 flex items-center gap-3">
               <AccessTimeOutlinedIcon />
               <div>

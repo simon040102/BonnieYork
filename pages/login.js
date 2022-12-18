@@ -93,7 +93,6 @@ const login = () => {
     }
   };
   useEffect(() => {});
-  console.log(Account);
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
       <div className="bg-height  w-screen bg-bgColor px-5 pt-20 ">

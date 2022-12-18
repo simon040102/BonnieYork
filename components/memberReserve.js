@@ -18,7 +18,7 @@ import format from 'date-fns/format';
 import { useThem } from '../modules/context';
 
 // eslint-disable-next-line react/function-component-definition
-const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
+const MemberReserve = ({ setReserveInf, SetReserve, reserveInf, describe }) => {
   const [startDate, setDate] = useState(new Date());
   const { apiUrl, setLoading } = useThem();
   const [reserveData, SetReserveData] = useState({});
@@ -26,6 +26,8 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
   const [enableDay, setEnableDay] = useState([]);
   const [time, setTime] = useState([]);
   const router = useRouter();
+
+  console.log(reserveData);
 
   const showStaff = () => {
     if (reserveData.TheStaffName) {
@@ -186,13 +188,18 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
               </div>
             </div>
           </div>
+          <div>
+            <p className="mb-4 rounded-md border-2 border-unSelect p-2">
+              {describe}
+            </p>
+          </div>
+
           <div className="mb-2">
-            <p className="mb-1">預約姓名：</p>
-            <p className="">{reserveData?.CustomerName}</p>
+            <p className="mb-1">預約姓名：{reserveData?.CustomerName}</p>
           </div>
           <div className="mb-8 ">
-            <p className="mb-1">手機號碼：</p>
-            <p className="">
+            <p className="mb-1">
+              手機號碼：{' '}
               {reserveData.CustomerCellPhoneNum &&
                 reserveData.CustomerCellPhoneNum[0]}
             </p>
