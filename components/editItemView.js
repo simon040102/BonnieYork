@@ -45,8 +45,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
       },
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setLoading(false);
         toast.success('刪除成功', {
           position: 'top-center',
@@ -56,8 +55,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
           router.reload(window.location.pathname);
         }, 1500);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -85,8 +83,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
         data: editItem,
       };
       axios(confing)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setLoading(false);
           setEdit(false);
           if (imagePreview == null) {
@@ -99,8 +96,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
             }, 1500);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }
@@ -115,8 +111,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
         data: itemImage,
       };
       axios(updateImage)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           setLoading(false);
           setEdit(false);
           toast.success('修改完成', {
@@ -127,8 +122,7 @@ const editItemView = ({ setEdit, editItem, setEditItem }) => {
             router.reload(window.location.pathname);
           }, 1500);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }

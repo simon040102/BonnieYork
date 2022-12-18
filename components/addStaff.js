@@ -12,8 +12,6 @@ const addStaff = ({ setAddStaff, allItem }) => {
   const [staffItem, setStaffItem] = useState({ Identity: 'staff' });
   const [job, setJob] = useState([]);
   const { apiUrl, setLoading } = useThem();
-  console.log(job);
-  console.log(staffItem);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStaffItem((prevState) => ({
@@ -35,8 +33,7 @@ const addStaff = ({ setAddStaff, allItem }) => {
       data: staffItem,
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setLoading(false);
         toast.success('發送成功', {
           position: 'top-center',
@@ -44,9 +41,7 @@ const addStaff = ({ setAddStaff, allItem }) => {
         });
         setAddStaff(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   };
 
   const showItem = () => {
@@ -54,7 +49,6 @@ const addStaff = ({ setAddStaff, allItem }) => {
       return allItem.map((item, index) => {
         const handleClick = (e) => {
           const { value, checked } = e.target;
-          console.log(value, checked);
           if (checked) {
             setJob([...job, value]);
           } else if (!checked) {

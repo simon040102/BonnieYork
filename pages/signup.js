@@ -54,9 +54,7 @@ const signup = ({ router }) => {
         headers: { Authorization },
       })
       .then(async (res) => {
-        console.log(res);
         const data = await res.data.Token;
-        console.log(data);
         setInf((preState) => ({
           ...preState,
           Identity: data?.Identity,
@@ -68,8 +66,7 @@ const signup = ({ router }) => {
           StoreName: data?.StoreName,
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         toast.error('網頁過期，請重新註冊', {
           position: 'top-center',
           autoClose: 1000,
@@ -82,7 +79,6 @@ const signup = ({ router }) => {
 
   const registerAccount = () => {
     setLoading(true);
-    console.log(data);
     if (!inf.CellphoneNumber) {
       setLoading(false);
       toast.error('手機號碼未填寫', {
@@ -108,7 +104,6 @@ const signup = ({ router }) => {
         autoClose: 1000,
       });
     } else if (inf.Identity === 'staff') {
-      console.log(Authorization);
       const config = {
         method: 'post',
         url: `${apiUrl}/user/signupuserdata`,
@@ -119,7 +114,6 @@ const signup = ({ router }) => {
       };
       axios(config)
         .then((res) => {
-          console.log(res);
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
           setPage(page + 1);
@@ -140,25 +134,22 @@ const signup = ({ router }) => {
               data: headShot,
             };
             axios(config)
-              .then((res) => {
-                console.log(res);
+              .then(() => {
                 setLoading(false);
               })
-              .catch((err) => console.log(err));
+              .catch(() => {});
             setLoading(false);
           } else {
             setLoading(false);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     } else {
       axios
         .post(`${apiUrl}/user/signupuserdata`, inf)
         .then((res) => {
-          console.log(res);
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
           setPage(page + 1);
@@ -179,23 +170,20 @@ const signup = ({ router }) => {
               data: headShot,
             };
             axios(config)
-              .then((res) => {
-                console.log(res);
+              .then(() => {
                 setLoading(false);
               })
-              .catch((err) => console.log(err));
+              .catch(() => {});
             setLoading(false);
           } else {
             setLoading(false);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }
   };
-  console.log(inf);
   useEffect(() => {
     if (token) {
       getTokenInf();

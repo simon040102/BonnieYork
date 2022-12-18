@@ -18,7 +18,6 @@ const changePassword = ({ inf, handleChange }) => {
     }
     return <> </>;
   };
-  console.log(inf);
   return (
     <div className="container mx-auto w-full px-8 lg:w-8/12  lg:px-0">
       <h2 className="my-8 text-center text-3xl font-bold">

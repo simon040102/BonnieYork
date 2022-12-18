@@ -21,14 +21,12 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
   const { apiUrl, setLoading } = useThem();
   const router = useRouter();
 
-  console.log(inf);
   const showAllItem = () => {
     try {
       return allItem.map((item) => {
         const handleClick = (e) => {
           SetDataChange(true);
           const { value, checked } = e.target;
-          console.log(value, checked);
           if (checked) {
             setJobs([...jobs, value]);
           } else if (!checked) {
@@ -69,7 +67,6 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
   };
 
   const handleSubmit = () => {
-    console.log(inf);
     const config = {
       method: 'post',
       url: `${apiUrl}/store/editstaff`,
@@ -81,8 +78,7 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
     if (changeData) {
       setLoading(true);
       axios(config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setLoading(false);
           toast.success('修改成功', {
             position: 'top-center',
@@ -93,7 +89,6 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
           }, 1500);
         })
         .catch((err) => {
-          console.log(err);
           toast.error(err.response.data.Message, {
             position: 'top-center',
             autoClose: 1000,
@@ -114,8 +109,7 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
       data: inf,
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setLoading(false);
         toast.success('刪除成功', {
           position: 'top-center',
@@ -126,7 +120,6 @@ const editStaff = ({ setEditStaff, editInf, allItem }) => {
         }, 1500);
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.response.data.Message, {
           position: 'top-center',
           autoClose: 1000,

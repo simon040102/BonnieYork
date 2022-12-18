@@ -14,7 +14,6 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
   const Authorization = localStorage.getItem('BonnieYork');
   const [allItem, setAllItem] = useState([]);
   const { apiUrl, setLoading } = useThem();
-  console.log(allItem);
 
   const showItem = () => {
     try {
@@ -68,12 +67,10 @@ const editItem = ({ setEdit, setAddItem, setEditItem }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         setAllItem(res.data.allItems);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

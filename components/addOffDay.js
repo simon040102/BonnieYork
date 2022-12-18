@@ -22,7 +22,6 @@ const addOffDay = ({ setAddOffDay }) => {
   const { apiUrl, setLoading, data } = useThem();
   const router = useRouter();
 
-  console.log(allHoliday);
   const handleClick = () => {
     const date = format(new Date(startDate), 'yyyy/MM/dd');
     if (HolidayDate.indexOf(date) >= 0) {
@@ -34,9 +33,7 @@ const addOffDay = ({ setAddOffDay }) => {
   };
   const showDate = () =>
     HolidayDate.map((item, index) => {
-      console.log(item);
       const handleDelete = () => {
-        console.log(item);
         setHolidayDate(HolidayDate.filter((num) => num !== item));
         SetAllHoliday(HolidayDate.filter((num) => num !== item));
       };
@@ -71,10 +68,8 @@ const addOffDay = ({ setAddOffDay }) => {
         [data.status === 'store' ? 'HolidayDate' : 'StaffDaysOff']: date,
       },
     };
-    console.log(config);
     axios(config)
       .then((res) => {
-        console.log(res);
         setLoading(false);
         toast.success('修改成功', {
           position: 'top-center',
@@ -85,7 +80,6 @@ const addOffDay = ({ setAddOffDay }) => {
         // }, 1500);
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.response.data.Message, {
           position: 'top-center',
           autoClose: 1000,
@@ -93,7 +87,6 @@ const addOffDay = ({ setAddOffDay }) => {
         setLoading(false);
       });
   };
-  console.log(HolidayDate);
 
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
@@ -110,7 +103,6 @@ const addOffDay = ({ setAddOffDay }) => {
     };
     axios(config)
       .then(async (res) => {
-        console.log(res);
         if (data.status === 'store') {
           const date = await res.data.ShowHolidayDate.split(',');
           const allDate = await res.data.PastHolidayDate.split(',');
@@ -125,8 +117,7 @@ const addOffDay = ({ setAddOffDay }) => {
           setLoading(false);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

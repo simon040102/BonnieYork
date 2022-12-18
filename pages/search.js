@@ -29,7 +29,6 @@ const search = () => {
       [name]: value,
     }));
   };
-  console.log(totalPage);
 
   const handleSearch = () => {
     setLoading(true);
@@ -44,13 +43,11 @@ const search = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         setResult(res.data);
         setTotalPage(res.data.TotalPages);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };

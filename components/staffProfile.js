@@ -22,8 +22,6 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
 
   const router = useRouter();
 
-  console.log(inf);
-
   const ChangeHeadShot = async (e) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
@@ -47,16 +45,14 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
         data: headShot,
       };
       axios(config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setLoading(false);
           toast.success('修改成功', {
             position: 'top-center',
             autoClose: 1000,
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }
@@ -72,8 +68,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
     if (dataChange) {
       setLoading(true);
       axios(config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           toast.success('修改成功', {
             position: 'top-center',
             autoClose: 1000,
@@ -84,8 +79,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
 
           setLoading(false);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }
@@ -103,9 +97,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         const { message } = res.data;
-        console.log(message);
         if (message === '密碼修改完成') {
           toast.success(message, {
             position: 'top-center',
@@ -120,7 +112,7 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
           setLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
     setInf({});
   };
   useEffect(() => {
@@ -133,13 +125,10 @@ const staffProfile = ({ handleChange, inf, setInf, dataChange }) => {
       })
       .then(async (res) => {
         const information = await res.data.StaffInformation;
-        console.log(information[0]);
         setInf(information[0]);
-        console.log(res);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

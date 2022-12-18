@@ -28,8 +28,6 @@ const login = () => {
     }));
   };
 
-  console.log(select);
-
   const checkEmail = (e) => {
     const { name } = e.target;
     const emailTest =
@@ -55,9 +53,7 @@ const login = () => {
       };
       axios
         .post(`${apiUrl}/user/SignUpIsValid`, data)
-        .then(async (res) => {
-          const message = await res.data.Message;
-          console.log(message, name);
+        .then(async () => {
           if (name === 'signup') {
             setSelect(name);
             setOpenView(true);
@@ -76,8 +72,7 @@ const login = () => {
             setLoading(false);
           }
         })
-        .catch(async (err) => {
-          console.log(err);
+        .catch(async () => {
           // const message = await err.response.data.Message;
           setLoading(false);
           if (name === 'signup') {

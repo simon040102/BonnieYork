@@ -13,7 +13,6 @@ import 'swiper/css/scrollbar';
 
 const storeSwiper = ({ photo }) => {
   const router = useRouter().pathname;
-  console.log(photo);
 
   return (
     <Swiper
@@ -27,7 +26,10 @@ const storeSwiper = ({ photo }) => {
             alt=""
             src={photo?.Banner1}
             className={`mx-auto ${
-              (router === '/' || router === '/search') && 'rounded-t-card'
+              (router === '/' ||
+                router === '/search' ||
+                router === '/favorite') &&
+              'rounded-t-card'
             }   object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'
@@ -41,7 +43,10 @@ const storeSwiper = ({ photo }) => {
             alt=""
             src={photo?.Banner2}
             className={`mx-auto  ${
-              (router === '/' || router === '/search') && 'rounded-t-card'
+              (router === '/' ||
+                router === '/search' ||
+                router === '/favorite') &&
+              'rounded-t-card'
             }  object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'
@@ -55,7 +60,10 @@ const storeSwiper = ({ photo }) => {
             alt=""
             src={photo?.Banner3}
             className={`mx-auto ${
-              (router === '/' || router === '/search') && 'rounded-t-card'
+              (router === '/' ||
+                router === '/search' ||
+                router === '/favorite') &&
+              'rounded-t-card'
             }  object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'
@@ -69,7 +77,10 @@ const storeSwiper = ({ photo }) => {
             alt=""
             src={photo?.Banner4}
             className={`mx-auto ${
-              (router === '/' || router === '/search') && 'rounded-t-card'
+              (router === '/' ||
+                router === '/search' ||
+                router === '/favorite') &&
+              'rounded-t-card'
             }  object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'
@@ -83,7 +94,10 @@ const storeSwiper = ({ photo }) => {
             alt=""
             src={photo?.Banner5}
             className={`mx-auto ${
-              (router === '/' || router === '/search') && 'rounded-t-card'
+              (router === '/' ||
+                router === '/search' ||
+                router === '/favorite') &&
+              'rounded-t-card'
             }   object-cover ${
               router === '/store/[storeId]' &&
               'aspect-video rounded-none lg:aspect-[21/9] lg:rounded-card 2xl:aspect-[21/9]'

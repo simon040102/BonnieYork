@@ -8,8 +8,6 @@ import Instagram from '../src/images/instagram-logo.svg';
 import Line from '../src/images/LINE-logo.svg';
 
 const storeStaff = ({ StaffInformation, staffTitle }) => {
-  console.log(StaffInformation);
-
   const showStaff = () =>
     StaffInformation.map((item, index) => {
       const showItem = () => {

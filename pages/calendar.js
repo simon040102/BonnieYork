@@ -31,9 +31,7 @@ const calendar = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         const response = res.data;
-        console.log(res.data);
         const Reserve = [];
         response.forEach((item) => {
           const task = {
@@ -50,7 +48,7 @@ const calendar = () => {
         setLoading(false);
         setAllReserve(Reserve);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
   }, []);
   return (
     <Layout title="我的行事曆">

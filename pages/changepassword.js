@@ -23,9 +23,7 @@ const changePassword = ({ router }) => {
       [name]: value,
     }));
   };
-  console.log(click);
   const handleSubmit = () => {
-    console.log(inf);
     setLoading(true);
     const config = {
       method: 'post',
@@ -36,8 +34,7 @@ const changePassword = ({ router }) => {
       data: inf,
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setLoading(false);
         toast.success('修改成功', {
           position: 'top-center',
@@ -47,14 +44,10 @@ const changePassword = ({ router }) => {
           router.push('/login');
         }, 1500);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
-
-  console.log(token);
-  console.log(inf);
 
   useEffect(() => {
     const passwordTest = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{8,}$/;

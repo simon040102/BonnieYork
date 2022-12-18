@@ -20,10 +20,8 @@ const calendarOverview = ({
       return;
     }
     setOrderId(e.event.id);
-    console.log(e.event.id);
     setEditOder(true);
   };
-  console.log(allReserve);
   return (
     <div>
       <div className="mb-4 flex justify-end">

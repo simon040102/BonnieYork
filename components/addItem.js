@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
@@ -50,7 +49,6 @@ const addItem = ({ setAddItem }) => {
     };
     axios(config)
       .then(async (res) => {
-        console.log(res);
         const id = await res.data.TheItemId;
         if (!imagePreview) {
           setLoading(false);
@@ -73,8 +71,7 @@ const addItem = ({ setAddItem }) => {
             data: itemImage,
           };
           axios(updateImage)
-            .then((response) => {
-              console.log(response);
+            .then(() => {
               setLoading(false);
               setAddItem(false);
               toast.success('新增成功', {
@@ -85,14 +82,12 @@ const addItem = ({ setAddItem }) => {
                 router.reload(window.location.pathname);
               }, 1500);
             })
-            .catch((err) => {
-              console.log(err);
+            .catch(() => {
               setLoading(false);
             });
         }
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         toast.error(`${err.response.data.Message}`, {
           position: 'top-center',
@@ -101,7 +96,6 @@ const addItem = ({ setAddItem }) => {
       });
   };
 
-  console.log(itemInf);
   useEffect(() => {
     AOS.init();
   }, []);

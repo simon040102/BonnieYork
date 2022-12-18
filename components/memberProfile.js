@@ -23,7 +23,6 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
 
   const router = useRouter();
   const Authorization = localStorage.getItem('BonnieYork');
-  console.log(headShot, headShotPreview);
   const changePassword = () => {
     setLoading(true);
     const config = {
@@ -36,9 +35,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         const message = res.data.Message;
-        console.log(message);
         if (message === '密碼修改完成') {
           toast.success('密碼修改完成', {
             position: 'top-center',
@@ -56,7 +53,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
           setLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
     setInf({});
   };
   const ChangeHeadShot = async (e) => {
@@ -81,7 +78,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
         data: headShot,
       };
       axios(config)
-        .then((res) => {
+        .then(() => {
           setLoading(false);
           toast.success('修改完成', {
             position: 'top-center',
@@ -90,10 +87,8 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
           setTimeout(() => {
             router.reload(window.location.pathname);
           }, 1200);
-
-          console.log(res);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {});
     }
     const config = {
       method: 'post',
@@ -106,7 +101,7 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
     if (dataChange) {
       setLoading(true);
       axios(config)
-        .then((res) => {
+        .then(() => {
           setLoading(false);
           toast.success('修改完成', {
             position: 'top-center',
@@ -115,10 +110,9 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
           setTimeout(() => {
             router.reload(window.location.pathname);
           }, 1200);
-          console.log(res);
           router.reload(window.location.pathname);
         })
-        .catch((err) => console.log(err));
+        .catch(() => {});
     }
   };
 
@@ -130,15 +124,11 @@ const memberProfile = ({ handleChange, inf, setInf, dataChange }) => {
         },
       })
       .then(async (res) => {
-        console.log(res);
         const CustomerInformation = await res.data.CustomerInformation[0];
         setInf(CustomerInformation);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   }, []);
-  console.log(inf);
   return (
     <div className="">
       <h2 className="mb-4 text-center text-4xl font-bold">會員資訊</h2>

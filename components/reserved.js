@@ -10,8 +10,6 @@ import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import Link from 'next/link';
 
 const reserved = ({ array }) => {
-  console.log(array);
-
   const showReserve = () => {
     return array?.map((item) => {
       const startTime = new Date(`${item.ReserveDate} ${item.ReserveStart}`)
@@ -21,7 +19,7 @@ const reserved = ({ array }) => {
         .toISOString()
         .replace(/[\ |\.|\|\-|\\|\:|\?]/g, '');
       const googleUrl = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${item?.StoreInformation[0].StoreName} ${item.ItemName}&dates=${startTime}/${endTime}&location=%E9%AB%98%E9%9B%84%E5%B8%82%E5%89%8D%E9%87%91%E5%8D%80%E8%87%AA%E5%BC%B7%E4%BA%8C%E8%B7%AF106%E5%B7%B719%E8%99%9F`;
-      console.log(startTime, endTime);
+
       return (
         <li className="mb-6 rounded-lg bg-white p-5 shadow-lg">
           <div className="flex justify-between">

@@ -30,7 +30,6 @@ const staff = () => {
           const array = [];
           item.StaffWorkItems.forEach((items) => {
             array.push(items.ItemName);
-            console.log(array);
           });
           return array.join('、');
         };
@@ -82,7 +81,6 @@ const staff = () => {
     }
   };
 
-  console.log(allStaff);
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
@@ -102,23 +100,19 @@ const staff = () => {
     };
     axios(getItem)
       .then((res) => {
-        console.log(res);
         setAllItem(res.data.allItems);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
     axios(getStaff)
       .then(async (res) => {
         const result = await res.data.AllStaffItem;
-        console.log(res);
         setAllStall(result);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

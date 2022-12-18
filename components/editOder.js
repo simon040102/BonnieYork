@@ -29,8 +29,7 @@ const editOder = ({ setEditOder, orderID }) => {
       },
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         toast.success('刪除成功', {
           position: 'top-center',
           autoClose: 1000,
@@ -40,8 +39,7 @@ const editOder = ({ setEditOder, orderID }) => {
         }, 1500);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -57,8 +55,7 @@ const editOder = ({ setEditOder, orderID }) => {
       },
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         toast.success('修改完成', {
           position: 'top-center',
           autoClose: 1000,
@@ -68,8 +65,7 @@ const editOder = ({ setEditOder, orderID }) => {
         }, 1500);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -86,18 +82,15 @@ const editOder = ({ setEditOder, orderID }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         const data = res.data[0];
         setOrder(data);
         setStartDate(new Date(data.ReserveDate));
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
-  console.log(order);
   return (
     <div className="fixed  top-20 z-10 flex h-full w-full justify-center overflow-y-auto bg-black/50 pb-20">
       <div

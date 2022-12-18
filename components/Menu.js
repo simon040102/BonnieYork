@@ -20,7 +20,6 @@ const Menu = () => {
   const router = useRouter();
 
   const logout = () => {
-    console.log(123);
     localStorage.removeItem('BonnieYork');
     router.push('/');
     router.reload(window.location.pathname);

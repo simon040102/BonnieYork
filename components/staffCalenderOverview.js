@@ -26,8 +26,6 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
   const showStaff = () =>
     staff?.map((item) => <option value={item.Id}>{item.StaffName}</option>);
 
-  console.log(event);
-
   const handleChange = (e) => {
     setLoading(true);
     const { value } = e.target;
@@ -42,12 +40,9 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
     axios(config)
       .then(async (res) => {
         setLoading(false);
-        console.log(res);
         const response = await res.data.calendar;
         setStoreInformation(res.data.holidayInformation[0]);
         const { HolidayDate, StaffDaysOff } = res.data.holidayInformation[0];
-        console.log(response);
-        console.log(HolidayDate);
         const Reserve = [];
         response.forEach((item) => {
           const task = {
@@ -77,11 +72,8 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
         });
         setEvent(Reserve);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => {});
   };
-  console.log(storeInformation);
 
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
@@ -98,12 +90,9 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
       axios(config)
         .then((res) => {
           setLoading(false);
-          console.log(res);
           setStaff(res.data.AllStaffItem);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     }
     if (data.status === 'staff') {
       const config = {
@@ -117,11 +106,8 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
         .then((res) => {
           setLoading(false);
           const response = res.data.calendar;
-          console.log(res);
           setStoreInformation(res.data.holidayInformation[0]);
           const { HolidayDate, StaffDaysOff } = res.data.holidayInformation[0];
-          console.log(response);
-          console.log(HolidayDate);
           const Reserve = [];
           response.forEach((item) => {
             const task = {
@@ -151,9 +137,7 @@ const staffCalenderOverview = ({ setEditOder, setAddOffDay, setOrderId }) => {
           });
           setEvent(Reserve);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => {});
     }
   }, [data]);
 

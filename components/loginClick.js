@@ -16,15 +16,13 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
   const { apiUrl, setData, setLoading } = useThem();
   const router = useRouter();
-  console.log(select);
   const handleSubmit = async () => {
     if (select === 'signup') {
       const data = { Identity: status, Account: Account.Account };
       setLoading(true);
       axios
         .post(`${apiUrl}/user/signupsendlink`, data)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setOpenView(false);
           toast.success('Email已發送', {
             position: 'top-center',
@@ -32,8 +30,7 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
           });
           setLoading(false);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     } else if (select === 'forget') {
@@ -45,16 +42,14 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
       };
       axios
         .post(`${apiUrl}/user/ForgetPasswordLink`, data)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           toast.success('Email已發送', {
             position: 'top-center',
             autoClose: 1000,
           });
           setLoading(false);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     } else if (select === 'login') {
@@ -68,7 +63,6 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
       await axios
         .post(`${apiUrl}/user/login`, data)
         .then((res) => {
-          console.log(res);
           const message = res.data;
           const token = `Bearer ${message.Token}`;
 
@@ -91,7 +85,6 @@ const loginClick = ({ setOpenView, Account, select, status, handleChange }) => {
           }, 1500);
         })
         .catch((err) => {
-          console.log(err);
           const message = err.response?.data.Message;
 
           toast.error(message, {

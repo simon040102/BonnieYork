@@ -12,10 +12,8 @@ const storeBanner = ({
   bannerPath,
 }) => {
   const handleChange = async (e) => {
-    console.log(Num);
     if (e.target.files[0]) {
       const reader = new FileReader();
-      console.log(e.target.files);
       reader.addEventListener('load', () => {
         // 預覽圖片
         // setBanner(reader.result);
@@ -28,7 +26,6 @@ const storeBanner = ({
       // 要上的檔案
       const formData = new FormData();
       formData.append([`Banner${Num}`], e.target.files[0]);
-      console.log(formData);
       setSelectBanner([...selectBanner, formData]);
     }
   };

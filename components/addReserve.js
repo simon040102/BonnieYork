@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-console */
 /* eslint-disable react/button-has-type */
 import DatePicker from 'react-datepicker';
@@ -105,7 +106,6 @@ const addReserve = ({ setAddReserve }) => {
     axios(config)
       .then(async (res) => {
         setLoading(false);
-        console.log(res);
         const { TheEnableDate, TheReserveDate } = await res.data;
 
         setStartDate(new Date(Object.keys(TheReserveDate)[0]));
@@ -122,8 +122,7 @@ const addReserve = ({ setAddReserve }) => {
           ),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -147,8 +146,7 @@ const addReserve = ({ setAddReserve }) => {
       data: reserve,
     };
     axios(config)
-      .then(async (res) => {
-        console.log(res);
+      .then(async () => {
         setLoading(false);
         toast.success('預約完成', {
           position: 'top-center',
@@ -158,8 +156,7 @@ const addReserve = ({ setAddReserve }) => {
           router.reload(window.location.pathname);
         }, 1200);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -176,13 +173,11 @@ const addReserve = ({ setAddReserve }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         setItem(res.data.allItems);
         setTitle(res.data.staffTitle[0]);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

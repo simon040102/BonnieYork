@@ -100,7 +100,7 @@ const searchResult = ({ Result, handleSearch }) => {
 
   return (
     <div className="container mx-auto w-full">
-      <ul className="flex flex-wrap justify-between gap-3">{showStore()}</ul>
+      <ul className="flex flex-wrap  gap-3">{showStore()}</ul>
     </div>
   );
 };

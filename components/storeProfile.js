@@ -50,9 +50,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         const message = res.data.Message;
-        console.log(message);
         if (message === '密碼修改完成') {
           toast.success('密碼修改完成', {
             position: 'top-center',
@@ -70,10 +68,9 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
           setLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {});
   };
 
-  console.log(selectBanner);
   const ChangeHeadShot = async (e) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
@@ -84,7 +81,6 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
     formData.append('HeadShot', e.target.files[0]);
     setHeadShot(formData);
   };
-  console.log(headShot);
   const handleSubmit = async () => {
     if (headShotPreview !== null) {
       setLoading(true);
@@ -97,8 +93,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         data: headShot,
       };
       axios(config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setLoading(false);
           toast.success('修改成功', {
             position: 'top-center',
@@ -108,8 +103,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
             router.reload(window.location.pathname);
           }, 1200);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
           toast.error('欄位未填寫正確', {
             position: 'top-center',
@@ -120,7 +114,6 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
     if (selectBanner.length !== 0) {
       setLoading(true);
       selectBanner.forEach(async (item) => {
-        console.log(item);
         const config = {
           method: 'post',
           url: `${apiUrl}/store/uploadprofile`,
@@ -130,9 +123,8 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
           data: item,
         };
         axios(config)
-          .then((res) => {
+          .then(() => {
             setCount((count += 1));
-            console.log(res);
             if (count === selectBanner.length) {
               setLoading(false);
               toast.success('修改成功', {
@@ -144,9 +136,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
               }, 1200);
             }
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(() => {});
       });
     }
     const config = {
@@ -160,8 +150,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
     if (dataChange) {
       setLoading(true);
       axios(config)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setLoading(false);
           toast.success('修改成功', {
             position: 'top-center',
@@ -171,8 +160,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
             router.reload(window.location.pathname);
           }, 1200);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           toast.error('欄位未填寫正確', {
             position: 'top-center',
             autoClose: 1000,
@@ -190,22 +178,17 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         },
       })
       .then(async (res) => {
-        console.log(res);
         const information = await res.data.StoreInformation;
         const BannerPath = await res.data.BannerPath;
-        console.log(information);
 
         setInf(information[0]);
         setBannerPath(BannerPath);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
-  console.log(inf);
-  console.log(count);
   return (
     <div className="">
       <div className="relative">

@@ -51,7 +51,6 @@ const Layout = ({ children, title, descriptionContent }) => {
         })
         .then((res) => {
           const result = res.data;
-          console.log(result);
           setData((preState) => ({
             ...preState,
             status: result.Identity,

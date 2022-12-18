@@ -46,7 +46,6 @@ const storeId = ({ inf }) => {
   const router = useRouter();
   const id = router.query.storeId;
   const { data } = useThem();
-  console.log(store);
   useEffect(() => {
     if (!store) {
       router.push('/');
@@ -75,59 +74,71 @@ const storeId = ({ inf }) => {
             <div className="3xl:aspect-[21/9]  mb-16 lg:container lg:mx-auto lg:aspect-[21/9]  lg:w-10/12 ">
               <StoreSwiper photo={store?.BannerPath} />
             </div>
-            <div className="container   mx-auto flex w-full lg:w-10/12">
-              <div className=" top-96 mx-auto w-2/5">
-                <h2 className="mb-2 text-4xl font-bold">{store?.StoreName}</h2>
-                <div className="mb-2 flex gap-1">
-                  <AccessTimeFilledIcon sx={{ color: '#535353' }} />
-                  <div>
-                    <p className="mb-2">
-                      平日：{store?.WeekdayStartTime}~{store?.WeekdayEndTime}
-                    </p>
-                    <p className="mb-2">
-                      假日：{store?.HolidayStartTime}~{store?.HolidayEndTime}
-                    </p>
+            <div className="container mx-auto  block w-full md:flex lg:w-10/12">
+              <div className=" top-96 mx-auto mb-16 flex w-full justify-between md:mb-0 md:block md:w-2/5">
+                <div>
+                  <h2 className="mb-2 text-center text-4xl font-bold">
+                    {store?.StoreName}
+                  </h2>
+                  <div className="mb-2 flex justify-center gap-1 md:justify-start">
+                    <AccessTimeFilledIcon sx={{ color: '#535353' }} />
+                    <div>
+                      <p className="mb-2">
+                        平日：{store?.WeekdayStartTime}~{store?.WeekdayEndTime}{' '}
+                        休息：{store?.WeekdayBreakStart}~
+                        {store?.WeekdayBreakEnd}
+                      </p>
+                      <p className="mb-2">
+                        假日：{store?.HolidayStartTime}~{store?.HolidayEndTime}{' '}
+                        休息：{store?.HolidayBreakStart}~
+                        {store?.HolidayBreakEnd}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mb-2 flex justify-center gap-1 md:justify-start">
+                    <LocationOnRoundedIcon sx={{ color: '#535353' }} />
+                    <p className="mb-2">{store?.Address}</p>
+                  </div>
+                  <div className="mb-8 flex justify-center gap-1 md:justify-start">
+                    <CallRoundedIcon sx={{ color: '#535353' }} />
+                    <p className="mb-2">電話：{store?.CellphoneNumber}</p>
+                  </div>
+                  <div className="mb-10  flex justify-center gap-3 md:justify-start">
+                    <Link
+                      href={store?.LineLink !== null ? store?.LineLink : '/'}
+                    >
+                      <a>
+                        <Image src={Line} width="40" height="40" />
+                      </a>
+                    </Link>
+                    <Link
+                      href={
+                        store?.FacebookLink !== null ? store?.FacebookLink : '/'
+                      }
+                    >
+                      <a>
+                        <Image src={Facebook} width="40" height="40" />
+                      </a>
+                    </Link>
+                    <Link
+                      href={
+                        store?.InstagramLink !== null
+                          ? store?.InstagramLink
+                          : '/'
+                      }
+                    >
+                      <a>
+                        <Image src={Instagram} width="40" height="40" />
+                      </a>
+                    </Link>
                   </div>
                 </div>
-                <div className="mb-2 flex gap-1">
-                  <LocationOnRoundedIcon sx={{ color: '#535353' }} />
-                  <p className="mb-2">{store?.Address}</p>
-                </div>
-                <div className="mb-8 flex gap-1">
-                  <CallRoundedIcon sx={{ color: '#535353' }} />
-                  <p className="mb-2">電話：{store?.CellphoneNumber}</p>
-                </div>
-                <div className="mb-10  flex gap-3">
-                  <Link href={store?.LineLink !== null ? store?.LineLink : '/'}>
-                    <a>
-                      <Image src={Line} width="40" height="40" />
-                    </a>
-                  </Link>
-                  <Link
-                    href={
-                      store?.FacebookLink !== null ? store?.FacebookLink : '/'
-                    }
-                  >
-                    <a>
-                      <Image src={Facebook} width="40" height="40" />
-                    </a>
-                  </Link>
-                  <Link
-                    href={
-                      store?.InstagramLink !== null ? store?.InstagramLink : '/'
-                    }
-                  >
-                    <a>
-                      <Image src={Instagram} width="40" height="40" />
-                    </a>
-                  </Link>
-                </div>
-                <div className="w-10/12 rounded-lg border-2 border-unSelect bg-white p-4 shadow-lg">
+                <div className=" h-fit w-2/5 rounded-lg border-2  border-unSelect bg-white p-4 shadow-lg  md:w-10/12">
                   {store?.Description}
                 </div>
               </div>
 
-              <div className="mb-4 w-3/5 justify-center">
+              <div className="mb-4 w-full justify-center md:w-3/5">
                 <div className="mb-10 text-center">
                   <button
                     className={` ${

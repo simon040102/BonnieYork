@@ -13,8 +13,6 @@ const reserve = () => {
   const [reserveArray, SetReserveArray] = useState({});
   const { apiUrl, setLoading } = useThem();
 
-  console.log(reserveArray);
-
   useEffect(() => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
@@ -27,12 +25,10 @@ const reserve = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         setLoading(false);
         SetReserveArray(res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);

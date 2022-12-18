@@ -27,7 +27,6 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
   const [time, setTime] = useState([]);
   const router = useRouter();
 
-  console.log(reserveData);
   const showStaff = () => {
     if (reserveData.TheStaffName) {
       return reserveData?.TheStaffName.map((item, index) => (
@@ -45,8 +44,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
   const selectStaff = (e) => {
     setLoading(true);
     const Authorization = localStorage.getItem('BonnieYork');
-    const { value, id } = e.target;
-    console.log(value, id);
+    const { value } = e.target;
     setReserveInf((prevState) => ({
       ...prevState,
       StaffId: Number(value.split(',')[0]),
@@ -64,7 +62,6 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
     axios(config)
       .then(async (res) => {
         setLoading(false);
-        console.log(res);
         const { TheEnableDate, TheReserveDate } = await res.data;
         setDate(new Date(Object.keys(TheReserveDate)[0]));
         setTime(Object.values(TheReserveDate)[0].split(','));
@@ -80,8 +77,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
           ),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -89,7 +85,6 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
   const selectDateHandle = (date) => {
     setDate(date);
     const choseDay = format(new Date(date), 'yyyy/MM/dd');
-    console.log(choseDay);
     setReserveInf((prevState) => ({
       ...prevState,
       ReserveDate: choseDay,
@@ -115,7 +110,6 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
   const handleSubmit = () => {
     setLoading(true);
     const Authorization = localStorage.getItem('BonnieYork');
-    console.log(reserveInf);
     const config = {
       method: 'post',
       url: `${apiUrl}/customer/confirmreserve`,
@@ -125,8 +119,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
       data: reserveInf,
     };
     axios(config)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setLoading(false);
         toast.success('預約完成', {
           position: 'top-center',
@@ -136,8 +129,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
           router.reload(window.location.pathname);
         }, 1200);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   };
@@ -157,8 +149,7 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf }) => {
         SetReserveData(res.data[0]);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
