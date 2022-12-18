@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable react/button-has-type */
 import { useEffect, useState } from 'react';
 
@@ -55,7 +56,7 @@ const search = () => {
   };
 
   const showPage = () => {
-    let pages = [];
+    const pages = [];
     for (let i = 0; i < totalPage; i++) {
       pages.push(i + 1);
     }
@@ -116,7 +117,7 @@ const search = () => {
               <>
                 <li className="mx-2  w-3/12">
                   <select
-                    className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
+                    className="h-12 w-full rounded-md  text-start indent-4 shadow-md"
                     name="City"
                     id=""
                     value={select.City}
@@ -128,7 +129,7 @@ const search = () => {
                 </li>
                 <li className="mx-2  w-3/12">
                   <select
-                    className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
+                    className="h-12 w-full rounded-md  text-start indent-4 shadow-md"
                     name="District"
                     id=""
                     value={select.District}
@@ -140,7 +141,7 @@ const search = () => {
                 </li>
                 <li className="mx-2  w-3/12">
                   <select
-                    className="h-8 w-full rounded-md  text-start indent-4 shadow-md"
+                    className="h-12 w-full rounded-md  text-start indent-4 shadow-md"
                     name="IndustryId"
                     id=""
                     value={select.IndustryId}
@@ -165,22 +166,22 @@ const search = () => {
                   type="text"
                   name="Keyword"
                   value={select.Keyword}
-                  className="h-8 w-full rounded-md  border-black indent-6 shadow-md"
+                  className="h-12 w-full rounded-md border-black indent-6 text-xl shadow-md"
                   onChange={handleChange}
                 />
               </li>
             )}
             <button
-              className=" flex w-32 justify-center gap-4 rounded-lg bg-secondary py-1   text-white"
+              className=" flex h-12 w-32 justify-center gap-4 rounded-lg bg-secondary py-1   text-white"
               onClick={handleSearch}
             >
-              <p>搜尋</p>
-              <SearchOutlinedIcon />
+              <p className="mt-2">搜尋</p>
+              <SearchOutlinedIcon className="mt-2" />
             </button>
           </ul>
         </div>
         <div>
-          <SearchResult Result={result.TheResult} />
+          <SearchResult Result={result.TheResult} handleSearch={handleSearch} />
         </div>
         <ul className="flex justify-center gap-3">{showPage()}</ul>
       </div>

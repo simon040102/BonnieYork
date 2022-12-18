@@ -2,10 +2,14 @@
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Router from 'next/router';
+import axios from 'axios';
 import StoreSwiper from './storeSwiper';
+import { useThem } from '../modules/context';
 
-const searchResult = ({ Result }) => {
+const searchResult = ({ Result, handleSearch }) => {
+  const { apiUrl } = useThem();
   const showStore = () =>
     Result?.map((item) => {
       console.log(item);
@@ -20,7 +24,28 @@ const searchResult = ({ Result }) => {
             </li>
           );
         });
+      const handleLike = () => {
+        const Authorization = localStorage.getItem('BonnieYork') || '';
 
+        const config = {
+          method: item.IsFavorite === 'No' ? 'post' : 'delete',
+          url: `${apiUrl}/customer/${
+            item.IsFavorite === 'No' ? 'addmyfavorite' : 'cancelmyfavorite'
+          }`,
+          headers: {
+            Authorization,
+          },
+          data: { storeId: item.Id },
+        };
+        axios(config)
+          .then((res) => {
+            console.log(res);
+            handleSearch();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
       return (
         <li className="mb-4 w-[32%] rounded-card shadow-md">
           <div className=" mb-4 rounded-t-card">
@@ -29,7 +54,13 @@ const searchResult = ({ Result }) => {
           <div className="px-5">
             <div className="mb-4 flex justify-between pt-2">
               <h2 className="text-xl text-secondary">{item.StoreName}</h2>
-              <FavoriteBorderOutlinedIcon />
+              <button onClick={handleLike}>
+                {item.IsFavorite === 'No' ? (
+                  <FavoriteBorderOutlinedIcon />
+                ) : (
+                  <FavoriteIcon sx={{ color: '#FF6347' }} />
+                )}
+              </button>
             </div>
             <ul className="mb-2 flex flex-wrap gap-2">
               {showItem()} <li>...</li>
