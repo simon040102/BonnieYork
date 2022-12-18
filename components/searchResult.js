@@ -14,13 +14,16 @@ const searchResult = ({ Result, handleSearch }) => {
     Result?.map((item) => {
       const showItem = () =>
         item.BusinessItem?.map((items, index) => {
-          if (index === 2) return;
+          if (index > 2) {
+            /* empty */
+          } else {
+            return (
+              <li className="rounded-full  bg-secondary px-2 py-1 text-center  text-white">
+                {items.ItemName}
+              </li>
+            );
+          }
           // eslint-disable-next-line consistent-return
-          return (
-            <li className="rounded-full  bg-secondary px-2 py-1 text-center  text-white">
-              {items.ItemName}
-            </li>
-          );
         });
       const handleLike = () => {
         const Authorization = localStorage.getItem('BonnieYork') || '';
@@ -42,7 +45,7 @@ const searchResult = ({ Result, handleSearch }) => {
           .catch(() => {});
       };
       return (
-        <li className="mb-4 w-[32%] rounded-card shadow-md">
+        <li className="mb-4 w-full rounded-card shadow-md md:w-[32%]">
           <div className=" mb-4 rounded-t-card">
             <StoreSwiper photo={item?.BannerPath} />
           </div>
