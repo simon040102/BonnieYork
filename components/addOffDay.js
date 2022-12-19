@@ -114,8 +114,8 @@ const addOffDay = ({ setAddOffDay }) => {
         } else {
           const date = await res.data.ShowStaffDaysOff.split(',');
           const allDate = await res.data.PastStaffDaysOff.split(',');
-          SetAllHoliday(allDate.concat(date));
-          setHolidayDate(date);
+          SetAllHoliday(allDate.concat(date).filter((item) => item !== ''));
+          setHolidayDate(date.filter((item) => item !== ''));
           setLoading(false);
         }
       })
