@@ -103,7 +103,7 @@ const signup = ({ router }) => {
         position: 'top-center',
         autoClose: 1000,
       });
-    } else if (inf.Identity === 'staff') {
+    } else if (inf.Identity === 'staff' || inf.Identity === 'store') {
       const config = {
         method: 'post',
         url: `${apiUrl}/user/signupuserdata`,
@@ -127,7 +127,7 @@ const signup = ({ router }) => {
         })
         .then(() => {
           const token = localStorage.getItem('BonnieYork');
-          if (headShot.length !== 0) {
+          if (headShot !== '{}') {
             const config = {
               method: 'post',
               url: `${apiUrl}/${data.status}/uploadprofile`,
@@ -141,8 +141,10 @@ const signup = ({ router }) => {
                 setPage(page + 1);
                 setLoading(false);
               })
-              .catch(() => {});
-            setLoading(false);
+              .catch(() => {
+                setPage(page + 1);
+                setLoading(false);
+              });
           } else {
             setLoading(false);
           }

@@ -103,8 +103,8 @@ const storeId = ({ inf }) => {
     <div className="relative ">
       <Layout
         title={`邦尼約克-${store?.StoreName}`}
-        image={store?.BannerPath.Banner1}
-        descriptionContent={describe}
+        image={store?.BannerPath && store?.BannerPath.Banner1}
+        descriptionContent={describe || ''}
       >
         {store?.PhoneNumber !== null ||
         store?.StaffTitle !== null ||
