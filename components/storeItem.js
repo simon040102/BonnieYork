@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const storeItem = ({ SetReserve, item, setReserveInf, setDescribe }) => {
   const { data } = useThem();
   const router = useRouter();
-  console.log(item);
   const showItem = () =>
     item.map((BusinessItem, index) => {
       setDescribe(BusinessItem.Describe);

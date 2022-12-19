@@ -12,7 +12,6 @@ import Link from 'next/link';
 const reserved = ({ array }) => {
   const showReserve = () => {
     return array?.map((item) => {
-      console.log(item);
       const startTime = new Date(`${item.ReserveDate} ${item.ReserveStart}`)
         .toISOString()
         .replace(/[\ |\.|\|\-|\\|\:|\?]/g, '');
