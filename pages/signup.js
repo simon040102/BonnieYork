@@ -291,7 +291,7 @@ const signup = ({ router }) => {
               <div className="container mx-auto flex px-8 lg:w-8/12  lg:px-0">
                 {page !== 1 && (
                   <button
-                    className={`mx-2 h-10 w-4/12 rounded-lg border-2 border-unSelect px-6 py-2 text-unSelect  ${
+                    className={`mx-2 h-10 w-5/12 rounded-lg border-2 border-unSelect px-6 py-2 text-unSelect  ${
                       page === 1 && 'hidden'
                     } ${page === 3 && 'hidden'}`}
                     onClick={() => {
