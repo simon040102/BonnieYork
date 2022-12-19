@@ -12,13 +12,14 @@ import Link from 'next/link';
 const reserved = ({ array }) => {
   const showReserve = () => {
     return array?.map((item) => {
+      console.log(item);
       const startTime = new Date(`${item.ReserveDate} ${item.ReserveStart}`)
         .toISOString()
         .replace(/[\ |\.|\|\-|\\|\:|\?]/g, '');
       const endTime = new Date(`${item.ReserveDate} ${item.ReserveEnd}`)
         .toISOString()
         .replace(/[\ |\.|\|\-|\\|\:|\?]/g, '');
-      const googleUrl = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${item?.StoreInformation[0].StoreName} ${item.ItemName}&dates=${startTime}/${endTime}&location=${item.Address}`;
+      const googleUrl = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${item?.StoreInformation[0].StoreName} ${item.ItemName}&dates=${startTime}/${endTime}&location=${item.StoreInformation[0].Address}`;
 
       return (
         <li className="mb-6 rounded-lg bg-white p-5 shadow-lg">
