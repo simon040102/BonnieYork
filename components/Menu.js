@@ -120,7 +120,9 @@ const Menu = () => {
                   </Link>
                 </li>
                 <li className="mb-3 border-b-2 border-b-secondary px-5 py-1 text-xl text-black">
-                  <Link href={`http://localhost:3000/store/${data.StoreId}`}>
+                  <Link
+                    href={`https://bonnie-york.vercel.app/store/${data.StoreId}`}
+                  >
                     <a>我的首頁</a>
                   </Link>
                 </li>
