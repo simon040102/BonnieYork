@@ -136,13 +136,21 @@ const storeId = ({ inf }) => {
                     <div>
                       <p className="mb-2">
                         平日：{store?.WeekdayStartTime}~{store?.WeekdayEndTime}{' '}
-                        休息：{store?.WeekdayBreakStart}~
-                        {store?.WeekdayBreakEnd}
+                        {store.WeekdayBreakStart && (
+                          <>
+                            休息：{store?.WeekdayBreakStart}~
+                            {store?.WeekdayBreakEnd}
+                          </>
+                        )}
                       </p>
                       <p className="mb-2">
                         假日：{store?.HolidayStartTime}~{store?.HolidayEndTime}{' '}
-                        休息：{store?.HolidayBreakStart}~
-                        {store?.HolidayBreakEnd}
+                        {store.HolidayBreakStart && (
+                          <>
+                            休息：{store?.HolidayBreakStart}~
+                            {store?.HolidayBreakEnd}
+                          </>
+                        )}
                       </p>
                     </div>
                   </div>
