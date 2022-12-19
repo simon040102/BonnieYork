@@ -125,13 +125,13 @@ const storeId = ({ inf }) => {
             </div>
             <div className="container mx-auto  block w-full md:flex lg:w-10/12">
               <div className=" top-96 mx-auto mb-16 flex w-full justify-around md:mb-0 md:block md:w-2/5">
-                <div>
+                <div className="">
                   <div className="flex justify-around">
                     <h2 className="mb-2 text-center text-4xl font-bold">
                       {store?.StoreName}
                     </h2>
                   </div>
-                  <div className="mb-2 flex  gap-1 md:justify-start">
+                  <div className="mb-2 flex justify-center  gap-1 md:justify-start">
                     <AccessTimeFilledIcon sx={{ color: '#535353' }} />
                     <div>
                       <p className="mb-2">
@@ -154,15 +154,15 @@ const storeId = ({ inf }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="mb-2 flex  gap-1 md:justify-start">
+                  <div className="mb-2 flex  justify-center  gap-1 md:justify-start">
                     <LocationOnRoundedIcon sx={{ color: '#535353' }} />
                     <p className="mb-2">{store?.Address}</p>
                   </div>
-                  <div className="mb-8 flex  gap-1 md:justify-start">
+                  <div className="mb-8 flex  justify-center  gap-1 md:justify-start">
                     <CallRoundedIcon sx={{ color: '#535353' }} />
                     <p className="mb-2">電話：{store?.CellphoneNumber}</p>
                   </div>
-                  <div className="mb-4 flex  gap-3">
+                  <div className="mb-4 flex justify-center gap-3 md:justify-start">
                     <Link
                       href={store?.LineLink !== null ? store?.LineLink : '/'}
                     >
@@ -191,7 +191,7 @@ const storeId = ({ inf }) => {
                       </a>
                     </Link>
                   </div>
-                  <div className="mb-10  flex h-10 w-52 justify-center rounded-lg border-2 border-secondary bg-footerL">
+                  <div className="mb-10 flex h-10 w-full justify-center rounded-lg border-2 border-secondary bg-footerL md:w-52">
                     <button
                       onClick={() => {
                         handleLike();
@@ -210,10 +210,9 @@ const storeId = ({ inf }) => {
                       )}
                     </button>
                   </div>
-                </div>
-
-                <div className=" h-fit w-2/5 rounded-lg border-2  border-unSelect bg-white p-4 shadow-lg  md:w-10/12">
-                  {store?.Description}
+                  <div className=" h-fit w-full rounded-lg border-2  border-unSelect bg-white p-4 shadow-lg  md:w-10/12">
+                    {store?.Description}
+                  </div>
                 </div>
               </div>
 
