@@ -53,7 +53,8 @@ const addOffDay = ({ setAddOffDay }) => {
   const handleSubmit = async () => {
     setLoading(true);
     const Authorization = localStorage.getItem('BonnieYork');
-    const date = allHoliday.toString();
+    const date = allHoliday.filter((item) => item !== '');
+
     const config = {
       method: 'post',
       url: `${apiUrl}/${
@@ -65,7 +66,8 @@ const addOffDay = ({ setAddOffDay }) => {
         Authorization,
       },
       data: {
-        [data.status === 'store' ? 'HolidayDate' : 'StaffDaysOff']: date,
+        [data.status === 'store' ? 'HolidayDate' : 'StaffDaysOff']:
+          date.toString(),
       },
     };
     axios(config)
@@ -106,8 +108,8 @@ const addOffDay = ({ setAddOffDay }) => {
         if (data.status === 'store') {
           const date = await res.data.ShowHolidayDate.split(',');
           const allDate = await res.data.PastHolidayDate.split(',');
-          SetAllHoliday(allDate.concat(date));
-          setHolidayDate(date);
+          SetAllHoliday(allDate.concat(date).filter((item) => item !== ''));
+          setHolidayDate(date.filter((item) => item !== ''));
           setLoading(false);
         } else {
           const date = await res.data.ShowStaffDaysOff.split(',');
