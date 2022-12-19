@@ -17,7 +17,7 @@ import IsLoading from '../components/isLoading';
 
 import LogoNav from '../src/images/logo_nav.png';
 
-const Layout = ({ children, title, descriptionContent }) => {
+const Layout = ({ children, title, descriptionContent, image }) => {
   const { data, setData, loading, apiUrl, setLoading } = useThem();
   const routerName = useRouter().pathname;
   const router = useRouter();
@@ -83,6 +83,7 @@ const Layout = ({ children, title, descriptionContent }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <title>{title || '邦尼約克Bonnie'}</title>
         <meta name="description" content={descriptionContent} />
+        <meta property="og:image" content={image} />
       </Head>
       <div className="sticky top-0 -mt-20 flex min-h-screen flex-col justify-between">
         <div className="sticky -top-menu z-50 ">{loading && <IsLoading />}</div>

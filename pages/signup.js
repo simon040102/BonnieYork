@@ -116,7 +116,10 @@ const signup = ({ router }) => {
         .then((res) => {
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
-          setPage(page + 1);
+          if (headShot.length === 0) {
+            setPage(page + 1);
+            setLoading(false);
+          }
           setData((preState) => ({
             ...preState,
             name: inf.CustomerName || inf.StoreName,
@@ -135,6 +138,7 @@ const signup = ({ router }) => {
             };
             axios(config)
               .then(() => {
+                setPage(page + 1);
                 setLoading(false);
               })
               .catch(() => {});
@@ -152,7 +156,10 @@ const signup = ({ router }) => {
         .then((res) => {
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
-          setPage(page + 1);
+          if (headShot.length === 0) {
+            setPage(page + 1);
+            setLoading(false);
+          }
           setData((preState) => ({
             ...preState,
             name: inf.CustomerName || inf.StoreName,
@@ -171,6 +178,7 @@ const signup = ({ router }) => {
             };
             axios(config)
               .then(() => {
+                setPage(page + 1);
                 setLoading(false);
               })
               .catch(() => {});

@@ -101,7 +101,11 @@ const storeId = ({ inf }) => {
   }, [store.StoreId]);
   return (
     <div className="relative ">
-      <Layout title={`邦尼約克-${store?.StoreName}`}>
+      <Layout
+        title={`邦尼約克-${store?.StoreName}`}
+        image={store?.BannerPath.Banner1}
+        descriptionContent={describe}
+      >
         {store?.PhoneNumber !== null ||
         store?.StaffTitle !== null ||
         store?.BusinessItem.length !== 0 ||
