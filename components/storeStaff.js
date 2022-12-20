@@ -20,7 +20,7 @@ const storeStaff = ({ StaffInformation, staffTitle }) => {
       return (
         <li
           key={index}
-          className=" mb-12 flex h-40 w-full rounded-lg bg-white shadow-lg"
+          className=" mb-12 flex h-60 w-full rounded-lg bg-white shadow-lg md:h-40"
         >
           <div className="relative aspect-square w-48">
             <img
