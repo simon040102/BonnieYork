@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import { useThem } from '../modules/context';
 
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import MemberInf from './memberInf';
 import StoreInf from './storeInf';
 import StaffInf from './staffInf';
@@ -39,9 +40,9 @@ const signupInf = ({
 
           <label
             htmlFor="headShot"
-            className="bg-gray-100 absolute right-0 bottom-0 rounded-full border-black shadow-md"
+            className="bg-gray-100 absolute right-0 bottom-0 rounded-full bg-secondary py-1 px-2 shadow-md"
           >
-            <Image src={Edit} />
+            <FlipCameraIosIcon sx={{ color: '#ffffff' }} />
           </label>
           <input
             type="file"

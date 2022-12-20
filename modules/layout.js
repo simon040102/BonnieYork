@@ -119,7 +119,7 @@ const Layout = ({ children, title, descriptionContent, image }) => {
 
         <div className="mb-auto pb-20 pt-20">{children}</div>
         <footer className="  ">
-          {router === '/' ? (
+          {routerName === '/' ? (
             <>
               <div className="hidden md:block">
                 <HomeFooter />

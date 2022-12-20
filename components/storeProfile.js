@@ -566,7 +566,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
                 />
               </div>
               <div className="mb-4">
-                <p>預約首頁Banner(最多可選五張，橫式佳)：</p>
+                <p>預約首頁圖(最多可選五張，橫式佳)：</p>
                 <div className="mb-10 flex flex-wrap gap-2 pt-2">
                   <StoreBanner
                     setSelectBanner={setSelectBanner}
