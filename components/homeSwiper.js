@@ -1,9 +1,10 @@
+/* eslint-disable consistent-return */
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Store1 from '../src/images/store01.jpg';
-import Store2 from '../src/images/store02.jpg';
-import Store3 from '../src/images/store03.jpg';
+import axios from 'axios';
+import StoreSwiper from './storeSwiper';
+import { useThem } from '../modules/context';
 
 // Import Swiper styles
 // eslint-disable-next-line import/no-unresolved
@@ -15,6 +16,50 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
 
 function HomeSwiper() {
+  const { apiUrl } = useThem();
+  const [stores, setStores] = useState([]);
+
+  const showStore = () =>
+    stores.map((item, index) => {
+      if (index > 4) return;
+      const showItem = () =>
+        item?.BusinessItem.map((items, index1) => {
+          if (index1 > 1) return;
+
+          return (
+            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
+              {items.ItemName}
+            </li>
+          );
+        });
+      return (
+        <SwiperSlide className="rounded-card bg-white ">
+          <StoreSwiper photo={item?.BannerPath} />
+
+          <div className="px-6 py-6">
+            <p className="text-xl text-secondary">{item.StoreName}</p>
+            <p className="mb-4">{item.Address}</p>
+            <ul className="mb-8 flex flex-wrap gap-2">{showItem()}...</ul>
+            <div className="w-full text-end text-success">
+              <Link
+                href={`https://bonnie-york.vercel.app/store/${item.StoreId}`}
+              >
+                MORE
+              </Link>
+            </div>
+          </div>
+        </SwiperSlide>
+      );
+    });
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/store/getallstore`)
+      .then((res) => {
+        setStores(res.data);
+      })
+      .catch(() => {});
+  }, []);
   return (
     <Swiper
       slidesPerView="auto"
@@ -25,141 +70,7 @@ function HomeSwiper() {
       modules={[Pagination]}
       className="HomeSwiper w-full"
     >
-      <SwiperSlide className="rounded-card bg-white ">
-        <Image
-          className="h-52 w-full rounded-t-card"
-          src={Store1}
-          objectFit="cover"
-          height={1300}
-          layout="responsive"
-        />
-        <div className="px-6 py-6">
-          <p>xxxhair Salon</p>
-          <p className="mb-2">台北大安</p>
-          <ul className="mb-8 flex">
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              美髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              染髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              挑染
-            </li>
-          </ul>
-          <div className="w-full text-end text-success">
-            <Link href="/">MORE</Link>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="rounded-card bg-white ">
-        <Image
-          className="h-52 w-full rounded-t-card"
-          src={Store2}
-          objectFit="cover"
-          height={1300}
-          layout="responsive"
-        />
-        <div className="px-6 py-6">
-          <p>xxxhair Salon</p>
-          <p className="mb-2">台北大安</p>
-          <ul className="mb-8 flex">
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              美髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              染髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              挑染
-            </li>
-          </ul>
-          <div className="w-full text-end text-success">
-            <Link href="/">MORE</Link>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="rounded-card bg-white">
-        <Image
-          className="h-52 w-full rounded-t-card"
-          src={Store3}
-          objectFit="cover"
-          height={800}
-          layout="responsive"
-        />
-        <div className="px-6 py-6">
-          <p>xxxhair Salon</p>
-          <p className="mb-2">台北大安</p>
-          <ul className="mb-8 flex">
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              美髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              染髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              挑染
-            </li>
-          </ul>
-          <div className="w-full text-end text-success">
-            <Link href="/">MORE</Link>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="rounded-card bg-white">
-        <Image
-          className="h-52 w-full rounded-t-card"
-          src={Store1}
-          objectFit="cover"
-          height={1300}
-          layout="responsive"
-        />
-        <div className="px-6 py-6">
-          <p>xxxhair Salon</p>
-          <p className="mb-2">台北大安</p>
-          <ul className="mb-8 flex">
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              美髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              染髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              挑染
-            </li>
-          </ul>
-          <div className="w-full text-end text-success">
-            <Link href="/">MORE</Link>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="rounded-card bg-white">
-        <Image
-          className="h-52 w-full rounded-t-card"
-          src={Store2}
-          objectFit="cover"
-          height={1300}
-          layout="responsive"
-        />
-        <div className="px-6 py-6">
-          <p>xxxhair Salon</p>
-          <p className="mb-2">台北大安</p>
-          <ul className="mb-8 flex">
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              美髮
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              染髮2
-            </li>
-            <li className="mr-4 flex items-center justify-center rounded-full bg-secondary px-4 text-white">
-              挑染
-            </li>
-          </ul>
-          <div className="w-full text-end text-success">
-            <Link href="/">MORE</Link>
-          </div>
-        </div>
-      </SwiperSlide>
+      {showStore()}
     </Swiper>
   );
 }

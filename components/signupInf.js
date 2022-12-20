@@ -2,14 +2,13 @@
 /* eslint-disable react/button-has-type */
 
 import Image from 'next/image';
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import { useThem } from '../modules/context';
 
-import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 import MemberInf from './memberInf';
 import StoreInf from './storeInf';
 import StaffInf from './staffInf';
 import Profile from '../src/images/profile.png';
-import Edit from '../src/images/pencil.svg';
 
 const signupInf = ({
   setInf,
