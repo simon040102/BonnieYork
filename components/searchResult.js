@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/button-has-type */
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
@@ -13,6 +14,7 @@ const searchResult = ({ Result, handleSearch }) => {
   const showStore = () =>
     Result?.map((item) => {
       const showItem = () =>
+        // eslint-disable-next-line array-callback-return
         item.BusinessItem?.map((items, index) => {
           if (index > 2) {
             /* empty */
