@@ -129,7 +129,7 @@ const editOder = ({ setEditOder, orderID }) => {
               name="StaffName"
               value={order.StaffName}
               id=""
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               disabled
             />
           </div>
@@ -140,7 +140,7 @@ const editOder = ({ setEditOder, orderID }) => {
             <input
               type="text"
               name="CustomerName"
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               value={order.CustomerName}
               disabled
             />
@@ -153,7 +153,7 @@ const editOder = ({ setEditOder, orderID }) => {
               name="ItemName"
               id=""
               value={order.ItemName}
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               disabled
             />
           </div>
@@ -163,7 +163,7 @@ const editOder = ({ setEditOder, orderID }) => {
             </p>
             <input
               type="text"
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               name="Price"
               value={order.Price}
               disabled
@@ -175,7 +175,7 @@ const editOder = ({ setEditOder, orderID }) => {
             </p>
             <input
               type="CellphoneNumber"
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               value={order.CellphoneNumber}
               disabled
             />
@@ -186,7 +186,7 @@ const editOder = ({ setEditOder, orderID }) => {
             </p>
             <input
               type="Email"
-              className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 "
+              className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center indent-3 text-unSelect "
               value={order.Email}
               disabled
             />
@@ -206,13 +206,13 @@ const editOder = ({ setEditOder, orderID }) => {
                   showMonthDropdown
                   useShortMonthInDropdown
                   dateFormat="yyyy/MM/dd"
-                  className="mb-6 h-10 w-full rounded-lg border border-unSelect  text-center indent-3 "
+                  className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-white text-center  indent-3 text-unSelect "
                   disabled
                 />
                 <select
                   name=""
                   id=""
-                  className="mb-6 h-10 w-full rounded-lg border border-unSelect bg-bgColor text-center indent-3 "
+                  className="mb-6 h-10 w-full rounded-lg border border-unSelect text-center indent-3 text-unSelect "
                   disabled
                 >
                   <option value="10:00">{order.ReserveStart}</option>
