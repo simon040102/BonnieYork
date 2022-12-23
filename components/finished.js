@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/button-has-type */
 
@@ -6,29 +7,21 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import Link from 'next/link';
 
 const finished = ({ array }) => {
   const showReserve = () =>
     array?.map((item) => (
       <li className="mb-6 rounded-lg bg-white p-5 shadow-lg">
         <div className="flex gap-3">
-          <h3 className="mb-2 text-2xl font-bold text-secondary">
-            {item?.StoreInformation[0].StoreName}
-          </h3>
+          <Link href={`/store/${item.StoreId}`}>
+            <a className="text-2xl font-bold text-secondary hover:underline">
+              {item?.StoreInformation[0].StoreName}
+            </a>
+          </Link>
           <p className="mb-4">
             {item?.StoreInformation[0].StaffTitle}：{item.StaffName}
           </p>
-          {/* <Link
-              href={googleUrl}
-              className="h-8 w-32 rounded-lg bg-secondary text-white"
-            >
-              <a
-                target="_blank"
-                className="w-32 rounded-lg bg-secondary py-2 text-center text-white"
-              >
-                Google行事曆
-              </a>
-            </Link> */}
         </div>
         <div className="mb-4 flex gap-3">
           <CalendarMonthIcon />

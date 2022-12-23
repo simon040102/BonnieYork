@@ -24,9 +24,12 @@ const reserved = ({ array }) => {
         <li className="mb-6 rounded-lg bg-white p-5 shadow-lg">
           <div className="flex justify-between">
             <div>
-              <h3 className="text-2xl font-bold text-secondary">
-                {item?.StoreInformation[0].StoreName}
-              </h3>
+              <Link href={`/store/${item.StoreId}`}>
+                <a className="text-2xl font-bold text-secondary hover:underline">
+                  {item?.StoreInformation[0].StoreName}
+                </a>
+              </Link>
+
               <p className="mb-4">
                 {item?.StoreInformation[0].StaffTitle}：{item.StaffName}
               </p>
