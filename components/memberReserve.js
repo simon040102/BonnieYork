@@ -27,8 +27,6 @@ const MemberReserve = ({ setReserveInf, SetReserve, reserveInf, describe }) => {
   const [time, setTime] = useState([]);
   const router = useRouter();
 
-  console.log(reserveData);
-
   const showStaff = () => {
     if (reserveData.TheStaffName) {
       return reserveData?.TheStaffName.map((item, index) => (
