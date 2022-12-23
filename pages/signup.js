@@ -25,7 +25,7 @@ const signup = ({ router }) => {
   const [page, setPage] = useState(1);
   const [inf, setInf] = useState({});
   const { token } = router.query;
-  const [headShot, setHeadShot] = useState({});
+  const [headShot, setHeadShot] = useState();
   const [headShotPreview, setHeadShotPreview] = useState(null);
   const Authorization = `Bearer ${token}`;
 
@@ -116,7 +116,7 @@ const signup = ({ router }) => {
         .then((res) => {
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
-          if (headShot.length === 0) {
+          if (headShot === undefined) {
             setPage(page + 1);
             setLoading(false);
           }
@@ -127,7 +127,7 @@ const signup = ({ router }) => {
         })
         .then(() => {
           const token = localStorage.getItem('BonnieYork');
-          if (headShot !== '{}') {
+          if (headShot !== undefined) {
             const config = {
               method: 'post',
               url: `${apiUrl}/${data.status}/uploadprofile`,
@@ -158,7 +158,7 @@ const signup = ({ router }) => {
         .then((res) => {
           const token = `Bearer ${res.data.Token}`;
           localStorage.setItem('BonnieYork', token);
-          if (headShot.length === 0) {
+          if (headShot === undefined) {
             setPage(page + 1);
             setLoading(false);
           }
@@ -169,10 +169,10 @@ const signup = ({ router }) => {
         })
         .then(() => {
           const token = localStorage.getItem('BonnieYork');
-          if (headShot.length !== 0) {
+          if (headShot !== undefined) {
             const config = {
               method: 'post',
-              url: `${apiUrl}/${data.status}/uploadprofile`,
+              url: `${apiUrl}/customer/uploadprofile`,
               headers: {
                 Authorization: token,
               },
