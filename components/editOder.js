@@ -17,7 +17,6 @@ const editOder = ({ setEditOder, orderID }) => {
   const [order, setOrder] = useState({});
   const { apiUrl, setLoading } = useThem();
   const router = useRouter();
-
   const handleDelete = () => {
     const Authorization = localStorage.getItem('BonnieYork');
     setLoading(true);
@@ -123,7 +122,7 @@ const editOder = ({ setEditOder, orderID }) => {
         <div>
           <div className="relative">
             <p className="absolute -top-2.5 left-4 z-10 bg-white px-2 text-input">
-              設計師
+              員工
             </p>
             <input
               name="StaffName"
