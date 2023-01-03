@@ -105,7 +105,7 @@ const storeProfile = ({ handleChange, inf, setInf, dataChange }) => {
         })
         .catch(() => {
           setLoading(false);
-          toast.error('欄位未填寫正確', {
+          toast.error('照片檔案過大，請選擇２MB以下', {
             position: 'top-center',
             autoClose: 1000,
           });
