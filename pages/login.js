@@ -95,7 +95,7 @@ const login = () => {
   useEffect(() => {});
   return (
     <Layout title="邦尼約克Bonnie York 登入" className="relative">
-      <div className="bg-height  w-screen bg-bgColor px-5 pt-20 ">
+      <div className="bg-height   bg-bgColor px-5 pt-20 ">
         <div className="container mx-auto  w-full rounded-login bg-white px-8 pt-4 pb-10 shadow-lg sm:w-1/2 lg:w-4/12">
           <div className="mb-4 flex h-20 w-full justify-center">
             <Image

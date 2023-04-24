@@ -83,7 +83,7 @@ const search = () => {
   }, [select.Page]);
   return (
     <Layout title="邦尼約克BonnieYork 店家搜尋">
-      <div className="-mb-40 w-screen bg-bgColor px-5 pb-40">
+      <div className="-mb-40 bg-bgColor px-5 pb-40">
         <div className="container mx-auto w-11/12 pt-20 md:w-8/12 lg:w-6/12">
           <h2 className="mb-4 text-center text-4xl">店家搜尋</h2>
           <div className="mb-4 flex justify-center gap-10">
