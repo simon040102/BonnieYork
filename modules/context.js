@@ -9,7 +9,7 @@ export const useThem = () => useContext(ThemeContext);
 
 // eslint-disable-next-line react/prop-types
 export const ThemeProvider = ({ children }) => {
-  const apiUrl = 'https://bonnieyork.rocket-coding.com';
+  const apiUrl = 'https://bonnieyork2023.rocket-coding.com';
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     status: 'customer',
